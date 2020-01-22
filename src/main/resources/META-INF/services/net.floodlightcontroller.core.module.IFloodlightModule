@@ -20,7 +20,9 @@ net.floodlightcontroller.staticflowentry.StaticFlowEntryPusher
 net.floodlightcontroller.testmodule.TestModule
 net.floodlightcontroller.topology.TopologyManager
 net.floodlightcontroller.forwarding.Forwarding
+net.floodlightcontroller.learningswitch.LearningSwitch
 net.floodlightcontroller.loadbalancer.LoadBalancer
 net.floodlightcontroller.linkdiscovery.internal.LinkDiscoveryManager
 net.floodlightcontroller.devicemanager.internal.DeviceManagerImpl
 net.floodlightcontroller.firewall.Firewall
+net.floodlightcontroller.l2_pairs.L2_Pairs
