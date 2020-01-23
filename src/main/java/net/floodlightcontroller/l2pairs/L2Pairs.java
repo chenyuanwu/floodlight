@@ -68,13 +68,13 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
 
         if (macToPortMap.get(new Pair<IOFSwitch, MacAddress>(sw, dstMac)) == null) {
             if (log.isTraceEnabled()) {
-                log.trace("Writing flood");
+                log.trace("Doing flood");
             }
             doPushPacket(sw, pi, OFPort.FLOOD, cntx);
         }
         else {
             if (log.isTraceEnabled()) {
-                log.trace("Writing forward");
+                log.trace("Installing forward");
             }
             doForwardFlow(sw, pi, cntx);
         }
