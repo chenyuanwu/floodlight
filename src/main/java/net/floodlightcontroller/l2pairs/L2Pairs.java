@@ -25,19 +25,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import net.floodlightcontroller.core.FloodlightContext;
 import net.floodlightcontroller.core.IFloodlightProviderService;
 import net.floodlightcontroller.core.IOFSwitch;
-import net.floodlightcontroller.devicemanager.IDeviceService;
-import net.floodlightcontroller.core.internal.IOFSwitchService;
 import net.floodlightcontroller.core.module.FloodlightModuleContext;
 import net.floodlightcontroller.core.module.FloodlightModuleException;
 import net.floodlightcontroller.core.module.IFloodlightModule;
 import net.floodlightcontroller.core.module.IFloodlightService;
 import net.floodlightcontroller.core.util.AppCookie;
-import net.floodlightcontroller.debugcounter.IDebugCounterService;
 import net.floodlightcontroller.packet.Ethernet;
 import net.floodlightcontroller.routing.ForwardingBase;
 import net.floodlightcontroller.routing.IRoutingDecision;
-import net.floodlightcontroller.routing.IRoutingService;
-import net.floodlightcontroller.topology.ITopologyService;
 
 import org.projectfloodlight.openflow.protocol.OFFlowMod;
 import org.projectfloodlight.openflow.protocol.action.OFActionOutput;
@@ -57,6 +52,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+
 public class L2Pairs extends ForwardingBase implements IFloodlightModule {
     protected static Logger log = LoggerFactory.getLogger(L2Pairs.class);
     protected Map<Pair<IOFSwitch, MacAddress>, OFPort> macToPortMap;
@@ -74,7 +70,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
             if (log.isTraceEnabled()) {
                 log.trace("Writing flood");
             }
-            doFlood(sw, pi, cntx);
+            doPushPacket(sw, pi, OFPort.FLOOD, cntx);
         }
         else {
             if (log.isTraceEnabled()) {
@@ -138,7 +134,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
                 .setActions(actions)
                 .setIdleTimeout(FLOWMOD_DEFAULT_IDLE_TIMEOUT)
                 .setHardTimeout(FLOWMOD_DEFAULT_HARD_TIMEOUT)
-                .setBufferId(OFBufferId.NO_BUFFER)//set the BufferId instead of doing PacketOut
+                .setBufferId(OFBufferId.NO_BUFFER)
                 .setCookie(cookie)
                 .setOutPort(outPort)
                 .setPriority(FLOWMOD_DEFAULT_PRIORITY);
@@ -147,20 +143,26 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
                     new Object[] {sw, inPort, outPort});
         }
         sw.write(fmb.build());
-        pushPacket(sw, pi, false, outPort, cntx);
+        doPushPacket(sw, pi, outPort, cntx);
 
         return;
     }
 
-    protected void doFlood(IOFSwitch sw, OFPacketIn pi, FloodlightContext cntx) {
+    protected void doPushPacket(IOFSwitch sw, OFPacketIn pi, OFPort outport, FloodlightContext cntx) {
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
-        // Set Action to flood
+
         OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
         List<OFAction> actions = new ArrayList<OFAction>();
-        if (sw.hasAttribute(IOFSwitch.PROP_SUPPORTS_OFPP_FLOOD)) {
-            actions.add(sw.getOFFactory().actions().output(OFPort.FLOOD, Integer.MAX_VALUE)); // FLOOD is a more selective/efficient version of ALL
-        } else {
-            actions.add(sw.getOFFactory().actions().output(OFPort.ALL, Integer.MAX_VALUE));
+        // Set Action to flood the packet
+        if (outport == OFPort.FLOOD || outport == OFPort.ALL) {
+            if (sw.hasAttribute(IOFSwitch.PROP_SUPPORTS_OFPP_FLOOD)) {
+                actions.add(sw.getOFFactory().actions().output(OFPort.FLOOD, Integer.MAX_VALUE)); // FLOOD is a more selective/efficient version of ALL
+            } else {
+                actions.add(sw.getOFFactory().actions().output(OFPort.ALL, Integer.MAX_VALUE));
+            }
+        }
+        else { //Set Action to push the packet out the port
+            actions.add(sw.getOFFactory().actions().output(outport, Integer.MAX_VALUE));
         }
         pob.setActions(actions);
         // set buffer-id, in-port and packet-data based on packet-in
@@ -195,10 +197,6 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         Collection<Class<? extends IFloodlightService>> l =
                 new ArrayList<Class<? extends IFloodlightService>>();
         l.add(IFloodlightProviderService.class);
-        //l.add(IDeviceService.class);
-        //l.add(IRoutingService.class);
-        //l.add(ITopologyService.class);
-        //l.add(IDebugCounterService.class);
         return l;
     }
 
@@ -206,11 +204,6 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
     public void init(FloodlightModuleContext context) throws FloodlightModuleException {
         super.init();
         this.floodlightProviderService = context.getServiceImpl(IFloodlightProviderService.class);
-        //this.deviceManagerService = context.getServiceImpl(IDeviceService.class);
-        //this.routingEngineService = context.getServiceImpl(IRoutingService.class);
-        //this.topologyService = context.getServiceImpl(ITopologyService.class);
-        //this.debugCounterService = context.getServiceImpl(IDebugCounterService.class);
-        //this.switchService = context.getServiceImpl(IOFSwitchService.class);
         macToPortMap = new ConcurrentHashMap<Pair<IOFSwitch, MacAddress>, OFPort>();
         if (log.isTraceEnabled()) {
             log.trace("module l2pairs initialized");
