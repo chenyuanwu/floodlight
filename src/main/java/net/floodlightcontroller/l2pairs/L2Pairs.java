@@ -276,19 +276,19 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         MacAddress dstMac = eth.getDestinationMACAddress();
         MacAddress srcMac = eth.getSourceMACAddress();
 
-        macToPortMap.put(new Pair<IOFSwitch, MacAddress>(sw, srcMac), inPort);
+        //macToPortMap.put(new Pair<IOFSwitch, MacAddress>(sw, srcMac), inPort);
 
         if (macToPortMap.get(new Pair<IOFSwitch, MacAddress>(sw, dstMac)) == null) {
-            doFlood(sw, pi, cntx);
             if (log.isTraceEnabled()) {
                 log.trace("Writing flood");
             }
+            doFlood(sw, pi, cntx);
         }
         else {
-            doForwardFlow(sw, pi, cntx);
             if (log.isTraceEnabled()) {
                 log.trace("Writing forward");
             }
+            doForwardFlow(sw, pi, cntx);
         }
 
         return Command.CONTINUE;
