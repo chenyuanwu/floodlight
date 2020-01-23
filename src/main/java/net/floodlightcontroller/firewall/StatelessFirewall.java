@@ -201,6 +201,10 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
             return Command.STOP;
         }
         else {
+            if (logger.isTraceEnabled()) {
+                logger.trace("Firewall is not handling sw={} inPort={}",
+                        new Object[] {sw, inPort});
+            }
             return Command.CONTINUE;
         }
     }
