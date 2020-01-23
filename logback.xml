@@ -11,6 +11,6 @@
   <logger name="LogService" level="WARN"/> <!-- Restlet access logging -->
   <logger name="net.floodlightcontroller.logging" level="WARN"/>
   <logger name="net.floodlightcontroller.l2pairs" level="TRACE"/>
-  <logger name="net.floodlightcontroller.firewall.StatelessFirewall" level="TRACE"/>
+  <logger name="net.floodlightcontroller.firewall" level="TRACE"/>
   <logger name="org.sdnplatform" level="WARN"/>
 </configuration>
