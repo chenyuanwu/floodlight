@@ -127,7 +127,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
         Ethernet eth = IFloodlightProviderService.bcStore.get(cntx, IFloodlightProviderService.CONTEXT_PI_PAYLOAD);
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
 
-        if (sw.getId() == (DatapathId.of(1))) {
+        if (sw.getId().equals(DatapathId.of(1))) {
             if (eth.getEtherType() == Ethernet.TYPE_ARP) {
                 OFPort outPort = (inPort == OFPort.of(2) ? OFPort.of(1) : OFPort.of(2));
 
@@ -207,5 +207,5 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
             return Command.CONTINUE;
         }
     }
-    
+
 }
