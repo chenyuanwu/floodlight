@@ -142,7 +142,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
 
                 if (logger.isTraceEnabled()) {
                     logger.trace("Firewall:Writing flood PacketOut For ARP packets, switch={} packet-in={} packet-out={}",
-                            new Object[] {sw, pi, pob.build()});
+                            new Object[]{sw, pi, pob.build()});
                 }
                 sw.write(pob.build());
             } else if (inPort == OFPort.of(1)) {
@@ -199,10 +199,13 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                 sw.write(fmb.build());
             }
             return Command.STOP;
-        }
-        else {
+        } else {
+            if (logger.isTraceEnabled()) {
+                logger.trace("Firewall:Not handling packet from, sw={} inPort={}",
+                        new Object[]{sw, inPort});
+            }
             return Command.CONTINUE;
         }
     }
-
+    
 }
