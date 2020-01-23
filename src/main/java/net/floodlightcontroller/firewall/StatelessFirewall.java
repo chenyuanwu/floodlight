@@ -51,10 +51,10 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
     public static int FLOWMOD_DEFAULT_HARD_TIMEOUT = 0; // infinite
     public static int FLOWMOD_DEFAULT_PRIORITY = 1; // 0 is the default table-miss flow in OF1.3+, so we need to use 1
 
-    public static final int FORWARDING_APP_ID = 2;
+    public static final int FIREWALL_APP_ID = 2;
     // by a global APP_ID class
     static {
-        AppCookie.registerApp(FORWARDING_APP_ID, "Forwarding");
+        AppCookie.registerApp(FIREWALL_APP_ID, "Firewall");
     }
 
     @Override
@@ -159,7 +159,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                 List<OFAction> actions = new ArrayList<OFAction>();
                 actions.add(sw.getOFFactory().actions().output(OFPort.of(2), Integer.MAX_VALUE));
 
-                U64 cookie = AppCookie.makeCookie(FORWARDING_APP_ID, 0);
+                U64 cookie = AppCookie.makeCookie(FIREWALL_APP_ID, 0);
                 fmb.setMatch(mb.build()) // was match w/o modifying input port
                         .setActions(actions)
                         .setIdleTimeout(FLOWMOD_DEFAULT_IDLE_TIMEOUT)
