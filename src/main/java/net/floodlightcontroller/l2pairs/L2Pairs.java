@@ -424,6 +424,9 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         this.debugCounterService = context.getServiceImpl(IDebugCounterService.class);
         this.switchService = context.getServiceImpl(IOFSwitchService.class);
         macToPortMap = new ConcurrentHashMap<Pair<IOFSwitch, MacAddress>, OFPort>();
+        if (log.isTraceEnabled()) {
+            log.trace("initialized");
+        }
 
     }
 
