@@ -25,4 +25,4 @@ net.floodlightcontroller.loadbalancer.LoadBalancer
 net.floodlightcontroller.linkdiscovery.internal.LinkDiscoveryManager
 net.floodlightcontroller.devicemanager.internal.DeviceManagerImpl
 net.floodlightcontroller.firewall.Firewall
-net.floodlightcontroller.l2_pairs.L2_Pairs
+net.floodlightcontroller.l2pairs.L2Pairs
