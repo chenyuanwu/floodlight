@@ -1,11 +1,9 @@
 package net.floodlightcontroller.firewall;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 import net.floodlightcontroller.core.util.AppCookie;
 import org.projectfloodlight.openflow.protocol.*;
@@ -22,22 +20,9 @@ import net.floodlightcontroller.core.module.FloodlightModuleException;
 import net.floodlightcontroller.core.module.IFloodlightModule;
 import net.floodlightcontroller.core.module.IFloodlightService;
 import net.floodlightcontroller.core.IFloodlightProviderService;
-import net.floodlightcontroller.devicemanager.IDeviceService;
-
-import java.util.ArrayList;
 
 import net.floodlightcontroller.packet.Ethernet;
-import net.floodlightcontroller.packet.IPv4;
-import net.floodlightcontroller.packet.TCP;
-import net.floodlightcontroller.packet.UDP;
-import net.floodlightcontroller.restserver.IRestApiService;
 import net.floodlightcontroller.routing.IRoutingDecision;
-import net.floodlightcontroller.routing.RoutingDecision;
-import net.floodlightcontroller.storage.IResultSet;
-import net.floodlightcontroller.storage.IStorageSourceService;
-import net.floodlightcontroller.storage.StorageException;
-import net.floodlightcontroller.util.MatchUtils;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
