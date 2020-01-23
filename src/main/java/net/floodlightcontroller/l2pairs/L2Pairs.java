@@ -407,10 +407,10 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         Collection<Class<? extends IFloodlightService>> l =
                 new ArrayList<Class<? extends IFloodlightService>>();
         l.add(IFloodlightProviderService.class);
-        l.add(IDeviceService.class);
-        l.add(IRoutingService.class);
-        l.add(ITopologyService.class);
-        l.add(IDebugCounterService.class);
+        //l.add(IDeviceService.class);
+        //l.add(IRoutingService.class);
+        //l.add(ITopologyService.class);
+        //l.add(IDebugCounterService.class);
         return l;
     }
 
@@ -418,11 +418,11 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
     public void init(FloodlightModuleContext context) throws FloodlightModuleException {
         super.init();
         this.floodlightProviderService = context.getServiceImpl(IFloodlightProviderService.class);
-        this.deviceManagerService = context.getServiceImpl(IDeviceService.class);
-        this.routingEngineService = context.getServiceImpl(IRoutingService.class);
-        this.topologyService = context.getServiceImpl(ITopologyService.class);
-        this.debugCounterService = context.getServiceImpl(IDebugCounterService.class);
-        this.switchService = context.getServiceImpl(IOFSwitchService.class);
+        //this.deviceManagerService = context.getServiceImpl(IDeviceService.class);
+        //this.routingEngineService = context.getServiceImpl(IRoutingService.class);
+        //this.topologyService = context.getServiceImpl(ITopologyService.class);
+        //this.debugCounterService = context.getServiceImpl(IDebugCounterService.class);
+        //this.switchService = context.getServiceImpl(IOFSwitchService.class);
         macToPortMap = new ConcurrentHashMap<Pair<IOFSwitch, MacAddress>, OFPort>();
         if (log.isTraceEnabled()) {
             log.trace("initialized");
