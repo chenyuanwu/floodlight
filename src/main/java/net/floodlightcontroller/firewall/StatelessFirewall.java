@@ -47,7 +47,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
     protected IFloodlightProviderService floodlightProvider;
     protected static Logger logger;
 
-    public static int FLOWMOD_DEFAULT_IDLE_TIMEOUT = 5; // in seconds
+    public static int FLOWMOD_DEFAULT_IDLE_TIMEOUT = 1000; // in seconds
     public static int FLOWMOD_DEFAULT_HARD_TIMEOUT = 0; // infinite
     public static int FLOWMOD_DEFAULT_PRIORITY = 1; // 0 is the default table-miss flow in OF1.3+, so we need to use 1
 
