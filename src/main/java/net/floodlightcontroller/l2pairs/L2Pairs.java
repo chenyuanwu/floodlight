@@ -342,24 +342,20 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         aob.setMaxLen(Integer.MAX_VALUE);
         actions.add(aob.build());
 
-        if (pi.getBufferId() == OFBufferId.NO_BUFFER) {
-            log.error("No BufferId!!!");
-        }
-        else {
-            fmb.setMatch(mb.build()) // was match w/o modifying input port
-                    .setActions(actions)
-                    .setIdleTimeout(FLOWMOD_DEFAULT_IDLE_TIMEOUT)
-                    .setHardTimeout(FLOWMOD_DEFAULT_HARD_TIMEOUT)
-                    .setBufferId(pi.getBufferId())//set the BufferId instead of doing PacketOut
-                    .setCookie(cookie)
-                    .setOutPort(outPort)
-                    .setPriority(FLOWMOD_DEFAULT_PRIORITY);
-        }
+        fmb.setMatch(mb.build()) // was match w/o modifying input port
+                .setActions(actions)
+                .setIdleTimeout(FLOWMOD_DEFAULT_IDLE_TIMEOUT)
+                .setHardTimeout(FLOWMOD_DEFAULT_HARD_TIMEOUT)
+                .setBufferId(OFBufferId.NO_BUFFER)//set the BufferId instead of doing PacketOut
+                .setCookie(cookie)
+                .setOutPort(outPort)
+                .setPriority(FLOWMOD_DEFAULT_PRIORITY);
         if (log.isTraceEnabled()) {
             log.trace("Pushing flowmod sw={} inPort={} outPort={}",
                     new Object[] {sw, inPort, outPort});
         }
         sw.write(fmb.build());
+        pushPacket(sw, pi, false, outPort, cntx);
 
         return;
     }
