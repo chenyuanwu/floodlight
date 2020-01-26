@@ -55,7 +55,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
 
     @Override
     public boolean isCallbackOrderingPostreq(OFType type, String name) {
-        return (type.equals(OFType.PACKET_IN) && name.equals("forwarding"));
+        return (type.equals(OFType.PACKET_IN) && name.equals("l2pairs"));
     }
 
     @Override
