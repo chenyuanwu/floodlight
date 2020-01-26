@@ -1,9 +1,7 @@
 package net.floodlightcontroller.firewall;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 import net.floodlightcontroller.core.util.AppCookie;
 import org.projectfloodlight.openflow.protocol.*;
@@ -26,11 +24,12 @@ import net.floodlightcontroller.routing.IRoutingDecision;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class StatelessFirewall implements IOFMessageListener, IFloodlightModule {
+public class FirewallMigration implements IOFMessageListener, IFloodlightModule {
 
     // service modules needed
     protected IFloodlightProviderService floodlightProvider;
     protected static Logger logger;
+    protected Set<MacAddress> trusted;
 
     public static int FLOWMOD_DEFAULT_IDLE_TIMEOUT = 1000; // in seconds
     public static int FLOWMOD_DEFAULT_HARD_TIMEOUT = 0; // infinite
@@ -44,7 +43,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
 
     @Override
     public String getName() {
-        return "statelessfirewall";
+        return "firewallmigration";
     }
 
     @Override
@@ -79,8 +78,9 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
     public void init(FloodlightModuleContext context) throws FloodlightModuleException {
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
         logger = LoggerFactory.getLogger(Firewall.class);
+        trusted = new ConcurrentSkipListSet<MacAddress>();
         if (logger.isTraceEnabled()) {
-            logger.trace("module statelessfirewall initialized");
+            logger.trace("module firewallmigration initialized");
         }
     }
 
@@ -131,15 +131,11 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                 }
                 sw.write(pob.build());
             } else if (inPort == OFPort.of(1)) {
-                MacAddress srcMac = eth.getSourceMACAddress();
-                MacAddress dstMac = eth.getDestinationMACAddress();
-
-                OFFlowMod.Builder fmb;
-                fmb = sw.getOFFactory().buildFlowAdd();
+                OFFlowMod.Builder fmb = sw.getOFFactory().buildFlowAdd();
                 //Install flow from port 1 to 2
                 Match.Builder mb = sw.getOFFactory().buildMatch();
-                mb.setExact(MatchField.ETH_SRC, srcMac)
-                        .setExact(MatchField.ETH_DST, dstMac);
+                mb.setExact(MatchField.ETH_SRC, eth.getSourceMACAddress())
+                        .setExact(MatchField.ETH_DST, eth.getDestinationMACAddress());
 
                 List<OFAction> actions = new ArrayList<OFAction>();
                 actions.add(sw.getOFFactory().actions().output(OFPort.of(2), Integer.MAX_VALUE));
@@ -164,25 +160,41 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                 pob.setInPort(inPort);
                 pob.setData(pi.getData());
                 sw.write(pob.build());
-                //Install flow from port 2 to 1
-                mb = sw.getOFFactory().buildMatch();
-                mb.setExact(MatchField.ETH_SRC, dstMac)
-                        .setExact(MatchField.ETH_DST, srcMac);
 
-                actions = new ArrayList<OFAction>();
-                actions.add(sw.getOFFactory().actions().output(OFPort.of(1), Integer.MAX_VALUE));
-                fmb.setMatch(mb.build()) // was match w/o modifying input port
-                        .setActions(actions)
-                        .setIdleTimeout(FLOWMOD_DEFAULT_IDLE_TIMEOUT)
-                        .setHardTimeout(FLOWMOD_DEFAULT_HARD_TIMEOUT)
-                        .setBufferId(OFBufferId.NO_BUFFER)
-                        .setCookie(cookie)
-                        .setOutPort(OFPort.of(1))
-                        .setPriority(FLOWMOD_DEFAULT_PRIORITY);
-                if (logger.isTraceEnabled()) {
-                    logger.trace("Firewall:Installing flow from port 2 to 1");
+                trusted.add(eth.getDestinationMACAddress());
+                trusted.add(eth.getSourceMACAddress());
+            } else if (inPort == OFPort.of(2)) {
+                if (trusted.contains(eth.getSourceMACAddress())) {
+                    OFFlowMod.Builder fmb = sw.getOFFactory().buildFlowAdd();
+                    //Install flow from port 2 to 1
+                    Match.Builder mb = sw.getOFFactory().buildMatch();
+                    mb.setExact(MatchField.ETH_SRC, eth.getSourceMACAddress())
+                            .setExact(MatchField.ETH_DST, eth.getDestinationMACAddress());
+
+                    List<OFAction> actions = new ArrayList<OFAction>();
+                    actions.add(sw.getOFFactory().actions().output(OFPort.of(1), Integer.MAX_VALUE));
+
+                    U64 cookie = AppCookie.makeCookie(FORWARDING_APP_ID, 0);
+                    fmb.setMatch(mb.build()) // was match w/o modifying input port
+                            .setActions(actions)
+                            .setIdleTimeout(FLOWMOD_DEFAULT_IDLE_TIMEOUT)
+                            .setHardTimeout(FLOWMOD_DEFAULT_HARD_TIMEOUT)
+                            .setBufferId(OFBufferId.NO_BUFFER)
+                            .setCookie(cookie)
+                            .setOutPort(OFPort.of(1))
+                            .setPriority(FLOWMOD_DEFAULT_PRIORITY);
+                    if (logger.isTraceEnabled()) {
+                        logger.trace("Firewall:Installing flow from port 2 to 1");
+                    }
+                    sw.write(fmb.build());
+                    //Push this packet out
+                    OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
+                    pob.setActions(actions);
+                    pob.setBufferId(OFBufferId.NO_BUFFER);
+                    pob.setInPort(inPort);
+                    pob.setData(pi.getData());
+                    sw.write(pob.build());
                 }
-                sw.write(fmb.build());
             }
             return Command.STOP;
         } else {
