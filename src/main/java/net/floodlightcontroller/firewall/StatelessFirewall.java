@@ -163,6 +163,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                 pob.setBufferId(OFBufferId.NO_BUFFER);
                 pob.setInPort(inPort);
                 pob.setData(pi.getData());
+                sw.write(pob.build());
                 //Install flow from port 2 to 1
                 mb = sw.getOFFactory().buildMatch();
                 mb.setExact(MatchField.ETH_SRC, dstMac)
