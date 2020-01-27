@@ -1,11 +1,8 @@
-package net.floodlightcontroller.firewall;
+package net.floodlightcontroller.auth;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
-
+import java.util.*;
 import net.floodlightcontroller.core.util.AppCookie;
+import net.floodlightcontroller.packet.IPv4;
 import org.projectfloodlight.openflow.protocol.*;
 import org.projectfloodlight.openflow.protocol.action.OFAction;
 import org.projectfloodlight.openflow.protocol.match.Match;
@@ -23,15 +20,18 @@ import net.floodlightcontroller.core.IFloodlightProviderService;
 
 import net.floodlightcontroller.packet.Ethernet;
 import net.floodlightcontroller.routing.IRoutingDecision;
+import org.sdnplatform.sync.internal.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class StatelessFirewall implements IOFMessageListener, IFloodlightModule {
+public class Auth implements IOFMessageListener, IFloodlightModule {
 
-    // service modules needed
     protected IFloodlightProviderService floodlightProvider;
     protected static Logger logger;
 
+    protected Map<Pair<IOFSwitch, IPv4Address>, OFPort> table;
+    protected Set<IPv4Address> auth;
+    protected static final Set<IPv4Address> AUTH_SERVERS = new HashSet<>(Arrays.asList(IPv4Address.of("10.0.0.4")));
     public static int FLOWMOD_DEFAULT_IDLE_TIMEOUT = 1000; // in seconds
     public static int FLOWMOD_DEFAULT_HARD_TIMEOUT = 0; // infinite
     public static int FLOWMOD_DEFAULT_PRIORITY = 1; // 0 is the default table-miss flow in OF1.3+, so we need to use 1
@@ -44,7 +44,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
 
     @Override
     public String getName() {
-        return "statelessfirewall";
+        return "auth";
     }
 
     @Override
@@ -55,7 +55,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
 
     @Override
     public boolean isCallbackOrderingPostreq(OFType type, String name) {
-        return (type.equals(OFType.PACKET_IN) && name.equals("forwarding"));
+        return false;
     }
 
     @Override
@@ -78,15 +78,18 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
     @Override
     public void init(FloodlightModuleContext context) throws FloodlightModuleException {
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
-        logger = LoggerFactory.getLogger(StatelessFirewall.class);
+        logger = LoggerFactory.getLogger(Auth.class);
+        table = new HashMap<Pair<IOFSwitch, IPv4Address>, OFPort>();
+        auth = new HashSet<IPv4Address>();
+        auth.addAll(AUTH_SERVERS);
         if (logger.isTraceEnabled()) {
-            logger.trace("module statelessfirewall initialized");
+            logger.debug("module auth initialized");
         }
     }
 
     @Override
     public void startUp(FloodlightModuleContext context) {
-        // always place firewall in pipeline at bootup
+        // always place in pipeline at bootup
         floodlightProvider.addOFMessageListener(OFType.PACKET_IN, this);
     }
 
@@ -112,37 +115,53 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
         Ethernet eth = IFloodlightProviderService.bcStore.get(cntx, IFloodlightProviderService.CONTEXT_PI_PAYLOAD);
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
 
-        if (sw.getId().equals(DatapathId.of(1))) {
-            if (eth.getEtherType() == Ethernet.TYPE_ARP) {
-                OFPort outPort = (inPort == OFPort.of(2) ? OFPort.of(1) : OFPort.of(2));
+        if (eth.getEtherType() != Ethernet.TYPE_IPv4) {
+            return Command.CONTINUE;
+        }
 
+        IPv4 ip = (IPv4) eth.getPayload();
+        IPv4Address srcIp = ip.getSourceAddress();
+        IPv4Address dstIp = ip.getDestinationAddress();
+
+        //learn the source
+        table.put(new Pair<IOFSwitch, IPv4Address>(sw, srcIp), inPort);
+        OFPort outPort = table.get(new Pair<IOFSwitch, IPv4Address>(sw, dstIp));
+
+        if (AUTH_SERVERS.contains(srcIp)) {
+            auth.add(dstIp);
+            logger.trace("{} is authorized", new Object[]{dstIp});
+        }
+
+        if (outPort == null) {
+            if (AUTH_SERVERS.contains(dstIp)) {
                 OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
+
                 List<OFAction> actions = new ArrayList<OFAction>();
-                actions.add(sw.getOFFactory().actions().output(outPort, Integer.MAX_VALUE));
+                if (sw.hasAttribute(IOFSwitch.PROP_SUPPORTS_OFPP_FLOOD)) {
+                    actions.add(sw.getOFFactory().actions().output(OFPort.FLOOD, Integer.MAX_VALUE)); // FLOOD is a more selective/efficient version of ALL
+                } else {
+                    actions.add(sw.getOFFactory().actions().output(OFPort.ALL, Integer.MAX_VALUE));
+                }
                 pob.setActions(actions);
 
                 pob.setBufferId(OFBufferId.NO_BUFFER);
                 pob.setInPort(inPort);
                 pob.setData(pi.getData());
-
-                if (logger.isTraceEnabled()) {
-                    logger.trace("Firewall:Writing flood PacketOut For ARP packets, switch={} packet-in={} packet-out={}",
-                            new Object[]{sw, pi, pob.build()});
-                }
                 sw.write(pob.build());
-            } else if (inPort == OFPort.of(1)) {
-                MacAddress srcMac = eth.getSourceMACAddress();
-                MacAddress dstMac = eth.getDestinationMACAddress();
 
-                OFFlowMod.Builder fmb;
-                fmb = sw.getOFFactory().buildFlowAdd();
-                //Install flow from port 1 to 2
+            }
+        }
+        else {
+            if (auth.contains(srcIp) && auth.contains(dstIp)) {
+                OFFlowMod.Builder fmb = sw.getOFFactory().buildFlowAdd();
+
                 Match.Builder mb = sw.getOFFactory().buildMatch();
-                mb.setExact(MatchField.ETH_SRC, srcMac)
-                        .setExact(MatchField.ETH_DST, dstMac);
+                mb.setExact(MatchField.IPV4_SRC, srcIp)
+                        .setExact(MatchField.IPV4_DST, dstIp)
+                        .setExact(MatchField.ETH_TYPE, EthType.IPv4);
 
                 List<OFAction> actions = new ArrayList<OFAction>();
-                actions.add(sw.getOFFactory().actions().output(OFPort.of(2), Integer.MAX_VALUE));
+                actions.add(sw.getOFFactory().actions().output(outPort, Integer.MAX_VALUE));
 
                 U64 cookie = AppCookie.makeCookie(FORWARDING_APP_ID, 0);
                 fmb.setMatch(mb.build()) // was match w/o modifying input port
@@ -151,10 +170,10 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                         .setHardTimeout(FLOWMOD_DEFAULT_HARD_TIMEOUT)
                         .setBufferId(OFBufferId.NO_BUFFER)
                         .setCookie(cookie)
-                        .setOutPort(OFPort.of(2))
+                        .setOutPort(outPort)
                         .setPriority(FLOWMOD_DEFAULT_PRIORITY);
                 if (logger.isTraceEnabled()) {
-                    logger.trace("Firewall:Installing flow from port 1 to 2");
+                    logger.trace("Auth:Installing {} -> {}", new Object[]{srcIp, dstIp});
                 }
                 sw.write(fmb.build());
                 //Push this packet out
@@ -164,36 +183,24 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                 pob.setInPort(inPort);
                 pob.setData(pi.getData());
                 sw.write(pob.build());
-                //Install flow from port 2 to 1
-                mb = sw.getOFFactory().buildMatch();
-                mb.setExact(MatchField.ETH_SRC, dstMac)
-                        .setExact(MatchField.ETH_DST, srcMac);
 
-                actions = new ArrayList<OFAction>();
-                actions.add(sw.getOFFactory().actions().output(OFPort.of(1), Integer.MAX_VALUE));
-                fmb.setMatch(mb.build()) // was match w/o modifying input port
-                        .setActions(actions)
-                        .setIdleTimeout(FLOWMOD_DEFAULT_IDLE_TIMEOUT)
-                        .setHardTimeout(FLOWMOD_DEFAULT_HARD_TIMEOUT)
-                        .setBufferId(OFBufferId.NO_BUFFER)
-                        .setCookie(cookie)
-                        .setOutPort(OFPort.of(1))
-                        .setPriority(FLOWMOD_DEFAULT_PRIORITY);
-                if (logger.isTraceEnabled()) {
-                    logger.trace("Firewall:Installing flow from port 2 to 1");
-                }
-                sw.write(fmb.build());
+            } else if (AUTH_SERVERS.contains(dstIp)) {
+                OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
+
+                List<OFAction> actions = new ArrayList<OFAction>();
+                actions.add(sw.getOFFactory().actions().output(outPort, Integer.MAX_VALUE));
+                pob.setActions(actions);
+                pob.setBufferId(OFBufferId.NO_BUFFER);
+                pob.setInPort(inPort);
+                pob.setData(pi.getData());
+                sw.write(pob.build());
+
             }
-            return Command.STOP;
-        } else {
-            /*
-            if (logger.isTraceEnabled()) {
-                logger.trace("Firewall:Not handling packet from, sw={} inPort={}",
-                        new Object[]{sw, inPort});
-            }
-             */
-            return Command.CONTINUE;
         }
+        return Command.CONTINUE;
     }
-
 }
+
+
+
+

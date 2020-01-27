@@ -78,7 +78,7 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
     @Override
     public void init(FloodlightModuleContext context) throws FloodlightModuleException {
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
-        logger = LoggerFactory.getLogger(Firewall.class);
+        logger = LoggerFactory.getLogger(StatefulFirewall.class);
         trusted = new ConcurrentSkipListSet<MacAddress>();
         if (logger.isTraceEnabled()) {
             logger.trace("module statefulfirewall initialized");

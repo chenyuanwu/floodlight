@@ -24,6 +24,7 @@ net.floodlightcontroller.learningswitch.LearningSwitch
 net.floodlightcontroller.loadbalancer.LoadBalancer
 net.floodlightcontroller.linkdiscovery.internal.LinkDiscoveryManager
 net.floodlightcontroller.devicemanager.internal.DeviceManagerImpl
+net.floodlightcontroller.auth.Auth
 net.floodlightcontroller.firewall.Firewall
 net.floodlightcontroller.firewall.StatelessFirewall
 net.floodlightcontroller.firewall.StatefulFirewall
