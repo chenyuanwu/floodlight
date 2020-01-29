@@ -1,6 +1,6 @@
 package net.floodlightcontroller.tracecollector;
 
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 import net.floodlightcontroller.core.FloodlightContext;
 import net.floodlightcontroller.core.IFloodlightProviderService;
 import net.floodlightcontroller.core.IOFSwitch;
@@ -35,7 +35,11 @@ class Convert {
     }
 }
 
-class PacketOut {
+interface OutputMessage {
+    String toTupleString();
+}
+
+class PacketOut implements OutputMessage{
     protected int dpid;
     protected int buffer_id;
     protected int out_port;
@@ -46,6 +50,7 @@ class PacketOut {
         out_port = ((OFActionOutput)msg.getActions().get(0)).getPort().getPortNumber();
     }
 
+    @Override
     public String toTupleString() {
         if (out_port == OFPort.FLOOD.getPortNumber() || out_port == OFPort.ALL.getPortNumber()) {
             return String.format("flood(%d, %d)", dpid, buffer_id);
@@ -56,7 +61,7 @@ class PacketOut {
     }
 }
 
-class FlowMod {
+class FlowMod implements OutputMessage{
     protected int dpid;
     protected String dl_src;
     protected String dl_dst;
@@ -74,6 +79,7 @@ class FlowMod {
         }
     }
 
+    @Override
     public String toTupleString() {
         if (out_port != -1) {
             return String.format("flow_mod(%d, %s, %s, %d)", dpid, dl_src, dl_dst, out_port);
@@ -84,7 +90,7 @@ class FlowMod {
     }
 }
 
-class FlowModL3 {
+class FlowModL3 implements OutputMessage {
     protected int dpid;
     protected String nw_src;
     protected String nw_dst;
@@ -102,6 +108,7 @@ class FlowModL3 {
         }
     }
 
+    @Override
     public String toTupleString() {
         if (out_port != -1) {
             return String.format("flow_mod_l3(%d, %s, %s, %d)", dpid, nw_src, nw_dst, out_port);
@@ -165,14 +172,14 @@ class IOInstance {
     protected IOFSwitch sw;
     protected PacketIn packet_in;
     protected List prev_states;
-    protected List out_msgs;
+    protected List<OutputMessage> out_msgs;
     protected List cur_states;
 
     public IOInstance() {
         sw = null;
         packet_in = null;
         prev_states = new ArrayList();
-        out_msgs = new ArrayList();
+        out_msgs = new ArrayList<OutputMessage>();
         cur_states = new ArrayList();
     }
 
@@ -254,11 +261,11 @@ class IOInstance {
 public class TraceCollector {
     protected File file;
     protected IOInstance currentInstance;
-    protected Gson gson;
+    //protected Gson gson;
 
     public TraceCollector(String outfile) {
         try {
-            file = new File("/home/floodlight/Desktop/floodlight/traces/" + outfile + ".json");
+            file = new File("/home/floodlight/Desktop/floodlight/traces/" + outfile + ".trace");
             if (file.exists()) {
                 file.delete();
                 file.createNewFile();
@@ -266,17 +273,76 @@ public class TraceCollector {
                 file.createNewFile();
             }
             currentInstance = null;
-            gson = new Gson();
+            //gson = new Gson();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void dumpInstance(IOInstance instance) {
+    private String getStateTuple(Object s) {
+        if (s instanceof List) {
+            List<String> list = (List<String>)s;
+            StringBuilder strbd = new StringBuilder("state(");
+            for (int i = 0; i < list.size(); i++) {
+                if (i != list.size() - 1) {
+                    strbd.append(list.get(i)).append(",");
+                }
+                else {
+                    strbd.append(list.get(i)).append(")");
+                }
+            }
+            return strbd.toString();
+        }
+        else {
+            return String.format("state(%s)", s);
+        }
+    }
+
+    private void dumpInstance() {
         try {
             FileWriter writter = new FileWriter(file, true);
-            gson.toJson(instance, writter);
-            writter.write("\n");
+            //gson.toJson(instance, writter);
+
+            //Write edbs to file
+            List<String> edb = new ArrayList<>();
+            List<String> old_states = new ArrayList<>();
+            edb.add(currentInstance.packet_in.toTupleString("l2"));
+
+            for (int i = 0; i < currentInstance.prev_states.size(); i++) {
+                old_states.add(getStateTuple(currentInstance.prev_states.get(i)));
+                edb.add(getStateTuple(currentInstance.prev_states.get(i)));
+            }
+            writter.write("EDB {\n");
+            for (int i = 0; i < edb.size(); i++) {
+                if (i != edb.size() - 1) {
+                    writter.write(edb.get(i) + ",\n");
+                }
+                else {
+                    writter.write(edb.get(i) + "\n}\n");
+                }
+            }
+
+            //Write idbs to file
+            List<String> idb = new ArrayList<>();
+            for (int i = 0; i < currentInstance.out_msgs.size(); i++) {
+                idb.add(currentInstance.out_msgs.get(i).toTupleString());
+            }
+
+            for (int i = 0; i < currentInstance.cur_states.size(); i++) {
+                if (! old_states.contains(getStateTuple(currentInstance.cur_states.get(i)))) {
+                    idb.add("new_" + getStateTuple(currentInstance.cur_states.get(i)));
+                }
+            }
+            writter.write("IDB {\n");
+            for (int i = 0; i < idb.size(); i++) {
+                if (i != idb.size() - 1) {
+                    writter.write(idb.get(i) + ",\n");
+                }
+                else {
+                    writter.write(idb.get(i) + "\n}\n");
+                }
+            }
+
             writter.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -299,12 +365,12 @@ public class TraceCollector {
 
     public void addFinalStates(Object states) {
         currentInstance.addFinalStates(states);
-        dumpInstance(currentInstance);
+        dumpInstance();
         currentInstance = null;
     }
 
     public void addFinalStates() {
-        dumpInstance(currentInstance);
+        dumpInstance();
         currentInstance = null;
     }
 }
