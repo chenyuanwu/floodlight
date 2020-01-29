@@ -34,6 +34,7 @@ import net.floodlightcontroller.packet.Ethernet;
 import net.floodlightcontroller.routing.ForwardingBase;
 import net.floodlightcontroller.routing.IRoutingDecision;
 
+import net.floodlightcontroller.tracecollector.TraceCollector;
 import org.projectfloodlight.openflow.protocol.OFFlowMod;
 import org.projectfloodlight.openflow.protocol.action.OFActionOutput;
 import org.projectfloodlight.openflow.protocol.match.Match;
@@ -56,9 +57,12 @@ import org.slf4j.LoggerFactory;
 public class L2Pairs extends ForwardingBase implements IFloodlightModule {
     protected static Logger log = LoggerFactory.getLogger(L2Pairs.class);
     protected Map<Pair<IOFSwitch, MacAddress>, OFPort> macToPortMap;
+    protected TraceCollector tc;
 
     @Override
     public Command processPacketInMessage(IOFSwitch sw, OFPacketIn pi, IRoutingDecision decision, FloodlightContext cntx) {
+        tc.addInput(pi, sw, cntx, macToPortMap);
+
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
         Ethernet eth = IFloodlightProviderService.bcStore.get(cntx, IFloodlightProviderService.CONTEXT_PI_PAYLOAD);
         MacAddress dstMac = eth.getDestinationMACAddress();
@@ -78,6 +82,8 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
             }
             doForwardFlow(sw, pi, cntx);
         }
+
+        tc.addFinalStates(macToPortMap);
 
         return Command.CONTINUE;
     }
@@ -116,6 +122,8 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
                     new Object[] {sw, inPort, outPort});
         }
         sw.write(fmb.build());
+
+        tc.addOutput(fmb.build());
         //flow out
         fmb = sw.getOFFactory().buildFlowAdd();
 
@@ -143,6 +151,9 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
                     new Object[] {sw, inPort, outPort});
         }
         sw.write(fmb.build());
+
+        tc.addOutput(fmb.build());
+
         doPushPacket(sw, pi, outPort, cntx);
 
         return;
@@ -175,6 +186,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
                     new Object[] {sw, pi, pob.build()});
         }
         sw.write(pob.build());
+        tc.addOutput(pob.build());
         return;
     }
 
@@ -205,6 +217,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         super.init();
         this.floodlightProviderService = context.getServiceImpl(IFloodlightProviderService.class);
         macToPortMap = new ConcurrentHashMap<Pair<IOFSwitch, MacAddress>, OFPort>();
+        tc = new TraceCollector("l2pairs");
         if (log.isTraceEnabled()) {
             log.trace("module l2pairs initialized");
         }
