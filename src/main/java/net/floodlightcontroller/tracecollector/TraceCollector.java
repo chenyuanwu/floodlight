@@ -176,8 +176,6 @@ class IOInstance {
     protected List cur_states;
 
     public IOInstance() {
-        sw = null;
-        packet_in = null;
         prev_states = new ArrayList();
         out_msgs = new ArrayList<OutputMessage>();
         cur_states = new ArrayList();

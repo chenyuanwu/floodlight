@@ -186,7 +186,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
                     new Object[] {sw, pi, pob.build()});
         }
         sw.write(pob.build());
-        tc.addOutput(pob.build());
+        //tc.addOutput(pob.build());
         return;
     }
 
