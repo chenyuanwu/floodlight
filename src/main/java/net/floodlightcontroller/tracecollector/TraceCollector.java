@@ -270,7 +270,7 @@ public class TraceCollector {
             } else {
                 file.createNewFile();
             }
-            currentInstance = null;
+            //currentInstance = null;
             //gson = new Gson();
         } catch (IOException e) {
             e.printStackTrace();
@@ -348,6 +348,7 @@ public class TraceCollector {
     }
 
     public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx, Object states) {
+        assert currentInstance == null : "A final state is expected.";
         currentInstance = new IOInstance();
         currentInstance.addInput(pi, sw, cntx, states);
     }
