@@ -355,15 +355,18 @@ public class TraceCollector {
     }
 
     public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx) {
+        assert currentInstance == null : "A final state is expected.";
         currentInstance = new IOInstance();
         currentInstance.addInput(pi, sw, cntx);
     }
 
     public void addOutput(OFMessage msg) {
+        assert currentInstance != null : "Missing previous input.";
         currentInstance.addOutput(msg);
     }
 
     public void addFinalStates(Object states) {
+        assert currentInstance != null : "Missing previous input.";
         currentInstance.addFinalStates(states);
         dumpInstance();
         currentInstance = null;
