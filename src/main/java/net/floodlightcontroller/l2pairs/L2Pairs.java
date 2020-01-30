@@ -62,6 +62,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
     @Override
     public Command processPacketInMessage(IOFSwitch sw, OFPacketIn pi, IRoutingDecision decision, FloodlightContext cntx) {
         tc.addInput(pi, sw, cntx, macToPortMap);
+        log.warn("Start processing PacketIn {}", pi.hashCode());
 
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
         Ethernet eth = IFloodlightProviderService.bcStore.get(cntx, IFloodlightProviderService.CONTEXT_PI_PAYLOAD);
@@ -84,6 +85,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         }
 
         tc.addFinalStates(macToPortMap);
+        log.warn("Done processing PacketIn {}", pi.hashCode());
 
         return Command.CONTINUE;
     }
