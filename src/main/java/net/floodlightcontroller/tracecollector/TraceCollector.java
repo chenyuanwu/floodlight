@@ -11,6 +11,7 @@ import org.projectfloodlight.openflow.protocol.action.OFActionOutput;
 import org.projectfloodlight.openflow.protocol.match.MatchField;
 import org.projectfloodlight.openflow.types.IPv4Address;
 import org.projectfloodlight.openflow.types.MacAddress;
+import org.projectfloodlight.openflow.types.OFBufferId;
 import org.projectfloodlight.openflow.types.OFPort;
 import org.sdnplatform.sync.internal.util.Pair;
 
@@ -40,6 +41,11 @@ interface OutputMessage {
 class PacketOut implements OutputMessage{
     protected int dpid;
     protected int buffer_id;
+    /*
+        The buffer_id field indicates the location of a raw packet to be injected into the data plane of the switch.
+        A value of 0xffffffff indicates that the raw packet is contained within the byte array data[],
+        otherwise the buffer_id value indicates a packet buffer local to the switch that contains the raw packet.
+    */
     protected int out_port;
 
     public PacketOut(OFPacketOut msg, IOFSwitch sw) {
@@ -122,6 +128,10 @@ class PacketIn {
     protected int dpid;
     protected int port;
     protected int buffer_id;
+    /*
+        For PacketIn messages, The buffer id is a unique value used to track the buffered packet
+    */
+
     //L2 information
     protected String eth_src;
     protected String eth_dst;
@@ -135,7 +145,11 @@ class PacketIn {
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
         dpid = (int)sw.getId().getLong();
         port = inPort.getPortNumber();
-        buffer_id = pi.getBufferId().getInt();
+        if (pi.getBufferId() != OFBufferId.NO_BUFFER) {
+            buffer_id = pi.getBufferId().getInt();
+        } else {
+            buffer_id = pi.hashCode();
+        }
 
         eth_src = Convert.convertMac(eth.getSourceMACAddress());
         eth_dst = Convert.convertMac(eth.getDestinationMACAddress());
@@ -257,7 +271,7 @@ class IOInstance {
 
 public class TraceCollector {
     protected File file;
-    protected Map<Integer, IOInstance> holdedInstances;
+    protected Map<Pair<Integer, Integer>, IOInstance> holdedInstances;
     //protected Gson gson;
 
     public TraceCollector(String outfile) {
@@ -269,7 +283,7 @@ public class TraceCollector {
             } else {
                 file.createNewFile();
             }
-            holdedInstances = new ConcurrentHashMap<Integer, IOInstance>();
+            holdedInstances = new ConcurrentHashMap<Pair<Integer, Integer>, IOInstance>();
             //gson = new Gson();
         } catch (IOException e) {
             e.printStackTrace();
@@ -347,42 +361,42 @@ public class TraceCollector {
     }
 
     public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx, Object states) {
-        assert holdedInstances.get(pi.hashCode()) == null :
-                String.format("A final state is expected for PacketIn %d.", pi.hashCode());
+        assert holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode())) == null :
+                String.format("A final state is expected for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
         IOInstance currentInstance = new IOInstance();
         currentInstance.addInput(pi, sw, cntx, states);
-        holdedInstances.put(pi.hashCode(), currentInstance);
+        holdedInstances.put(new Pair<>((int)sw.getId().getLong(), pi.hashCode()), currentInstance);
     }
 
     public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx) {
-        assert holdedInstances.get(pi.hashCode()) == null :
-                String.format("A final state is expected for PacketIn %d.", pi.hashCode());
+        assert holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode())) == null :
+                String.format("A final state is expected for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
         IOInstance currentInstance = new IOInstance();
         currentInstance.addInput(pi, sw, cntx);
-        holdedInstances.put(pi.hashCode(), currentInstance);
+        holdedInstances.put(new Pair<>((int)sw.getId().getLong(), pi.hashCode()), currentInstance);
     }
 
-    public void addOutput(OFPacketIn pi, OFMessage msg) {
-        assert holdedInstances.get(pi.hashCode()) != null :
-                String.format("Missing previous input for PacketIn %d.", pi.hashCode());
-        IOInstance currentInstance = holdedInstances.get(pi.hashCode());
+    public void addOutput(OFPacketIn pi, IOFSwitch sw, OFMessage msg) {
+        assert holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode())) != null :
+                String.format("Missing previous input for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
+        IOInstance currentInstance = holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode()));
         currentInstance.addOutput(msg);
     }
 
-    public void addFinalStates(OFPacketIn pi, Object states) {
-        assert holdedInstances.get(pi.hashCode()) != null :
-                String.format("Missing previous input for PacketIn %d.", pi.hashCode());
-        IOInstance currentInstance = holdedInstances.get(pi.hashCode());
+    public void addFinalStates(OFPacketIn pi, IOFSwitch sw, Object states) {
+        assert holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode())) != null :
+                String.format("Missing previous input for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
+        IOInstance currentInstance = holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode()));
         currentInstance.addFinalStates(states);
         dumpInstance(currentInstance);
-        holdedInstances.remove(pi.hashCode());
+        holdedInstances.remove(new Pair<>((int)sw.getId().getLong(), pi.hashCode()));
     }
 
-    public void addFinalStates(OFPacketIn pi) {
-        assert holdedInstances.get(pi.hashCode()) != null :
-                String.format("Missing previous input for PacketIn %d.", pi.hashCode());
-        IOInstance currentInstance = holdedInstances.get(pi.hashCode());
+    public void addFinalStates(OFPacketIn pi, IOFSwitch sw) {
+        assert holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode())) != null :
+                String.format("Missing previous input for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
+        IOInstance currentInstance = holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode()));
         dumpInstance(currentInstance);
-        holdedInstances.remove(pi.hashCode());
+        holdedInstances.remove(new Pair<>((int)sw.getId().getLong(), pi.hashCode()));
     }
 }
