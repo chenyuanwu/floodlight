@@ -221,7 +221,7 @@ public class FirewallMigration implements IOFMessageListener, IFloodlightModule 
             }
              */
             tc.addFinalStates(pi, sw, trusted);
-            
+
             return Command.CONTINUE;
         }
     }

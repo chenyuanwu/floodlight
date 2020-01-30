@@ -29,4 +29,5 @@ net.floodlightcontroller.auth.Auth
 net.floodlightcontroller.firewall.Firewall
 net.floodlightcontroller.firewall.StatelessFirewall
 net.floodlightcontroller.firewall.StatefulFirewall
+net.floodlightcontroller.firewall.FirewallMigration
 net.floodlightcontroller.l2pairs.L2Pairs
