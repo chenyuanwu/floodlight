@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 import net.floodlightcontroller.core.util.AppCookie;
+import net.floodlightcontroller.tracecollector.TraceCollector;
 import org.projectfloodlight.openflow.protocol.*;
 import org.projectfloodlight.openflow.protocol.action.OFAction;
 import org.projectfloodlight.openflow.protocol.match.Match;
@@ -31,6 +32,7 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
     protected IFloodlightProviderService floodlightProvider;
     protected static Logger logger;
     protected Set<MacAddress> trusted;
+    protected TraceCollector tc;
 
     public static int FLOWMOD_DEFAULT_IDLE_TIMEOUT = 1000; // in seconds
     public static int FLOWMOD_DEFAULT_HARD_TIMEOUT = 0; // infinite
@@ -80,6 +82,7 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
         logger = LoggerFactory.getLogger(StatefulFirewall.class);
         trusted = new ConcurrentSkipListSet<MacAddress>();
+        tc = new TraceCollector("statefulfirewall");
         if (logger.isTraceEnabled()) {
             logger.trace("module statefulfirewall initialized");
         }
@@ -110,6 +113,7 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
 
 
     public Command processPacketInMessage(IOFSwitch sw, OFPacketIn pi, IRoutingDecision decision, FloodlightContext cntx) {
+        tc.addInput(pi, sw, cntx, trusted);
         Ethernet eth = IFloodlightProviderService.bcStore.get(cntx, IFloodlightProviderService.CONTEXT_PI_PAYLOAD);
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
 
@@ -131,6 +135,8 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
                             new Object[]{sw, pi, pob.build()});
                 }
                 sw.write(pob.build());
+
+                tc.addOutput(pi, sw, pob.build());
             } else if (inPort == OFPort.of(1)) {
                 OFFlowMod.Builder fmb = sw.getOFFactory().buildFlowAdd();
                 //Install flow from port 1 to 2
@@ -154,6 +160,8 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
                     logger.trace("Firewall:Installing flow from port 1 to 2");
                 }
                 sw.write(fmb.build());
+
+                tc.addOutput(pi, sw, fmb.build());
                 //Push this packet out
                 OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
                 pob.setActions(actions);
@@ -161,6 +169,8 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
                 pob.setInPort(inPort);
                 pob.setData(pi.getData());
                 sw.write(pob.build());
+
+                tc.addOutput(pi, sw, pob.build());
 
                 trusted.add(eth.getDestinationMACAddress());
             } else if (inPort == OFPort.of(2)) {
@@ -187,6 +197,8 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
                         logger.trace("Firewall:Installing flow from port 2 to 1");
                     }
                     sw.write(fmb.build());
+
+                    tc.addOutput(pi, sw, fmb.build());
                     //Push this packet out
                     OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
                     pob.setActions(actions);
@@ -194,8 +206,12 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
                     pob.setInPort(inPort);
                     pob.setData(pi.getData());
                     sw.write(pob.build());
+
+                    tc.addOutput(pi, sw, fmb.build());
                 }
             }
+            tc.addFinalStates(pi, sw, trusted);
+
             return Command.STOP;
         } else {
             /*
@@ -204,6 +220,8 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
                         new Object[]{sw, inPort});
             }
              */
+            tc.addFinalStates(pi, sw, trusted);
+            
             return Command.CONTINUE;
         }
     }
