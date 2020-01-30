@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.ArrayList;
 
 import net.floodlightcontroller.core.util.AppCookie;
+import net.floodlightcontroller.tracecollector.TraceCollector;
 import org.projectfloodlight.openflow.protocol.*;
 import org.projectfloodlight.openflow.protocol.action.OFAction;
 import org.projectfloodlight.openflow.protocol.match.Match;
@@ -31,6 +32,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
     // service modules needed
     protected IFloodlightProviderService floodlightProvider;
     protected static Logger logger;
+    protected TraceCollector tc;
 
     public static int FLOWMOD_DEFAULT_IDLE_TIMEOUT = 1000; // in seconds
     public static int FLOWMOD_DEFAULT_HARD_TIMEOUT = 0; // infinite
@@ -79,6 +81,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
     public void init(FloodlightModuleContext context) throws FloodlightModuleException {
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
         logger = LoggerFactory.getLogger(StatelessFirewall.class);
+        tc = new TraceCollector("statelessfirewall");
         if (logger.isTraceEnabled()) {
             logger.trace("module statelessfirewall initialized");
         }
@@ -109,6 +112,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
 
 
     public Command processPacketInMessage(IOFSwitch sw, OFPacketIn pi, IRoutingDecision decision, FloodlightContext cntx) {
+        tc.addInput(pi, sw, cntx);
         Ethernet eth = IFloodlightProviderService.bcStore.get(cntx, IFloodlightProviderService.CONTEXT_PI_PAYLOAD);
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
 
@@ -130,6 +134,8 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                             new Object[]{sw, pi, pob.build()});
                 }
                 sw.write(pob.build());
+
+                tc.addOutput(pi, sw, pob.build());
             } else if (inPort == OFPort.of(1)) {
                 MacAddress srcMac = eth.getSourceMACAddress();
                 MacAddress dstMac = eth.getDestinationMACAddress();
@@ -157,6 +163,8 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                     logger.trace("Firewall:Installing flow from port 1 to 2");
                 }
                 sw.write(fmb.build());
+
+                tc.addOutput(pi, sw, fmb.build());
                 //Push this packet out
                 OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
                 pob.setActions(actions);
@@ -164,6 +172,8 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                 pob.setInPort(inPort);
                 pob.setData(pi.getData());
                 sw.write(pob.build());
+
+                tc.addOutput(pi, sw, pob.build());
                 //Install flow from port 2 to 1
                 mb = sw.getOFFactory().buildMatch();
                 mb.setExact(MatchField.ETH_SRC, dstMac)
@@ -183,7 +193,11 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                     logger.trace("Firewall:Installing flow from port 2 to 1");
                 }
                 sw.write(fmb.build());
+
+                tc.addOutput(pi, sw, fmb.build());
             }
+            tc.addFinalStates(pi, sw);
+
             return Command.STOP;
         } else {
             /*
@@ -192,8 +206,10 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                         new Object[]{sw, inPort});
             }
              */
+            tc.addFinalStates(pi, sw);
+
             return Command.CONTINUE;
         }
-    }
 
+    }
 }
