@@ -350,9 +350,10 @@ public class TraceCollector {
                     writter.write(idb.get(i) + ",\n");
                 }
                 else {
-                    writter.write(idb.get(i) + "\n}\n");
+                    writter.write(idb.get(i) + "\n");
                 }
             }
+            writter.write("}\n");
 
             writter.close();
         } catch (IOException e) {
