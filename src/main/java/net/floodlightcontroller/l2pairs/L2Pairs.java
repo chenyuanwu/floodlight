@@ -125,7 +125,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         }
         sw.write(fmb.build());
 
-        //tc.addOutput(pi, fmb.build());
+        tc.addOutput(pi, fmb.build());
         //flow out
         fmb = sw.getOFFactory().buildFlowAdd();
 
@@ -154,7 +154,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         }
         sw.write(fmb.build());
 
-        //tc.addOutput(pi, fmb.build());
+        tc.addOutput(pi, fmb.build());
 
         doPushPacket(sw, pi, outPort, cntx);
 

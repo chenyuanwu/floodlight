@@ -240,7 +240,8 @@ class IOInstance {
             out_msgs.add(new PacketOut((OFPacketOut)msg, sw));
         }
         else if (msg instanceof OFFlowMod) {
-            if (((OFFlowMod)msg).getMatch().get(MatchField.ETH_TYPE).getValue() == Ethernet.TYPE_IPv4) {
+            if (((OFFlowMod)msg).getMatch().get(MatchField.ETH_TYPE) != null &&
+                    ((OFFlowMod)msg).getMatch().get(MatchField.ETH_TYPE).getValue() == Ethernet.TYPE_IPv4) {
                 out_msgs.add(new FlowModL3((OFFlowMod)msg, sw));
             }
             else {
