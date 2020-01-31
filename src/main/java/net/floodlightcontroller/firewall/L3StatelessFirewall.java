@@ -111,7 +111,6 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
         return Command.CONTINUE;
     }
 
-
     public Command processPacketInMessage(IOFSwitch sw, OFPacketIn pi, IRoutingDecision decision, FloodlightContext cntx) {
         tc.addTableNames();
         tc.addInput(pi, sw, cntx);
@@ -139,7 +138,7 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
                 sw.write(pob.build());
 
                 tc.addOutput(pob.build());
-            } else if (eth.getPayload() instanceof IPv4){
+            } else if (eth.getPayload() instanceof IPv4 && ((IPv4)eth.getPayload()).getDestinationAddress() != IPv4Address.of("255.255.255.255")){
                 if (inPort == OFPort.of(1)) {
                     IPv4 ip = (IPv4) eth.getPayload();
                     IPv4Address srcIp = ip.getSourceAddress();
