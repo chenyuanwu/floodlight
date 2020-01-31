@@ -325,7 +325,7 @@ public class TraceCollector {
             //Write edbs to file
             List<String> edb = new ArrayList<>();
             List<String> old_states = new ArrayList<>();
-            edb.add(instance.packet_in.toTupleString("l2"));
+            edb.add(instance.packet_in.toTupleString("l3"));
 
             for (Map.Entry<String, List> entry : instance.prev_states.entrySet()) {
                 for (int i = 0; i < entry.getValue().size(); i++) {
