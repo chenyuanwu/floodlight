@@ -1,9 +1,12 @@
 package net.floodlightcontroller.firewall;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.ArrayList;
 
 import net.floodlightcontroller.core.util.AppCookie;
+import net.floodlightcontroller.packet.IPv4;
 import net.floodlightcontroller.tracecollector.TraceCollector;
 import org.projectfloodlight.openflow.protocol.*;
 import org.projectfloodlight.openflow.protocol.action.OFAction;
@@ -25,12 +28,11 @@ import net.floodlightcontroller.routing.IRoutingDecision;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FirewallMigration implements IOFMessageListener, IFloodlightModule {
+public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModule {
 
     // service modules needed
     protected IFloodlightProviderService floodlightProvider;
     protected static Logger logger;
-    protected Set<MacAddress> trusted;
     protected TraceCollector tc;
 
     public static int FLOWMOD_DEFAULT_IDLE_TIMEOUT = 1000; // in seconds
@@ -45,7 +47,7 @@ public class FirewallMigration implements IOFMessageListener, IFloodlightModule 
 
     @Override
     public String getName() {
-        return "firewallmigration";
+        return "l3-statelessfirewall";
     }
 
     @Override
@@ -79,11 +81,10 @@ public class FirewallMigration implements IOFMessageListener, IFloodlightModule 
     @Override
     public void init(FloodlightModuleContext context) throws FloodlightModuleException {
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
-        logger = LoggerFactory.getLogger(FirewallMigration.class);
-        trusted = new ConcurrentSkipListSet<MacAddress>();
-        tc = new TraceCollector("firewallmigration");
+        logger = LoggerFactory.getLogger(StatelessFirewall.class);
+        tc = new TraceCollector("l3-statelessfirewall");
         if (logger.isTraceEnabled()) {
-            logger.trace("module firewallmigration initialized");
+            logger.trace("module l3-statelessfirewall initialized");
         }
     }
 
@@ -112,8 +113,8 @@ public class FirewallMigration implements IOFMessageListener, IFloodlightModule 
 
 
     public Command processPacketInMessage(IOFSwitch sw, OFPacketIn pi, IRoutingDecision decision, FloodlightContext cntx) {
-        tc.addTableNames("trusted");
-        tc.addInput(pi, sw, cntx, trusted);
+        tc.addTableNames();
+        tc.addInput(pi, sw, cntx);
 
         Ethernet eth = IFloodlightProviderService.bcStore.get(cntx, IFloodlightProviderService.CONTEXT_PI_PAYLOAD);
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
@@ -138,55 +139,55 @@ public class FirewallMigration implements IOFMessageListener, IFloodlightModule 
                 sw.write(pob.build());
 
                 tc.addOutput(pob.build());
-            } else if (inPort == OFPort.of(1)) {
-                OFFlowMod.Builder fmb = sw.getOFFactory().buildFlowAdd();
-                //Install flow from port 1 to 2
-                Match.Builder mb = sw.getOFFactory().buildMatch();
-                mb.setExact(MatchField.ETH_SRC, eth.getSourceMACAddress())
-                        .setExact(MatchField.ETH_DST, eth.getDestinationMACAddress());
+            } else if (eth.getEtherType() == Ethernet.TYPE_IPv4) {
+                if (inPort == OFPort.of(1)) {
+                    IPv4 ip = (IPv4) eth.getPayload();
+                    IPv4Address srcIp = ip.getSourceAddress();
+                    IPv4Address dstIp = ip.getDestinationAddress();
 
-                List<OFAction> actions = new ArrayList<OFAction>();
-                actions.add(sw.getOFFactory().actions().output(OFPort.of(2), Integer.MAX_VALUE));
-
-                U64 cookie = AppCookie.makeCookie(FORWARDING_APP_ID, 0);
-                fmb.setMatch(mb.build()) // was match w/o modifying input port
-                        .setActions(actions)
-                        .setIdleTimeout(FLOWMOD_DEFAULT_IDLE_TIMEOUT)
-                        .setHardTimeout(FLOWMOD_DEFAULT_HARD_TIMEOUT)
-                        .setBufferId(OFBufferId.NO_BUFFER)
-                        .setCookie(cookie)
-                        .setOutPort(OFPort.of(2))
-                        .setPriority(FLOWMOD_DEFAULT_PRIORITY);
-                if (logger.isTraceEnabled()) {
-                    logger.trace("Firewall:Installing flow from port 1 to 2");
-                }
-                sw.write(fmb.build());
-
-                tc.addOutput(fmb.build());
-                //Push this packet out
-                OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
-                pob.setActions(actions);
-                pob.setBufferId(OFBufferId.NO_BUFFER);
-                pob.setInPort(inPort);
-                pob.setData(pi.getData());
-                sw.write(pob.build());
-
-                tc.addOutput(pob.build());
-
-                trusted.add(eth.getDestinationMACAddress());
-                trusted.add(eth.getSourceMACAddress());
-            } else if (inPort == OFPort.of(2)) {
-                if (trusted.contains(eth.getSourceMACAddress())) {
-                    OFFlowMod.Builder fmb = sw.getOFFactory().buildFlowAdd();
-                    //Install flow from port 2 to 1
+                    OFFlowMod.Builder fmb;
+                    fmb = sw.getOFFactory().buildFlowAdd();
+                    //Install flow from port 1 to 2
                     Match.Builder mb = sw.getOFFactory().buildMatch();
-                    mb.setExact(MatchField.ETH_SRC, eth.getSourceMACAddress())
-                            .setExact(MatchField.ETH_DST, eth.getDestinationMACAddress());
+                    mb.setExact(MatchField.IPV4_SRC, srcIp)
+                            .setExact(MatchField.IPV4_DST, dstIp)
+                            .setExact(MatchField.ETH_TYPE, EthType.IPv4);
 
                     List<OFAction> actions = new ArrayList<OFAction>();
-                    actions.add(sw.getOFFactory().actions().output(OFPort.of(1), Integer.MAX_VALUE));
+                    actions.add(sw.getOFFactory().actions().output(OFPort.of(2), Integer.MAX_VALUE));
 
                     U64 cookie = AppCookie.makeCookie(FORWARDING_APP_ID, 0);
+                    fmb.setMatch(mb.build()) // was match w/o modifying input port
+                            .setActions(actions)
+                            .setIdleTimeout(FLOWMOD_DEFAULT_IDLE_TIMEOUT)
+                            .setHardTimeout(FLOWMOD_DEFAULT_HARD_TIMEOUT)
+                            .setBufferId(OFBufferId.NO_BUFFER)
+                            .setCookie(cookie)
+                            .setOutPort(OFPort.of(2))
+                            .setPriority(FLOWMOD_DEFAULT_PRIORITY);
+                    if (logger.isTraceEnabled()) {
+                        logger.trace("Firewall:Installing flow from port 1 to 2");
+                    }
+                    sw.write(fmb.build());
+
+                    tc.addOutput(fmb.build());
+                    //Push this packet out
+                    OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
+                    pob.setActions(actions);
+                    pob.setBufferId(OFBufferId.NO_BUFFER);
+                    pob.setInPort(inPort);
+                    pob.setData(pi.getData());
+                    sw.write(pob.build());
+
+                    tc.addOutput(pob.build());
+                    //Install flow from port 2 to 1
+                    mb = sw.getOFFactory().buildMatch();
+                    mb.setExact(MatchField.IPV4_SRC, dstIp)
+                            .setExact(MatchField.IPV4_DST, srcIp)
+                            .setExact(MatchField.ETH_TYPE, EthType.IPv4);
+
+                    actions = new ArrayList<OFAction>();
+                    actions.add(sw.getOFFactory().actions().output(OFPort.of(1), Integer.MAX_VALUE));
                     fmb.setMatch(mb.build()) // was match w/o modifying input port
                             .setActions(actions)
                             .setIdleTimeout(FLOWMOD_DEFAULT_IDLE_TIMEOUT)
@@ -201,18 +202,39 @@ public class FirewallMigration implements IOFMessageListener, IFloodlightModule 
                     sw.write(fmb.build());
 
                     tc.addOutput(fmb.build());
-                    //Push this packet out
-                    OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
-                    pob.setActions(actions);
-                    pob.setBufferId(OFBufferId.NO_BUFFER);
-                    pob.setInPort(inPort);
-                    pob.setData(pi.getData());
-                    sw.write(pob.build());
+                } else {
+                    //Drop the traffic
+                    IPv4 ip = (IPv4) eth.getPayload();
+                    IPv4Address srcIp = ip.getSourceAddress();
+                    IPv4Address dstIp = ip.getDestinationAddress();
 
-                    tc.addOutput(pob.build());
+                    OFFlowMod.Builder fmb;
+                    fmb = sw.getOFFactory().buildFlowAdd();
+
+                    Match.Builder mb = sw.getOFFactory().buildMatch();
+                    mb.setExact(MatchField.IPV4_SRC, srcIp)
+                            .setExact(MatchField.IPV4_DST, dstIp)
+                            .setExact(MatchField.ETH_TYPE, EthType.IPv4);
+
+                    List<OFAction> actions = new ArrayList<OFAction>();
+                    U64 cookie = AppCookie.makeCookie(FORWARDING_APP_ID, 0);
+
+                    fmb.setMatch(mb.build()) // was match w/o modifying input port
+                            .setActions(actions)
+                            .setIdleTimeout(FLOWMOD_DEFAULT_IDLE_TIMEOUT)
+                            .setHardTimeout(FLOWMOD_DEFAULT_HARD_TIMEOUT)
+                            .setBufferId(OFBufferId.NO_BUFFER)
+                            .setCookie(cookie)
+                            .setPriority(FLOWMOD_DEFAULT_PRIORITY);
+                    if (logger.isTraceEnabled()) {
+                        logger.trace("Firewall:Dropping flow from port 2 to 1");
+                    }
+                    sw.write(fmb.build());
+
+                    tc.addOutput(fmb.build());
                 }
             }
-            tc.addFinalStates(trusted);
+            tc.addFinalStates();
 
             return Command.STOP;
         } else {
@@ -222,10 +244,10 @@ public class FirewallMigration implements IOFMessageListener, IFloodlightModule 
                         new Object[]{sw, inPort});
             }
              */
-            tc.addFinalStates(trusted);
+            tc.addFinalStates();
 
             return Command.CONTINUE;
         }
-    }
 
+    }
 }

@@ -30,4 +30,7 @@ net.floodlightcontroller.firewall.Firewall
 net.floodlightcontroller.firewall.StatelessFirewall
 net.floodlightcontroller.firewall.StatefulFirewall
 net.floodlightcontroller.firewall.FirewallMigration
+net.floodlightcontroller.firewall.L3StatelessFirewall
+net.floodlightcontroller.firewall.L3StatefulFirewall
+net.floodlightcontroller.firewall.L3FirewallMigration
 net.floodlightcontroller.l2pairs.L2Pairs
