@@ -288,7 +288,7 @@ public class TraceCollector {
 
             FileWriter writter = new FileWriter(file, true);
             Date date = new Date();
-            writter.write(String.format("// Trace collected %s", date.toString()));
+            writter.write(String.format("// Trace collected %s\n", date.toString()));
             writter.close();
 
             currentInstance = null;
@@ -364,7 +364,7 @@ public class TraceCollector {
                     writter.write(idb.get(i) + "\n");
                 }
             }
-            writter.write("}\n");
+            writter.write("}\n\n");
 
             //Collection time
             double collection_time = (System.nanoTime() - start_time) / 1000000000.0;
@@ -385,7 +385,7 @@ public class TraceCollector {
     public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx, Object...states) {
         assert currentInstance != null :
                 String.format("Missing previous input for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
-        if (start_time != 0L)
+        if (start_time == 0L)
             start_time = System.nanoTime();
         currentInstance.addInput(pi, sw, cntx, states);
     }
