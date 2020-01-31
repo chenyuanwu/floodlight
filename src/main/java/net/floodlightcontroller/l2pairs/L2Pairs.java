@@ -61,7 +61,9 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
 
     @Override
     public Command processPacketInMessage(IOFSwitch sw, OFPacketIn pi, IRoutingDecision decision, FloodlightContext cntx) {
+        tc.addTableNames("macToPortMap");
         tc.addInput(pi, sw, cntx, macToPortMap);
+
         log.warn("Start processing PacketIn {}", pi.hashCode());
 
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
@@ -84,7 +86,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
             doForwardFlow(sw, pi, cntx);
         }
 
-        tc.addFinalStates(pi, sw, macToPortMap);
+        tc.addFinalStates(macToPortMap);
         log.warn("Done processing PacketIn {}", pi.hashCode());
 
         return Command.CONTINUE;
@@ -125,7 +127,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         }
         sw.write(fmb.build());
 
-        tc.addOutput(pi, sw, fmb.build());
+        tc.addOutput(fmb.build());
         //flow out
         fmb = sw.getOFFactory().buildFlowAdd();
 
@@ -154,7 +156,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         }
         sw.write(fmb.build());
 
-        tc.addOutput(pi, sw, fmb.build());
+        tc.addOutput(fmb.build());
 
         doPushPacket(sw, pi, outPort, cntx);
 
@@ -188,7 +190,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
                     new Object[] {sw, pi, pob.build()});
         }
         sw.write(pob.build());
-        tc.addOutput(pi, sw, pob.build());
+        tc.addOutput(pob.build());
         return;
     }
 

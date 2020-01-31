@@ -3,6 +3,7 @@ package net.floodlightcontroller.auth;
 import java.util.*;
 import net.floodlightcontroller.core.util.AppCookie;
 import net.floodlightcontroller.packet.IPv4;
+import net.floodlightcontroller.tracecollector.TraceCollector;
 import org.projectfloodlight.openflow.protocol.*;
 import org.projectfloodlight.openflow.protocol.action.OFAction;
 import org.projectfloodlight.openflow.protocol.match.Match;
@@ -28,6 +29,7 @@ public class Auth implements IOFMessageListener, IFloodlightModule {
 
     protected IFloodlightProviderService floodlightProvider;
     protected static Logger logger;
+    protected TraceCollector tc;
 
     protected Map<Pair<IOFSwitch, IPv4Address>, OFPort> table;
     protected Set<IPv4Address> auth;
@@ -82,6 +84,7 @@ public class Auth implements IOFMessageListener, IFloodlightModule {
         table = new HashMap<Pair<IOFSwitch, IPv4Address>, OFPort>();
         auth = new HashSet<IPv4Address>();
         auth.addAll(AUTH_SERVERS);
+        tc = new TraceCollector("auth");
         if (logger.isTraceEnabled()) {
             logger.debug("module auth initialized");
         }
@@ -119,6 +122,9 @@ public class Auth implements IOFMessageListener, IFloodlightModule {
             return Command.CONTINUE;
         }
 
+        tc.addTableNames("table", "auth");
+        tc.addInput(pi, sw, cntx, table, auth);
+
         IPv4 ip = (IPv4) eth.getPayload();
         IPv4Address srcIp = ip.getSourceAddress();
         IPv4Address dstIp = ip.getDestinationAddress();
@@ -149,6 +155,7 @@ public class Auth implements IOFMessageListener, IFloodlightModule {
                 pob.setData(pi.getData());
                 sw.write(pob.build());
 
+                tc.addOutput(pob.build());
             }
         }
         else {
@@ -176,6 +183,8 @@ public class Auth implements IOFMessageListener, IFloodlightModule {
                     logger.trace("Auth:Installing {} -> {}", new Object[]{srcIp, dstIp});
                 }
                 sw.write(fmb.build());
+
+                tc.addOutput(fmb.build());
                 //Push this packet out
                 OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
                 pob.setActions(actions);
@@ -184,6 +193,7 @@ public class Auth implements IOFMessageListener, IFloodlightModule {
                 pob.setData(pi.getData());
                 sw.write(pob.build());
 
+                tc.addOutput(pob.build());
             } else if (AUTH_SERVERS.contains(dstIp)) {
                 OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
 
@@ -195,8 +205,11 @@ public class Auth implements IOFMessageListener, IFloodlightModule {
                 pob.setData(pi.getData());
                 sw.write(pob.build());
 
+                tc.addOutput(pob.build());
             }
         }
+        tc.addFinalStates(table, auth);
+
         return Command.CONTINUE;
     }
 }

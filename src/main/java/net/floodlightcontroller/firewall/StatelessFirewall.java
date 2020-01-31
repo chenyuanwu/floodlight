@@ -112,7 +112,9 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
 
 
     public Command processPacketInMessage(IOFSwitch sw, OFPacketIn pi, IRoutingDecision decision, FloodlightContext cntx) {
+        tc.addTableNames();
         tc.addInput(pi, sw, cntx);
+
         Ethernet eth = IFloodlightProviderService.bcStore.get(cntx, IFloodlightProviderService.CONTEXT_PI_PAYLOAD);
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
 
@@ -135,7 +137,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                 }
                 sw.write(pob.build());
 
-                tc.addOutput(pi, sw, pob.build());
+                tc.addOutput(pob.build());
             } else if (inPort == OFPort.of(1)) {
                 MacAddress srcMac = eth.getSourceMACAddress();
                 MacAddress dstMac = eth.getDestinationMACAddress();
@@ -164,7 +166,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                 }
                 sw.write(fmb.build());
 
-                tc.addOutput(pi, sw, fmb.build());
+                tc.addOutput(fmb.build());
                 //Push this packet out
                 OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
                 pob.setActions(actions);
@@ -173,7 +175,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                 pob.setData(pi.getData());
                 sw.write(pob.build());
 
-                tc.addOutput(pi, sw, pob.build());
+                tc.addOutput(pob.build());
                 //Install flow from port 2 to 1
                 mb = sw.getOFFactory().buildMatch();
                 mb.setExact(MatchField.ETH_SRC, dstMac)
@@ -194,9 +196,9 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                 }
                 sw.write(fmb.build());
 
-                tc.addOutput(pi, sw, fmb.build());
+                tc.addOutput(fmb.build());
             }
-            tc.addFinalStates(pi, sw);
+            tc.addFinalStates();
 
             return Command.STOP;
         } else {
@@ -206,7 +208,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
                         new Object[]{sw, inPort});
             }
              */
-            tc.addFinalStates(pi, sw);
+            tc.addFinalStates();
 
             return Command.CONTINUE;
         }

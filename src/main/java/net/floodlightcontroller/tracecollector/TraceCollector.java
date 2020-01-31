@@ -177,14 +177,16 @@ class PacketIn {
 class IOInstance {
     protected IOFSwitch sw;
     protected PacketIn packet_in;
-    protected List prev_states;
+    protected List<String> table_names;
+    protected Map<String, List> prev_states;
     protected List<OutputMessage> out_msgs;
-    protected List cur_states;
+    protected Map<String, List> cur_states;
 
     public IOInstance() {
-        prev_states = new ArrayList();
+        table_names = new ArrayList<String>();
+        prev_states = new ConcurrentHashMap<String, List>();
         out_msgs = new ArrayList<OutputMessage>();
-        cur_states = new ArrayList();
+        cur_states = new ConcurrentHashMap<String, List>();
     }
 
     private static String convertStateType(Object k) {
@@ -232,15 +234,16 @@ class IOInstance {
         }
     }
 
-    public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx, Object states) {
-        this.sw = sw;
-        packet_in = new PacketIn(pi, sw, cntx);
-        prev_states.addAll(handleStates(states));
+    public void addTableNames(String...names) {
+        Collections.addAll(table_names, names);
     }
 
-    public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx) {
+    public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx, Object...states) {
         this.sw = sw;
         packet_in = new PacketIn(pi, sw, cntx);
+        for (int i = 0; i < states.length; i++) {
+            prev_states.put(table_names.get(i), handleStates(states[i]));
+        }
     }
 
     public void addOutput(OFMessage msg) {
@@ -260,8 +263,10 @@ class IOInstance {
         }
     }
 
-    public void addFinalStates(Object states) {
-        cur_states.addAll(handleStates(states));
+    public void addFinalStates(Object...states) {
+        for (int i = 0; i < states.length; i++) {
+            cur_states.put(table_names.get(i), handleStates(states[i]));
+        }
     }
 }
 
@@ -273,8 +278,6 @@ public class TraceCollector {
 
     public TraceCollector(String outfile) {
         try {
-            start_time = System.nanoTime();
-
             file = new File("/home/floodlight/Desktop/floodlight/traces/" + outfile + ".trace");
             if (file.exists()) {
                 file.delete();
@@ -282,6 +285,12 @@ public class TraceCollector {
             } else {
                 file.createNewFile();
             }
+
+            FileWriter writter = new FileWriter(file, true);
+            Date date = new Date();
+            writter.write(String.format("// Trace collected %s", date.toString()));
+            writter.close();
+
             currentInstance = null;
             //gson = new Gson();
         } catch (IOException e) {
@@ -289,10 +298,10 @@ public class TraceCollector {
         }
     }
 
-    private String getStateTuple(Object s) {
+    private String getStateTuple(Object s, String name) {
         if (s instanceof List) {
             List<String> list = (List<String>)s;
-            StringBuilder strbd = new StringBuilder("state(");
+            StringBuilder strbd = new StringBuilder(name + "(");
             for (int i = 0; i < list.size(); i++) {
                 if (i != list.size() - 1) {
                     strbd.append(list.get(i)).append(",");
@@ -304,7 +313,7 @@ public class TraceCollector {
             return strbd.toString();
         }
         else {
-            return String.format("state(%s)", s);
+            return String.format("%s(%s)", name, s);
         }
     }
 
@@ -316,11 +325,13 @@ public class TraceCollector {
             //Write edbs to file
             List<String> edb = new ArrayList<>();
             List<String> old_states = new ArrayList<>();
-            edb.add(instance.packet_in.toTupleString("l2"));
+            edb.add(instance.packet_in.toTupleString("l3"));
 
-            for (int i = 0; i < instance.prev_states.size(); i++) {
-                old_states.add(getStateTuple(instance.prev_states.get(i)));
-                edb.add(getStateTuple(instance.prev_states.get(i)));
+            for (Map.Entry<String, List> entry : instance.prev_states.entrySet()) {
+                for (int i = 0; i < entry.getValue().size(); i++) {
+                    old_states.add(getStateTuple(entry.getValue().get(i), entry.getKey()));
+                    edb.add(getStateTuple(entry.getValue().get(i), entry.getKey()));
+                }
             }
             writter.write("EDB {\n");
             for (int i = 0; i < edb.size(); i++) {
@@ -338,9 +349,10 @@ public class TraceCollector {
                 idb.add(instance.out_msgs.get(i).toTupleString());
             }
 
-            for (int i = 0; i < instance.cur_states.size(); i++) {
-                if (! old_states.contains(getStateTuple(instance.cur_states.get(i)))) {
-                    idb.add("new_" + getStateTuple(instance.cur_states.get(i)));
+            for (Map.Entry<String, List> entry : instance.cur_states.entrySet()) {
+                for (int i = 0; i < entry.getValue().size(); i++) {
+                    if (! old_states.contains(getStateTuple(entry.getValue().get(i), entry.getKey())))
+                        idb.add("new_" + getStateTuple(entry.getValue().get(i), entry.getKey()));
                 }
             }
             writter.write("IDB {\n");
@@ -364,37 +376,28 @@ public class TraceCollector {
         }
     }
 
-    public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx, Object states) {
-        assert currentInstance == null :
-                String.format("A final state is expected for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
+    public void addTableNames(String...names) {
+        assert currentInstance == null : "A final state is expected.";
         currentInstance = new IOInstance();
+        currentInstance.addTableNames(names);
+    }
+
+    public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx, Object...states) {
+        assert currentInstance != null :
+                String.format("Missing previous input for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
+        if (start_time != 0L)
+            start_time = System.nanoTime();
         currentInstance.addInput(pi, sw, cntx, states);
     }
 
-    public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx) {
-        assert currentInstance == null :
-                String.format("A final state is expected for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
-        currentInstance = new IOInstance();
-        currentInstance.addInput(pi, sw, cntx);
-    }
-
-    public void addOutput(OFPacketIn pi, IOFSwitch sw, OFMessage msg) {
-        assert currentInstance != null :
-                String.format("Missing previous input for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
+    public void addOutput(OFMessage msg) {
+        assert currentInstance != null : "Missing previous input.";
         currentInstance.addOutput(msg);
     }
 
-    public void addFinalStates(OFPacketIn pi, IOFSwitch sw, Object states) {
-        assert currentInstance != null :
-                String.format("Missing previous input for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
+    public void addFinalStates(Object...states) {
+        assert currentInstance != null : "Missing previous input.";
         currentInstance.addFinalStates(states);
-        dumpInstance(currentInstance);
-        currentInstance = null;
-    }
-
-    public void addFinalStates(OFPacketIn pi, IOFSwitch sw) {
-        assert currentInstance != null :
-                String.format("Missing previous input for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
         dumpInstance(currentInstance);
         currentInstance = null;
     }
