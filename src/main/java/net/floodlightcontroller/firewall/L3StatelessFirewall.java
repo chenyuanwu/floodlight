@@ -152,6 +152,7 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
                 IPv4Address dstIp = ip.getDestinationAddress();
 
                 if (isIPBroadcast(dstIp)) {
+                    tc.addFinalStates();
                     return Command.CONTINUE;
                 }
 
