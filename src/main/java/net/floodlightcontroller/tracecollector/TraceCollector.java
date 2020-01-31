@@ -360,14 +360,14 @@ public class TraceCollector {
     public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx, Object states) {
         assert currentInstance == null :
                 String.format("A final state is expected for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
-        IOInstance currentInstance = new IOInstance();
+        currentInstance = new IOInstance();
         currentInstance.addInput(pi, sw, cntx, states);
     }
 
     public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx) {
         assert currentInstance == null :
                 String.format("A final state is expected for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
-        IOInstance currentInstance = new IOInstance();
+        currentInstance = new IOInstance();
         currentInstance.addInput(pi, sw, cntx);
     }
 
