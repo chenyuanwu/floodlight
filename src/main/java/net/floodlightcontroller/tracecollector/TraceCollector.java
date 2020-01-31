@@ -268,10 +268,13 @@ class IOInstance {
 public class TraceCollector {
     protected File file;
     protected IOInstance currentInstance;
+    protected long start_time;
     //protected Gson gson;
 
     public TraceCollector(String outfile) {
         try {
+            start_time = System.nanoTime();
+
             file = new File("/home/floodlight/Desktop/floodlight/traces/" + outfile + ".trace");
             if (file.exists()) {
                 file.delete();
@@ -350,6 +353,10 @@ public class TraceCollector {
                 }
             }
             writter.write("}\n");
+
+            //Collection time
+            double collection_time = (System.nanoTime() - start_time) / 1000000000;
+            writter.write(String.format("// [Collection time(s)] %f\n", collection_time));
 
             writter.close();
         } catch (IOException e) {
