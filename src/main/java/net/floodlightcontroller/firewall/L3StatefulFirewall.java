@@ -79,7 +79,7 @@ public class L3StatefulFirewall implements IOFMessageListener, IFloodlightModule
     @Override
     public void init(FloodlightModuleContext context) throws FloodlightModuleException {
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
-        logger = LoggerFactory.getLogger(StatelessFirewall.class);
+        logger = LoggerFactory.getLogger(L3StatefulFirewall.class);
         trusted = new ConcurrentSkipListSet<IPv4Address>();
         tc = new TraceCollector("l3-statefulfirewall");
         if (logger.isTraceEnabled()) {

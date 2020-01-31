@@ -81,7 +81,7 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
     @Override
     public void init(FloodlightModuleContext context) throws FloodlightModuleException {
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
-        logger = LoggerFactory.getLogger(StatelessFirewall.class);
+        logger = LoggerFactory.getLogger(L3StatelessFirewall.class);
         tc = new TraceCollector("l3-statelessfirewall");
         if (logger.isTraceEnabled()) {
             logger.trace("module l3-statelessfirewall initialized");
@@ -166,7 +166,7 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
                             .setOutPort(OFPort.of(2))
                             .setPriority(FLOWMOD_DEFAULT_PRIORITY);
                     if (logger.isTraceEnabled()) {
-                        logger.trace("Firewall:Installing flow from port 1 to 2");
+                        logger.trace("Firewall:Installing flow from {} to {}", new Object[]{srcIp, dstIp});
                     }
                     sw.write(fmb.build());
 
@@ -197,7 +197,7 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
                             .setOutPort(OFPort.of(1))
                             .setPriority(FLOWMOD_DEFAULT_PRIORITY);
                     if (logger.isTraceEnabled()) {
-                        logger.trace("Firewall:Installing flow from port 2 to 1");
+                        logger.trace("Firewall:Installing flow from {} to {}", new Object[]{dstIp, srcIp});
                     }
                     sw.write(fmb.build());
 
@@ -227,7 +227,7 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
                             .setCookie(cookie)
                             .setPriority(FLOWMOD_DEFAULT_PRIORITY);
                     if (logger.isTraceEnabled()) {
-                        logger.trace("Firewall:Dropping flow from port 2 to 1");
+                        logger.trace("Firewall:Dropping flow from {} to {}", new Object[]{srcIp, dstIp});
                     }
                     sw.write(fmb.build());
 

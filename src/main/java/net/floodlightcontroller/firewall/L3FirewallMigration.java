@@ -80,7 +80,7 @@ public class L3FirewallMigration implements IOFMessageListener, IFloodlightModul
     @Override
     public void init(FloodlightModuleContext context) throws FloodlightModuleException {
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
-        logger = LoggerFactory.getLogger(StatelessFirewall.class);
+        logger = LoggerFactory.getLogger(L3FirewallMigration.class);
         trusted = new ConcurrentSkipListSet<IPv4Address>();
         tc = new TraceCollector("l3-firewallmigration");
         if (logger.isTraceEnabled()) {
