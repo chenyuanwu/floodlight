@@ -41,26 +41,20 @@ interface OutputMessage {
 class PacketOut implements OutputMessage{
     protected int dpid;
     protected int buffer_id;
-    /*
-        The buffer_id field indicates the location of a raw packet to be injected into the data plane of the switch.
-        A value of 0xffffffff indicates that the raw packet is contained within the byte array data[],
-        otherwise the buffer_id value indicates a packet buffer local to the switch that contains the raw packet.
-    */
     protected int out_port;
 
     public PacketOut(OFPacketOut msg, IOFSwitch sw) {
         dpid = (int)sw.getId().getLong();
-        buffer_id = msg.getBufferId().getInt();
         out_port = ((OFActionOutput)msg.getActions().get(0)).getPort().getPortNumber();
     }
 
     @Override
     public String toTupleString() {
         if (out_port == OFPort.FLOOD.getPortNumber() || out_port == OFPort.ALL.getPortNumber()) {
-            return String.format("flood(%d, %d)", dpid, buffer_id);
+            return String.format("flood(%d, %x)", dpid, buffer_id);
         }
         else {
-            return String.format("packet_out(%d, %d, %d)", dpid, buffer_id, out_port);
+            return String.format("packet_out(%d, %x, %d)", dpid, buffer_id, out_port);
         }
     }
 }
@@ -168,10 +162,10 @@ class PacketIn {
 
     public String toTupleString(String layer) {
         if (this.eth_type == Ethernet.TYPE_IPv4 && layer.equals("l3")) {
-            return String.format("packet_in_l3(%d, %d, %d, %s, %s)", dpid, port, buffer_id, ip_src, ip_dst);
+            return String.format("packet_in_l3(%d, %d, %x, %s, %s)", dpid, port, buffer_id, ip_src, ip_dst);
         }
         else {
-            return String.format("packet_in(%d, %d, %d, %s, %s, %x)", dpid, port, buffer_id, eth_src, eth_dst, eth_type);
+            return String.format("packet_in(%d, %d, %x, %s, %s, %x)", dpid, port, buffer_id, eth_src, eth_dst, eth_type);
         }
     }
 
@@ -251,7 +245,9 @@ class IOInstance {
 
     public void addOutput(OFMessage msg) {
         if (msg instanceof OFPacketOut) {
-            out_msgs.add(new PacketOut((OFPacketOut)msg, sw));
+            PacketOut pout = new PacketOut((OFPacketOut)msg, sw);
+            pout.buffer_id = packet_in.buffer_id;
+            out_msgs.add(pout);
         }
         else if (msg instanceof OFFlowMod) {
             if (((OFFlowMod)msg).getMatch().get(MatchField.ETH_TYPE) != null &&
@@ -271,7 +267,7 @@ class IOInstance {
 
 public class TraceCollector {
     protected File file;
-    protected Map<Pair<Integer, Integer>, IOInstance> holdedInstances;
+    protected IOInstance currentInstance;
     //protected Gson gson;
 
     public TraceCollector(String outfile) {
@@ -283,7 +279,7 @@ public class TraceCollector {
             } else {
                 file.createNewFile();
             }
-            holdedInstances = new ConcurrentHashMap<Pair<Integer, Integer>, IOInstance>();
+            currentInstance = null;
             //gson = new Gson();
         } catch (IOException e) {
             e.printStackTrace();
@@ -362,42 +358,37 @@ public class TraceCollector {
     }
 
     public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx, Object states) {
-        assert holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode())) == null :
+        assert currentInstance == null :
                 String.format("A final state is expected for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
         IOInstance currentInstance = new IOInstance();
         currentInstance.addInput(pi, sw, cntx, states);
-        holdedInstances.put(new Pair<>((int)sw.getId().getLong(), pi.hashCode()), currentInstance);
     }
 
     public void addInput(OFPacketIn pi, IOFSwitch sw, FloodlightContext cntx) {
-        assert holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode())) == null :
+        assert currentInstance == null :
                 String.format("A final state is expected for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
         IOInstance currentInstance = new IOInstance();
         currentInstance.addInput(pi, sw, cntx);
-        holdedInstances.put(new Pair<>((int)sw.getId().getLong(), pi.hashCode()), currentInstance);
     }
 
     public void addOutput(OFPacketIn pi, IOFSwitch sw, OFMessage msg) {
-        assert holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode())) != null :
+        assert currentInstance != null :
                 String.format("Missing previous input for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
-        IOInstance currentInstance = holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode()));
         currentInstance.addOutput(msg);
     }
 
     public void addFinalStates(OFPacketIn pi, IOFSwitch sw, Object states) {
-        assert holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode())) != null :
+        assert currentInstance != null :
                 String.format("Missing previous input for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
-        IOInstance currentInstance = holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode()));
         currentInstance.addFinalStates(states);
         dumpInstance(currentInstance);
-        holdedInstances.remove(new Pair<>((int)sw.getId().getLong(), pi.hashCode()));
+        currentInstance = null;
     }
 
     public void addFinalStates(OFPacketIn pi, IOFSwitch sw) {
-        assert holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode())) != null :
+        assert currentInstance != null :
                 String.format("Missing previous input for PacketIn %d in Switch %d.", pi.hashCode(), sw.getId().getLong());
-        IOInstance currentInstance = holdedInstances.get(new Pair<>((int)sw.getId().getLong(), pi.hashCode()));
         dumpInstance(currentInstance);
-        holdedInstances.remove(new Pair<>((int)sw.getId().getLong(), pi.hashCode()));
+        currentInstance = null;
     }
 }
