@@ -355,7 +355,7 @@ public class TraceCollector {
             writter.write("}\n");
 
             //Collection time
-            double collection_time = (System.nanoTime() - start_time) / 1000000000;
+            double collection_time = (System.nanoTime() - start_time) / 1000000000.0;
             writter.write(String.format("// [Collection time(s)] %f\n", collection_time));
 
             writter.close();
