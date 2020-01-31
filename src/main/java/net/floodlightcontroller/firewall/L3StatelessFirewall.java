@@ -225,6 +225,7 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
                             .setHardTimeout(FLOWMOD_DEFAULT_HARD_TIMEOUT)
                             .setBufferId(OFBufferId.NO_BUFFER)
                             .setCookie(cookie)
+                            .setOutPort(OFPort.of(1))
                             .setPriority(FLOWMOD_DEFAULT_PRIORITY);
                     if (logger.isTraceEnabled()) {
                         logger.trace("Firewall:Dropping flow from {} to {}", new Object[]{srcIp, dstIp});
