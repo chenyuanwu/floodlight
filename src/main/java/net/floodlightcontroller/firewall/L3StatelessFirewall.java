@@ -138,7 +138,7 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
                 sw.write(pob.build());
 
                 tc.addOutput(pob.build());
-            } else if (eth.getPayload() instanceof IPv4 && ((IPv4)eth.getPayload()).getDestinationAddress().equals(IPv4Address.of("255.255.255.255"))){
+            } else if (eth.getPayload() instanceof IPv4 && ! ((IPv4)eth.getPayload()).getDestinationAddress().equals(IPv4Address.of("255.255.255.255"))){
                 if (inPort == OFPort.of(1)) {
                     IPv4 ip = (IPv4) eth.getPayload();
                     IPv4Address srcIp = ip.getSourceAddress();
