@@ -64,7 +64,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         tc.addTableNames("macToPortMap");
         tc.addInput(pi, sw, cntx, macToPortMap);
 
-        log.warn("Start processing PacketIn {}", pi.hashCode());
+        //log.warn("Start processing PacketIn {}", pi.hashCode());
 
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
         Ethernet eth = IFloodlightProviderService.bcStore.get(cntx, IFloodlightProviderService.CONTEXT_PI_PAYLOAD);
@@ -75,19 +75,19 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
 
         if (macToPortMap.get(new Pair<IOFSwitch, MacAddress>(sw, dstMac)) == null) {
             if (log.isTraceEnabled()) {
-                log.trace("Doing flood");
+                //log.trace("Doing flood");
             }
             doPushPacket(sw, pi, OFPort.FLOOD, cntx);
         }
         else {
             if (log.isTraceEnabled()) {
-                log.trace("Installing forward");
+                //log.trace("Installing forward");
             }
             doForwardFlow(sw, pi, cntx);
         }
 
         tc.addFinalStates(macToPortMap);
-        log.warn("Done processing PacketIn {}", pi.hashCode());
+        //log.warn("Done processing PacketIn {}", pi.hashCode());
 
         return Command.CONTINUE;
     }
@@ -122,8 +122,8 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
                 .setOutPort(outPort)
                 .setPriority(FLOWMOD_DEFAULT_PRIORITY);
         if (log.isTraceEnabled()) {
-            log.trace("Pushing flowmod sw={} inPort={} outPort={}",
-                    new Object[] {sw, inPort, outPort});
+            //log.trace("Pushing flowmod sw={} inPort={} outPort={}",
+                    //new Object[] {sw, inPort, outPort});
         }
         sw.write(fmb.build());
 
@@ -151,8 +151,8 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
                 .setOutPort(outPort)
                 .setPriority(FLOWMOD_DEFAULT_PRIORITY);
         if (log.isTraceEnabled()) {
-            log.trace("Pushing flowmod sw={} inPort={} outPort={}",
-                    new Object[] {sw, inPort, outPort});
+            //log.trace("Pushing flowmod sw={} inPort={} outPort={}",
+              //      new Object[] {sw, inPort, outPort});
         }
         sw.write(fmb.build());
 
@@ -186,8 +186,8 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         pob.setData(pi.getData());
 
         if (log.isTraceEnabled()) {
-            log.trace("Writing flood PacketOut switch={} packet-in={} packet-out={}",
-                    new Object[] {sw, pi, pob.build()});
+            //log.trace("Writing flood PacketOut switch={} packet-in={} packet-out={}",
+              //      new Object[] {sw, pi, pob.build()});
         }
         sw.write(pob.build());
         tc.addOutput(pob.build());
