@@ -51,10 +51,10 @@ class PacketOut implements OutputMessage{
     @Override
     public String toTupleString() {
         if (out_port == OFPort.FLOOD.getPortNumber() || out_port == OFPort.ALL.getPortNumber()) {
-            return String.format("flood(%d, %x)", dpid, buffer_id);
+            return String.format("flood(%d, x%x)", dpid, buffer_id);
         }
         else {
-            return String.format("packet_out(%d, %x, %d)", dpid, buffer_id, out_port);
+            return String.format("packet_out(%d, x%x, %d)", dpid, buffer_id, out_port);
         }
     }
 }
@@ -162,10 +162,10 @@ class PacketIn {
 
     public String toTupleString(String layer) {
         if (this.eth_type == Ethernet.TYPE_IPv4 && layer.equals("l3")) {
-            return String.format("packet_in_l3(%d, %d, %x, %s, %s)", dpid, port, buffer_id, ip_src, ip_dst);
+            return String.format("packet_in_l3(%d, %d, x%x, %s, %s)", dpid, port, buffer_id, ip_src, ip_dst);
         }
         else {
-            return String.format("packet_in(%d, %d, %x, %s, %s, %x)", dpid, port, buffer_id, eth_src, eth_dst, eth_type);
+            return String.format("packet_in(%d, %d, x%x, %s, %s, %x)", dpid, port, buffer_id, eth_src, eth_dst, eth_type);
         }
     }
 
@@ -325,7 +325,7 @@ public class TraceCollector {
             //Write edbs to file
             List<String> edb = new ArrayList<>();
             List<String> old_states = new ArrayList<>();
-            edb.add(instance.packet_in.toTupleString("l3"));
+            edb.add(instance.packet_in.toTupleString("l2"));
 
             for (Map.Entry<String, List> entry : instance.prev_states.entrySet()) {
                 for (int i = 0; i < entry.getValue().size(); i++) {
