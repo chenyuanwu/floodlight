@@ -16,6 +16,7 @@
  **/
 package net.floodlightcontroller.l2pairs;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -224,6 +225,20 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         tc = new TraceCollector("l2pairs");
         if (log.isTraceEnabled()) {
             log.trace("module l2pairs initialized");
+        }
+
+        try {
+            Class cls = Class.forName("L2Pairs");
+            Field fieldlist[] = cls.getDeclaredFields();
+            for (int i = 0; i < fieldlist.length; i++) {
+                Field fld = fieldlist[i];
+                if (fld.getType().toString() == "Set" || fld.getType().toString() == "List" ||
+                        fld.getType().toString() == "Map") {
+                    System.out.println(fld.getName() + "," + fld.getType());
+                }
+            }
+        } catch (Throwable e) {
+            System.err.println(e);
         }
 
     }
