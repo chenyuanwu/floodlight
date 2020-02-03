@@ -147,7 +147,7 @@ class PacketIn {
 
         eth_src = Convert.convertMac(eth.getSourceMACAddress());
         eth_dst = Convert.convertMac(eth.getDestinationMACAddress());
-        eth_type = eth.getEtherType();
+        eth_type = eth.getEtherType() & 0xffff;
 
         if (eth.getEtherType() == Ethernet.TYPE_IPv4) {
             IPv4 ip = (IPv4) eth.getPayload();
@@ -165,7 +165,7 @@ class PacketIn {
             return String.format("packet_in_l3(%d, %d, x%x, %s, %s)", dpid, port, buffer_id, ip_src, ip_dst);
         }
         else {
-            return String.format("packet_in(%d, %d, x%x, %s, %s, %x)", dpid, port, buffer_id, eth_src, eth_dst, eth_type);
+            return String.format("packet_in(%d, %d, x%x, %s, %s, %d)", dpid, port, buffer_id, eth_src, eth_dst, eth_type);
         }
     }
 
@@ -325,7 +325,7 @@ public class TraceCollector {
             //Write edbs to file
             List<String> edb = new ArrayList<>();
             List<String> old_states = new ArrayList<>();
-            edb.add(instance.packet_in.toTupleString("l3"));
+            edb.add(instance.packet_in.toTupleString("l2"));
 
             for (Map.Entry<String, List> entry : instance.prev_states.entrySet()) {
                 for (int i = 0; i < entry.getValue().size(); i++) {
