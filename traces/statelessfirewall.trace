@@ -1,758 +1,895 @@
-// Trace collected Mon Feb 03 04:54:14 EST 2020
+// Trace collected Mon Feb 03 08:31:21 EST 2020
 EDB {
-packet_in(3, 3, x2fce23f9, x46d346a7dd88, x0180c200000e, 35020)
+packet_in(2, 3, x80afc5f1, xc2e2bdf3d98f, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 0.007205
+// [Collection time(s)] 0.017965
 
 EDB {
-packet_in(2, 3, xc5ec9f4f, x722b5e6cf572, x0180c200000e, 35020)
+packet_in(2, 3, xa81b48da, xc2e2bdf3d98f, x0180c200000e, 35020)
 }
 IDB {
 }
-// [Collection time(s)] 0.017544
+// [Collection time(s)] 0.074411
 
 EDB {
-packet_in(1, 2, xbebaa46b, xc69a0732b8ac, xffffffffffff, 35138)
+packet_in(1, 2, x62b801a6, xaa7319cb42a6, x0180c200000e, 35020)
 }
 IDB {
 }
-// [Collection time(s)] 0.021460
+// [Collection time(s)] 0.093847
 
 EDB {
-packet_in(1, 2, xa3b3f69e, xc69a0732b8ac, x0180c200000e, 35020)
+packet_in(1, 1, xa2e533a7, x56e9b01803f1, xffffffffffff, 35138)
 }
 IDB {
 }
-// [Collection time(s)] 0.027210
+// [Collection time(s)] 0.094666
 
 EDB {
-packet_in(1, 1, xefb37b85, x529f35ad2f19, x0180c200000e, 35020)
+packet_in(1, 1, x59d411b8, x56e9b01803f1, xffffffffffff, 2048)
 }
 IDB {
-flow_mod(1, x529f35ad2f19, x0180c200000e, 2),
-packet_out(1, xefb37b85, 2),
-flow_mod(1, x0180c200000e, x529f35ad2f19, 1)
+flow_mod(1, x56e9b01803f1, xffffffffffff, 2),
+packet_out(1, x59d411b8, 2),
+flow_mod(1, xffffffffffff, x56e9b01803f1, 1)
 }
-// [Collection time(s)] 0.226539
+// [Collection time(s)] 0.314652
 
 EDB {
-packet_in(3, 3, x98f4ded3, x46d346a7dd88, x3333000000fb, 34525)
+packet_in(1, 1, x74872fda, x56e9b01803f1, x0180c200000e, 35020)
 }
 IDB {
 }
-// [Collection time(s)] 0.228594
+// [Collection time(s)] 0.315451
 
 EDB {
-packet_in(3, 3, xefb37bc3, x529f35ad2f19, x0180c200000e, 35020)
+packet_in(2, 3, x824040f3, xc2e2bdf3d98f, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 0.273914
+// [Collection time(s)] 0.318371
 
 EDB {
-packet_in(3, 2, x632fa38f, xea3e5660d910, x333300000016, 34525)
+packet_in(2, 3, xa8f1b488, xc2e2bdf3d98f, x333300000016, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 0.281090
+// [Collection time(s)] 0.323447
 
 EDB {
-packet_in(2, 1, x4f042997, xa6666081911e, xffffffffffff, 2054)
+packet_in(2, 3, x8a3ba368, xc2e2bdf3d98f, xffffffffffff, 35138)
 }
 IDB {
 }
-// [Collection time(s)] 0.284973
+// [Collection time(s)] 0.324789
 
 EDB {
-packet_in(2, 3, x428e964a, x722b5e6cf572, x3333000000fb, 34525)
+packet_in(1, 2, x2ec71f40, xaa7319cb42a6, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 0.291121
+// [Collection time(s)] 0.327097
 
 EDB {
-packet_in(1, 2, x632fa38f, xea3e5660d910, x333300000016, 34525)
+packet_in(1, 1, x8dd50b9e, x56e9b01803f1, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 0.292122
+// [Collection time(s)] 0.327774
 
 EDB {
-packet_in(1, 1, x4f042997, xa6666081911e, xffffffffffff, 2054)
+packet_in(1, 2, x11159f34, xaa7319cb42a6, xffffffffffff, 35138)
 }
 IDB {
-packet_out(1, x4f042997, 2)
 }
-// [Collection time(s)] 0.302284
+// [Collection time(s)] 0.328488
 
 EDB {
-packet_in(3, 3, x4f0429d5, xa6666081911e, xffffffffffff, 2054)
+packet_in(3, 3, xdea2e557, x46931dacc2ea, x333300000016, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 0.303587
+// [Collection time(s)] 0.329438
 
 EDB {
-packet_in(3, 3, x317200d8, x46d346a7dd88, xffffffffffff, 2048)
+packet_in(3, 3, x4975783a, x46931dacc2ea, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 0.359419
+// [Collection time(s)] 0.331467
 
 EDB {
-packet_in(1, 2, xac67e138, xc69a0732b8ac, x3333000000fb, 34525)
+packet_in(3, 3, x7717c2af, x46931dacc2ea, xffffffffffff, 35138)
 }
 IDB {
 }
-// [Collection time(s)] 0.503271
+// [Collection time(s)] 0.332793
 
 EDB {
-packet_in(1, 1, xdb6927af, x529f35ad2f19, xffffffffffff, 2048)
+packet_in(3, 3, x59d4117a, x56e9b01803f1, xffffffffffff, 2048)
 }
 IDB {
-flow_mod(1, x529f35ad2f19, xffffffffffff, 2),
-packet_out(1, xdb6927af, 2),
-flow_mod(1, xffffffffffff, x529f35ad2f19, 1)
 }
-// [Collection time(s)] 0.696639
+// [Collection time(s)] 0.335729
 
 EDB {
-packet_in(3, 3, xdb6927ed, x529f35ad2f19, xffffffffffff, 2048)
+packet_in(2, 3, xf2df45e5, xc2e2bdf3d98f, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 0.698211
+// [Collection time(s)] 0.338910
 
 EDB {
-packet_in(1, 2, xe6e0f72f, xc69a0732b8ac, xffffffffffff, 2048)
+packet_in(1, 2, x3c9c56f2, xaa7319cb42a6, x333300000016, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 0.716970
+// [Collection time(s)] 0.347891
 
 EDB {
-packet_in(2, 3, xb77e16c0, x722b5e6cf572, xffffffffffff, 2048)
+packet_in(1, 2, x2ec71f40, xaa7319cb42a6, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 0.880352
+// [Collection time(s)] 0.390144
 
 EDB {
-packet_in(1, 1, x8c8ea5bf, x529f35ad2f19, x3333000000fb, 34525)
+packet_in(3, 3, x4975783a, x46931dacc2ea, x3333000000fb, 34525)
 }
 IDB {
-flow_mod(1, x529f35ad2f19, x3333000000fb, 2),
-packet_out(1, x8c8ea5bf, 2),
-flow_mod(1, x3333000000fb, x529f35ad2f19, 1)
 }
-// [Collection time(s)] 1.220603
+// [Collection time(s)] 0.390959
 
 EDB {
-packet_in(3, 3, x8c8ea5fd, x529f35ad2f19, x3333000000fb, 34525)
+packet_in(2, 1, x6ec30966, xc625d5645909, xffffffffffff, 2054)
 }
 IDB {
 }
-// [Collection time(s)] 1.221930
+// [Collection time(s)] 0.416797
 
 EDB {
-packet_in(2, 1, x4f042997, xa6666081911e, xffffffffffff, 2054)
+packet_in(1, 1, x6ec30966, xc625d5645909, xffffffffffff, 2054)
 }
 IDB {
+packet_out(1, x6ec30966, 2)
 }
-// [Collection time(s)] 1.244712
+// [Collection time(s)] 0.424080
 
 EDB {
-packet_in(1, 1, x4f042997, xa6666081911e, xffffffffffff, 2054)
+packet_in(3, 3, x6ec30928, xc625d5645909, xffffffffffff, 2054)
 }
 IDB {
-packet_out(1, x4f042997, 2)
 }
-// [Collection time(s)] 1.254850
+// [Collection time(s)] 0.425012
 
 EDB {
-packet_in(3, 3, x4f0429d5, xa6666081911e, xffffffffffff, 2054)
+packet_in(3, 2, x685af1e4, x46b8ae57b1d3, xc625d5645909, 2054)
 }
 IDB {
 }
-// [Collection time(s)] 1.255863
+// [Collection time(s)] 0.428942
 
 EDB {
-packet_in(3, 2, xa14499ff, xea3e5660d910, xa6666081911e, 2054)
+packet_in(1, 2, x685af1e4, x46b8ae57b1d3, xc625d5645909, 2054)
 }
 IDB {
+packet_out(1, x685af1e4, 1)
 }
-// [Collection time(s)] 1.259289
+// [Collection time(s)] 0.443029
 
 EDB {
-packet_in(3, 3, x43639c2e, x529f35ad2f19, x3333000000fb, 34525)
+packet_in(2, 3, x685af203, x46b8ae57b1d3, xc625d5645909, 2054)
 }
 IDB {
 }
-// [Collection time(s)] 1.273328
+// [Collection time(s)] 0.443925
 
 EDB {
-packet_in(1, 2, xa14499ff, xea3e5660d910, xa6666081911e, 2054)
+packet_in(2, 1, xad54763e, xc625d5645909, x46b8ae57b1d3, 2048)
 }
 IDB {
-packet_out(1, xa14499ff, 1)
 }
-// [Collection time(s)] 1.276623
+// [Collection time(s)] 0.450301
 
 EDB {
-packet_in(2, 3, xa14499e0, xea3e5660d910, xa6666081911e, 2054)
+packet_in(2, 1, x12006640, xc625d5645909, x46b8ae57b1d3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 1.277485
+// [Collection time(s)] 0.467970
 
 EDB {
-packet_in(2, 1, x36759a18, xa6666081911e, xea3e5660d910, 2048)
+packet_in(2, 1, x1da33bf, xc625d5645909, x46b8ae57b1d3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 1.283818
+// [Collection time(s)] 0.473576
 
 EDB {
-packet_in(1, 1, x36759a18, xa6666081911e, xea3e5660d910, 2048)
+packet_in(1, 1, xad54763e, xc625d5645909, x46b8ae57b1d3, 2048)
 }
 IDB {
-flow_mod(1, xa6666081911e, xea3e5660d910, 2),
-packet_out(1, x36759a18, 2),
-flow_mod(1, xea3e5660d910, xa6666081911e, 1)
+flow_mod(1, xc625d5645909, x46b8ae57b1d3, 2),
+packet_out(1, xad54763e, 2),
+flow_mod(1, x46b8ae57b1d3, xc625d5645909, 1)
 }
-// [Collection time(s)] 1.306039
+// [Collection time(s)] 0.487071
 
 EDB {
-packet_in(3, 2, xecd31c75, xea3e5660d910, xa6666081911e, 2048)
+packet_in(1, 1, x12006640, xc625d5645909, x46b8ae57b1d3, 2048)
 }
 IDB {
+flow_mod(1, xc625d5645909, x46b8ae57b1d3, 2),
+packet_out(1, x12006640, 2),
+flow_mod(1, x46b8ae57b1d3, xc625d5645909, 1)
 }
-// [Collection time(s)] 1.307007
+// [Collection time(s)] 0.491330
 
 EDB {
-packet_in(3, 3, x8fa2d474, x46d346a7dd88, x3333000000fb, 34525)
+packet_in(1, 1, x1da33bf, xc625d5645909, x46b8ae57b1d3, 2048)
 }
 IDB {
+flow_mod(1, xc625d5645909, x46b8ae57b1d3, 2),
+packet_out(1, x1da33bf, 2),
+flow_mod(1, x46b8ae57b1d3, xc625d5645909, 1)
 }
-// [Collection time(s)] 1.472593
+// [Collection time(s)] 0.495823
 
 EDB {
-packet_in(2, 3, x65ee72c9, x722b5e6cf572, x3333000000fb, 34525)
+packet_in(3, 2, x908926c3, x46b8ae57b1d3, xc625d5645909, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 1.524746
+// [Collection time(s)] 0.497008
 
 EDB {
-packet_in(3, 3, xb1bfe404, x46d346a7dd88, x3333000000fb, 34525)
+packet_in(3, 2, xb89c1ea3, x46b8ae57b1d3, xc625d5645909, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 1.530101
+// [Collection time(s)] 0.503092
 
 EDB {
-packet_in(2, 3, xb4828e3a, x722b5e6cf572, x3333000000fb, 34525)
+packet_in(3, 2, x151c55a3, x46b8ae57b1d3, xc625d5645909, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 1.571112
+// [Collection time(s)] 0.510684
 
 EDB {
-packet_in(1, 2, x450a77d8, xc69a0732b8ac, x3333000000fb, 34525)
+packet_in(1, 2, xcf41a081, xaa7319cb42a6, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 1.783576
+// [Collection time(s)] 0.591527
 
 EDB {
-packet_in(1, 2, x17bd3ca, xc69a0732b8ac, x3333000000fb, 34525)
+packet_in(3, 3, x51ee5a1a, x46931dacc2ea, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 1.845780
+// [Collection time(s)] 0.594347
 
 EDB {
-packet_in(3, 3, x8636a7dd, x529f35ad2f19, x3333000000fb, 34525)
+packet_in(2, 3, x8f3def1d, xc2e2bdf3d98f, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 1.951610
+// [Collection time(s)] 0.610226
 
 EDB {
-packet_in(1, 1, xd016700b, x529f35ad2f19, x333300000002, 34525)
+packet_in(2, 3, xb18d871d, xc2e2bdf3d98f, xffffffffffff, 2048)
 }
 IDB {
-flow_mod(1, x529f35ad2f19, x333300000002, 2),
-packet_out(1, xd016700b, 2),
-flow_mod(1, x333300000002, x529f35ad2f19, 1)
 }
-// [Collection time(s)] 2.171233
+// [Collection time(s)] 0.700816
 
 EDB {
-packet_in(3, 3, xd0167049, x529f35ad2f19, x333300000002, 34525)
+packet_in(1, 2, x40c89ed2, xaa7319cb42a6, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 2.172523
+// [Collection time(s)] 0.780948
 
 EDB {
-packet_in(3, 3, x98f4ded3, x46d346a7dd88, x3333000000fb, 34525)
+packet_in(3, 3, xb60c49ac, x46931dacc2ea, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 2.204586
+// [Collection time(s)] 0.782250
 
 EDB {
-packet_in(3, 2, xc2cf3403, xea3e5660d910, xffffffffffff, 2054)
+packet_in(1, 1, xdca3a454, x56e9b01803f1, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 2.251927
+// [Collection time(s)] 0.844873
 
 EDB {
-packet_in(2, 3, x428e964a, x722b5e6cf572, x3333000000fb, 34525)
+packet_in(1, 2, x4872708b, xaa7319cb42a6, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 2.253672
+// [Collection time(s)] 1.075259
 
 EDB {
-packet_in(1, 2, xc2cf3403, xea3e5660d910, xffffffffffff, 2054)
+packet_in(3, 3, x31eed2a4, x46931dacc2ea, x3333000000fb, 34525)
 }
 IDB {
-packet_out(1, xc2cf3403, 1)
 }
-// [Collection time(s)] 2.257338
+// [Collection time(s)] 1.076640
 
 EDB {
-packet_in(2, 3, xc2cf33e4, xea3e5660d910, xffffffffffff, 2054)
+packet_in(2, 3, x824040f3, xc2e2bdf3d98f, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 2.263297
+// [Collection time(s)] 1.279988
 
 EDB {
-packet_in(2, 2, x4f1c173a, x1e377d29565c, xea3e5660d910, 2054)
+packet_in(1, 2, xa8b569d0, xaa7319cb42a6, xffffffffffff, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 2.265074
+// [Collection time(s)] 1.286513
 
 EDB {
-packet_in(1, 1, x4f1c16dd, x1e377d29565c, xea3e5660d910, 2054)
+packet_in(2, 1, xf5617e7f, xc625d5645909, x46b8ae57b1d3, 2048)
 }
 IDB {
-packet_out(1, x4f1c16dd, 2)
 }
-// [Collection time(s)] 2.274051
+// [Collection time(s)] 1.428539
 
 EDB {
-packet_in(3, 3, x4f1c171b, x1e377d29565c, xea3e5660d910, 2054)
+packet_in(3, 3, xf5617e41, xc625d5645909, x46b8ae57b1d3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 2.274940
+// [Collection time(s)] 1.440641
 
 EDB {
-packet_in(3, 2, x2ac77311, xea3e5660d910, x1e377d29565c, 2048)
+packet_in(3, 2, x9d583622, x46b8ae57b1d3, xc625d5645909, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 2.281166
+// [Collection time(s)] 1.446073
 
 EDB {
-packet_in(1, 2, x2ac77311, xea3e5660d910, x1e377d29565c, 2048)
+packet_in(3, 2, x3eb7ea48, x46b8ae57b1d3, xffffffffffff, 2054)
 }
 IDB {
 }
-// [Collection time(s)] 2.286974
+// [Collection time(s)] 1.456318
 
 EDB {
-packet_in(3, 3, x8a31c2f2, x46d346a7dd88, x333300000002, 34525)
+packet_in(1, 2, x3eb7ea48, x46b8ae57b1d3, xffffffffffff, 2054)
 }
 IDB {
+packet_out(1, x3eb7ea48, 1)
 }
-// [Collection time(s)] 2.429025
+// [Collection time(s)] 1.460153
 
 EDB {
-packet_in(2, 1, xcf222087, xa6666081911e, x333300000002, 34525)
+packet_in(2, 3, x3eb7ea67, x46b8ae57b1d3, xffffffffffff, 2054)
 }
 IDB {
 }
-// [Collection time(s)] 2.460400
+// [Collection time(s)] 1.461015
 
 EDB {
-packet_in(1, 1, xcf222087, xa6666081911e, x333300000002, 34525)
+packet_in(3, 3, xb50a6994, x46931dacc2ea, xffffffffffff, 2048)
 }
 IDB {
-flow_mod(1, xa6666081911e, x333300000002, 2),
-packet_out(1, xcf222087, 2),
-flow_mod(1, x333300000002, xa6666081911e, 1)
 }
-// [Collection time(s)] 2.470285
+// [Collection time(s)] 1.462958
 
 EDB {
-packet_in(3, 3, xcf2220c5, xa6666081911e, x333300000002, 34525)
+packet_in(2, 2, x4427da19, x66955783b6f3, x46b8ae57b1d3, 2054)
 }
 IDB {
 }
-// [Collection time(s)] 2.472027
+// [Collection time(s)] 1.464788
 
 EDB {
-packet_in(2, 3, xedb5fc5a, x722b5e6cf572, x333300000002, 34525)
+packet_in(1, 1, x4427da76, x66955783b6f3, x46b8ae57b1d3, 2054)
 }
 IDB {
+packet_out(1, x4427da76, 2)
 }
-// [Collection time(s)] 2.476422
+// [Collection time(s)] 1.470590
 
 EDB {
-packet_in(1, 2, xac67e138, xc69a0732b8ac, x3333000000fb, 34525)
+packet_in(3, 3, x4427da38, x66955783b6f3, x46b8ae57b1d3, 2054)
 }
 IDB {
 }
-// [Collection time(s)] 2.511190
+// [Collection time(s)] 1.471433
 
 EDB {
-packet_in(1, 2, xe8e1498a, xc69a0732b8ac, x333300000002, 34525)
+packet_in(3, 2, x18c13dda, x46b8ae57b1d3, x66955783b6f3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 2.739918
+// [Collection time(s)] 1.483688
 
 EDB {
-packet_in(2, 2, x8e23b502, x1e377d29565c, x333300000002, 34525)
+packet_in(1, 2, x18c13dda, x46b8ae57b1d3, x66955783b6f3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 3.100939
+// [Collection time(s)] 1.488979
 
 EDB {
-packet_in(1, 1, x8e23b4a5, x1e377d29565c, x333300000002, 34525)
+packet_in(1, 2, xcf41a081, xaa7319cb42a6, x3333000000fb, 34525)
 }
 IDB {
-flow_mod(1, x1e377d29565c, x333300000002, 2),
-packet_out(1, x8e23b4a5, 2),
-flow_mod(1, x333300000002, x1e377d29565c, 1)
 }
-// [Collection time(s)] 3.109584
+// [Collection time(s)] 1.747788
 
 EDB {
-packet_in(3, 3, x8e23b4e3, x1e377d29565c, x333300000002, 34525)
+packet_in(3, 3, x51ee5a1a, x46931dacc2ea, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 3.111244
+// [Collection time(s)] 1.748827
 
 EDB {
-packet_in(3, 1, xc08ce8de, xbe7ed078a03d, x333300000002, 34525)
+packet_in(1, 1, x9f18b125, x56e9b01803f1, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 3.252246
+// [Collection time(s)] 1.877193
 
 EDB {
-packet_in(1, 2, xc08ce93b, xbe7ed078a03d, x333300000002, 34525)
+packet_in(2, 3, xf2df45e5, xc2e2bdf3d98f, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 3.257881
+// [Collection time(s)] 2.319173
 
 EDB {
-packet_in(3, 2, x7b91e9f2, xea3e5660d910, x1e377d29565c, 2048)
+packet_in(1, 1, x4d843ff5, x56e9b01803f1, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 3.259350
+// [Collection time(s)] 2.327154
 
 EDB {
-packet_in(1, 2, x7b91e9f2, xea3e5660d910, x1e377d29565c, 2048)
+packet_in(3, 2, xad7e909a, x46b8ae57b1d3, x66955783b6f3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 3.264997
+// [Collection time(s)] 2.463813
 
 EDB {
-packet_in(3, 2, x260874ca, xea3e5660d910, x333300000002, 34525)
+packet_in(1, 2, xad7e909a, x46b8ae57b1d3, x66955783b6f3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 3.284163
+// [Collection time(s)] 2.471350
 
 EDB {
-packet_in(1, 2, x260874ca, xea3e5660d910, x333300000002, 34525)
+packet_in(2, 1, xa2d10f24, xc625d5645909, x333300000002, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 3.286076
+// [Collection time(s)] 2.488131
 
 EDB {
-packet_in(3, 2, x7fb20372, xea3e5660d910, x1e377d29565c, 2048)
+packet_in(1, 1, xa2d10f24, xc625d5645909, x333300000002, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 4.263951
+// [Collection time(s)] 2.490359
 
 EDB {
-packet_in(1, 2, x7fb20372, xea3e5660d910, x1e377d29565c, 2048)
+packet_in(2, 3, xc2cbff53, xc2e2bdf3d98f, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 4.272141
+// [Collection time(s)] 2.767892
 
 EDB {
-packet_in(2, 3, x7fbe0bc0, x722b5e6cf572, xffffffffffff, 2048)
+packet_in(1, 1, xd5daa174, x56e9b01803f1, x333300000002, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 4.649311
+// [Collection time(s)] 2.776438
 
 EDB {
-packet_in(3, 3, x43639c2e, x529f35ad2f19, x3333000000fb, 34525)
+packet_in(1, 2, x40c89ed2, xaa7319cb42a6, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 5.266123
+// [Collection time(s)] 2.779245
 
 EDB {
-packet_in(3, 2, xacd45013, xea3e5660d910, x1e377d29565c, 2048)
+packet_in(3, 3, xb60c49ac, x46931dacc2ea, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 5.269948
+// [Collection time(s)] 2.780232
 
 EDB {
-packet_in(1, 2, xacd45013, xea3e5660d910, x1e377d29565c, 2048)
+packet_in(3, 1, xede97daf, x86f5b6014672, x333300000002, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 5.287421
+// [Collection time(s)] 2.808155
 
 EDB {
-packet_in(3, 3, xb1bfe404, x46d346a7dd88, x3333000000fb, 34525)
+packet_in(1, 2, xede97d52, x86f5b6014672, x333300000002, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 5.523672
+// [Collection time(s)] 2.811292
 
 EDB {
-packet_in(2, 3, xb4828e3a, x722b5e6cf572, x3333000000fb, 34525)
+packet_in(2, 2, x8ffd8685, x66955783b6f3, x333300000002, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 5.572574
+// [Collection time(s)] 2.888305
 
 EDB {
-packet_in(1, 2, x17bd3ca, xc69a0732b8ac, x3333000000fb, 34525)
+packet_in(1, 1, x8ffd86e2, x66955783b6f3, x333300000002, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 5.842349
+// [Collection time(s)] 2.916817
 
 EDB {
-packet_in(3, 3, xd0167049, x529f35ad2f19, x333300000002, 34525)
+packet_in(3, 2, xd2caeaea, x46b8ae57b1d3, x333300000002, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 6.172807
+// [Collection time(s)] 3.000456
 
 EDB {
-packet_in(2, 2, x1531cb10, x1e377d29565c, xea3e5660d910, 2048)
+packet_in(1, 2, xd2caeaea, x46b8ae57b1d3, x333300000002, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 6.276410
+// [Collection time(s)] 3.003827
 
 EDB {
-packet_in(1, 1, x1531cab3, x1e377d29565c, xea3e5660d910, 2048)
+packet_in(1, 1, xdca3a454, x56e9b01803f1, x3333000000fb, 34525)
 }
 IDB {
-flow_mod(1, x1e377d29565c, xea3e5660d910, 2),
-packet_out(1, x1531cab3, 2),
-flow_mod(1, xea3e5660d910, x1e377d29565c, 1)
 }
-// [Collection time(s)] 6.308918
+// [Collection time(s)] 3.004847
 
 EDB {
-packet_in(3, 2, x3c95c8d1, xea3e5660d910, x1e377d29565c, 2048)
+packet_in(2, 3, x57a87457, xc2e2bdf3d98f, x333300000002, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 6.310155
+// [Collection time(s)] 3.224148
 
 EDB {
-packet_in(2, 1, x60b99ce2, xa6666081911e, xea3e5660d910, 2054)
+packet_in(1, 2, x3cf90a2, xaa7319cb42a6, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 6.327521
+// [Collection time(s)] 3.231856
 
 EDB {
-packet_in(3, 3, x60b99d20, xa6666081911e, xea3e5660d910, 2054)
+packet_in(3, 3, x90535c3b, x46931dacc2ea, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 6.333435
+// [Collection time(s)] 3.232934
 
 EDB {
-packet_in(3, 3, x8a31c2f2, x46d346a7dd88, x333300000002, 34525)
+packet_in(2, 3, x824040f3, xc2e2bdf3d98f, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 6.436660
+// [Collection time(s)] 3.437936
 
 EDB {
-packet_in(2, 1, xcf222087, xa6666081911e, x333300000002, 34525)
+packet_in(3, 2, xbaf97abb, x46b8ae57b1d3, x66955783b6f3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 6.471636
+// [Collection time(s)] 3.467352
 
 EDB {
-packet_in(3, 3, xcf2220c5, xa6666081911e, x333300000002, 34525)
+packet_in(1, 2, xbaf97abb, x46b8ae57b1d3, x66955783b6f3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 6.476020
+// [Collection time(s)] 3.474872
 
 EDB {
-packet_in(2, 3, xedb5fc5a, x722b5e6cf572, x333300000002, 34525)
+packet_in(1, 2, x882ddb4d, xaa7319cb42a6, x333300000002, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 6.484186
+// [Collection time(s)] 3.687969
 
 EDB {
-packet_in(1, 2, x9340e6af, xc69a0732b8ac, xffffffffffff, 2048)
+packet_in(3, 3, xcea515f2, x46931dacc2ea, x333300000002, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 6.557625
+// [Collection time(s)] 3.689216
 
 EDB {
-packet_in(1, 2, xe8e1498a, xc69a0732b8ac, x333300000002, 34525)
+packet_in(1, 2, xcf41a081, xaa7319cb42a6, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 6.748064
+// [Collection time(s)] 3.904869
 
 EDB {
-packet_in(3, 3, xddd1f058, x46d346a7dd88, xffffffffffff, 2048)
+packet_in(3, 3, x51ee5a1a, x46931dacc2ea, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 6.872798
+// [Collection time(s)] 3.906399
 
 EDB {
-packet_in(2, 2, x8e23b502, x1e377d29565c, x333300000002, 34525)
+packet_in(3, 2, xa4b443fb, x46b8ae57b1d3, x66955783b6f3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 7.108430
+// [Collection time(s)] 4.469618
 
 EDB {
-packet_in(3, 3, x8e23b4e3, x1e377d29565c, x333300000002, 34525)
+packet_in(1, 2, xa4b443fb, x46b8ae57b1d3, x66955783b6f3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 7.111210
+// [Collection time(s)] 4.483692
 
 EDB {
-packet_in(3, 1, xc08ce8de, xbe7ed078a03d, x333300000002, 34525)
+packet_in(3, 3, xb3a6154, x46931dacc2ea, xffffffffffff, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 7.260370
+// [Collection time(s)] 4.829683
 
 EDB {
-packet_in(1, 2, xc08ce93b, xbe7ed078a03d, x333300000002, 34525)
+packet_in(2, 2, x79a1fa7c, x66955783b6f3, x46b8ae57b1d3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 7.263247
+// [Collection time(s)] 5.490270
 
 EDB {
-packet_in(3, 2, x260874ca, xea3e5660d910, x333300000002, 34525)
+packet_in(1, 1, x79a1fad9, x66955783b6f3, x46b8ae57b1d3, 2048)
 }
 IDB {
+flow_mod(1, x66955783b6f3, x46b8ae57b1d3, 2),
+packet_out(1, x79a1fad9, 2),
+flow_mod(1, x46b8ae57b1d3, x66955783b6f3, 1)
 }
-// [Collection time(s)] 7.292414
+// [Collection time(s)] 5.503322
 
 EDB {
-packet_in(1, 2, x260874ca, xea3e5660d910, x333300000002, 34525)
+packet_in(2, 1, x4b840181, xc625d5645909, x46b8ae57b1d3, 2054)
 }
 IDB {
 }
-// [Collection time(s)] 7.295279
+// [Collection time(s)] 5.504102
 
 EDB {
-packet_in(2, 2, x2dec5071, x1e377d29565c, xea3e5660d910, 2048)
+packet_in(3, 2, xd6b2185c, x46b8ae57b1d3, x66955783b6f3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 7.297154
+// [Collection time(s)] 5.513028
 
 EDB {
-packet_in(3, 3, x2dec5052, x1e377d29565c, xea3e5660d910, 2048)
+packet_in(3, 3, x4b840143, xc625d5645909, x46b8ae57b1d3, 2054)
 }
 IDB {
 }
-// [Collection time(s)] 7.308331
+// [Collection time(s)] 5.518677
 
 EDB {
-packet_in(3, 2, x6ed1d891, xea3e5660d910, x1e377d29565c, 2048)
+packet_in(1, 1, x9f18b125, x56e9b01803f1, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 7.315893
+// [Collection time(s)] 5.877136
 
 EDB {
-packet_in(3, 3, xf9d914ad, x529f35ad2f19, xffffffffffff, 2048)
+packet_in(2, 3, xf2df45e5, xc2e2bdf3d98f, x3333000000fb, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 7.516894
+// [Collection time(s)] 6.318848
 
 EDB {
-packet_in(2, 2, xbccde6d1, x1e377d29565c, xea3e5660d910, 2048)
+packet_in(2, 2, xf43bddbd, x66955783b6f3, x46b8ae57b1d3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 8.297768
+// [Collection time(s)] 6.496420
 
 EDB {
-packet_in(3, 3, xbccde6b2, x1e377d29565c, xea3e5660d910, 2048)
+packet_in(2, 1, xa2d10f24, xc625d5645909, x333300000002, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 8.307357
+// [Collection time(s)] 6.516334
 
 EDB {
-packet_in(3, 2, x5b801231, xea3e5660d910, x1e377d29565c, 2048)
+packet_in(3, 3, xf43bdddc, x66955783b6f3, x46b8ae57b1d3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 8.314786
+// [Collection time(s)] 6.526705
 
 EDB {
-packet_in(2, 2, xc25403b1, x1e377d29565c, xea3e5660d910, 2048)
+packet_in(1, 1, xa2d10f24, xc625d5645909, x333300000002, 34525)
 }
 IDB {
 }
-// [Collection time(s)] 9.304174
+// [Collection time(s)] 6.537206
 
 EDB {
-packet_in(3, 3, xc2540392, x1e377d29565c, xea3e5660d910, 2048)
+packet_in(3, 2, xd5d7c2fc, x46b8ae57b1d3, x66955783b6f3, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 9.311503
+// [Collection time(s)] 6.538514
 
 EDB {
-packet_in(3, 2, x2497aaf2, xea3e5660d910, x1e377d29565c, 2048)
+packet_in(2, 3, x5ded769d, xc2e2bdf3d98f, xffffffffffff, 2048)
 }
 IDB {
 }
-// [Collection time(s)] 9.318094
+// [Collection time(s)] 6.765512
+
+EDB {
+packet_in(1, 2, x40c89ed2, xaa7319cb42a6, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.780708
+
+EDB {
+packet_in(3, 3, xb60c49ac, x46931dacc2ea, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.784203
+
+EDB {
+packet_in(1, 1, xd5daa174, x56e9b01803f1, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.785948
+
+EDB {
+packet_in(3, 1, xede97daf, x86f5b6014672, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.816407
+
+EDB {
+packet_in(1, 2, xede97d52, x86f5b6014672, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.819181
+
+EDB {
+packet_in(2, 2, x8ffd8685, x66955783b6f3, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.896165
+
+EDB {
+packet_in(1, 1, x8ffd86e2, x66955783b6f3, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.898681
+
+EDB {
+packet_in(3, 2, xd2caeaea, x46b8ae57b1d3, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 7.008093
+
+EDB {
+packet_in(1, 2, xd2caeaea, x46b8ae57b1d3, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 7.010898
+
+EDB {
+packet_in(2, 3, x57a87457, xc2e2bdf3d98f, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 7.232297
+
+EDB {
+packet_in(2, 2, x794c47dc, x66955783b6f3, x46b8ae57b1d3, 2048)
+}
+IDB {
+}
+// [Collection time(s)] 7.507371
+
+EDB {
+packet_in(3, 3, x794c47fb, x66955783b6f3, x46b8ae57b1d3, 2048)
+}
+IDB {
+}
+// [Collection time(s)] 7.517970
+
+EDB {
+packet_in(3, 2, xe3d1219c, x46b8ae57b1d3, x66955783b6f3, 2048)
+}
+IDB {
+}
+// [Collection time(s)] 7.521971
+
+EDB {
+packet_in(3, 3, x7843fe3a, x56e9b01803f1, xffffffffffff, 2048)
+}
+IDB {
+}
+// [Collection time(s)] 7.573815
+
+EDB {
+packet_in(1, 2, x882ddb4d, xaa7319cb42a6, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 7.696488
+
+EDB {
+packet_in(3, 3, xcea515f2, x46931dacc2ea, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 7.697995
+
+EDB {
+packet_in(3, 3, x616a5914, x46931dacc2ea, xffffffffffff, 2048)
+}
+IDB {
+}
+// [Collection time(s)] 7.860912
+
+EDB {
+packet_in(1, 2, xc7255690, xaa7319cb42a6, xffffffffffff, 2048)
+}
+IDB {
+}
+// [Collection time(s)] 8.354433
+
+EDB {
+packet_in(2, 2, x64e189db, x66955783b6f3, x46b8ae57b1d3, 2048)
+}
+IDB {
+}
+// [Collection time(s)] 8.512229
+
+EDB {
+packet_in(3, 3, x64e189fa, x66955783b6f3, x46b8ae57b1d3, 2048)
+}
+IDB {
+}
+// [Collection time(s)] 8.524347
+
+EDB {
+packet_in(3, 2, x6da9927c, x46b8ae57b1d3, x66955783b6f3, 2048)
+}
+IDB {
+}
+// [Collection time(s)] 8.528252
 
