@@ -34,6 +34,8 @@ public class L3FirewallMigration implements IOFMessageListener, IFloodlightModul
     protected TraceCollector tc;
     protected Set<IPv4Address> trusted;
 
+    protected IPv4Address subnet_mask = IPv4Address.of("255.255.255.0");
+
     public static int FLOWMOD_DEFAULT_IDLE_TIMEOUT = 1000; // in seconds
     public static int FLOWMOD_DEFAULT_HARD_TIMEOUT = 0; // infinite
     public static int FLOWMOD_DEFAULT_PRIORITY = 1; // 0 is the default table-miss flow in OF1.3+, so we need to use 1
@@ -111,6 +113,11 @@ public class L3FirewallMigration implements IOFMessageListener, IFloodlightModul
         return Command.CONTINUE;
     }
 
+    public boolean isIPBroadcast(IPv4Address ip) {
+        // inverted subnet mask
+        IPv4Address inv_subnet_mask = subnet_mask.not();
+        return ip.and(inv_subnet_mask).equals(inv_subnet_mask);
+    }
 
     public Command processPacketInMessage(IOFSwitch sw, OFPacketIn pi, IRoutingDecision decision, FloodlightContext cntx) {
         tc.addTableNames("trusted");
@@ -140,11 +147,16 @@ public class L3FirewallMigration implements IOFMessageListener, IFloodlightModul
 
                 tc.addOutput(pob.build());
             } else if (eth.getEtherType() == Ethernet.TYPE_IPv4) {
-                if (inPort == OFPort.of(1)) {
-                    IPv4 ip = (IPv4) eth.getPayload();
-                    IPv4Address srcIp = ip.getSourceAddress();
-                    IPv4Address dstIp = ip.getDestinationAddress();
+                IPv4 ip = (IPv4) eth.getPayload();
+                IPv4Address srcIp = ip.getSourceAddress();
+                IPv4Address dstIp = ip.getDestinationAddress();
 
+                if (isIPBroadcast(dstIp)) {
+                    tc.addFinalStates();
+                    return Command.CONTINUE;
+                }
+
+                if (inPort == OFPort.of(1)) {
                     OFFlowMod.Builder fmb;
                     fmb = sw.getOFFactory().buildFlowAdd();
                     //Install flow from port 1 to 2
@@ -183,10 +195,6 @@ public class L3FirewallMigration implements IOFMessageListener, IFloodlightModul
                     trusted.add(dstIp);
                     trusted.add(srcIp);
                 } else if (inPort == OFPort.of(2)) {
-                    IPv4 ip = (IPv4) eth.getPayload();
-                    IPv4Address srcIp = ip.getSourceAddress();
-                    IPv4Address dstIp = ip.getDestinationAddress();
-
                     OFFlowMod.Builder fmb;
                     fmb = sw.getOFFactory().buildFlowAdd();
 
