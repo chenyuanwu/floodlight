@@ -1,0 +1,765 @@
+// Trace collected Mon Feb 03 05:00:27 EST 2020
+EDB {
+packet_in_l3(2, 1, x1c0d7bb6, i10_0_0_1, i10_0_0_4),
+auth(i10_0_0_4)
+}
+IDB {
+flood(2, x1c0d7bb6),
+new_table(2,i10_0_0_1,1)
+}
+// [Collection time(s)] 0.007386
+
+EDB {
+packet_in_l3(2, 1, xd8917ef6, i10_0_0_1, i10_0_0_4),
+auth(i10_0_0_4),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flood(2, xd8917ef6)
+}
+// [Collection time(s)] 0.014118
+
+EDB {
+packet_in_l3(1, 1, x1c0d7bb6, i10_0_0_1, i10_0_0_4),
+auth(i10_0_0_4),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flood(1, x1c0d7bb6),
+new_table(1,i10_0_0_1,1)
+}
+// [Collection time(s)] 0.016693
+
+EDB {
+packet_in_l3(1, 1, xd8917ef6, i10_0_0_1, i10_0_0_4),
+auth(i10_0_0_4),
+table(1,i10_0_0_1,1),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flood(1, xd8917ef6)
+}
+// [Collection time(s)] 0.024662
+
+EDB {
+packet_in_l3(3, 3, x1c0d7b78, i10_0_0_1, i10_0_0_4),
+auth(i10_0_0_4),
+table(1,i10_0_0_1,1),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flood(3, x1c0d7b78),
+new_table(3,i10_0_0_1,3)
+}
+// [Collection time(s)] 0.035445
+
+EDB {
+packet_in_l3(3, 3, xd8917eb8, i10_0_0_1, i10_0_0_4),
+auth(i10_0_0_4),
+table(1,i10_0_0_1,1),
+table(3,i10_0_0_1,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flood(3, xd8917eb8)
+}
+// [Collection time(s)] 0.038444
+
+EDB {
+packet_in_l3(3, 2, x32005798, i10_0_0_4, i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i10_0_0_1,1),
+table(3,i10_0_0_1,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(3, i10_0_0_4, i10_0_0_1, 3),
+packet_out(3, x32005798, 3),
+new_auth(i10_0_0_1),
+new_table(3,i10_0_0_4,2)
+}
+// [Collection time(s)] 0.178243
+
+EDB {
+packet_in_l3(3, 2, x96fc6698, i10_0_0_4, i10_0_0_1),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i10_0_0_1,1),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_4,2),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(3, i10_0_0_4, i10_0_0_1, 3),
+packet_out(3, x96fc6698, 3)
+}
+// [Collection time(s)] 0.183692
+
+EDB {
+packet_in_l3(1, 2, x32005798, i10_0_0_4, i10_0_0_1),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i10_0_0_1,1),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_4,2),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(1, i10_0_0_4, i10_0_0_1, 1),
+packet_out(1, x32005798, 1),
+new_table(1,i10_0_0_4,2)
+}
+// [Collection time(s)] 0.191391
+
+EDB {
+packet_in_l3(1, 2, x96fc6698, i10_0_0_4, i10_0_0_1),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_4,2),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(1, i10_0_0_4, i10_0_0_1, 1),
+packet_out(1, x96fc6698, 1)
+}
+// [Collection time(s)] 0.201741
+
+EDB {
+packet_in_l3(2, 3, x32005779, i10_0_0_4, i10_0_0_1),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_4,2),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(2, i10_0_0_4, i10_0_0_1, 1),
+packet_out(2, x32005779, 1),
+new_table(2,i10_0_0_4,3)
+}
+// [Collection time(s)] 0.211167
+
+EDB {
+packet_in_l3(2, 3, x96fc6679, i10_0_0_4, i10_0_0_1),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_4,2),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(2, i10_0_0_4, i10_0_0_1, 1),
+packet_out(2, x96fc6679, 1)
+}
+// [Collection time(s)] 0.219617
+
+EDB {
+packet_in_l3(1, 1, x413d1b2b, i0_0_0_0, i255_255_255_255),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_4,2),
+table(2,i10_0_0_1,1)
+}
+IDB {
+new_table(1,i0_0_0_0,1)
+}
+// [Collection time(s)] 0.225583
+
+EDB {
+packet_in_l3(2, 1, x8f940cd7, i10_0_0_1, i10_0_0_4),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,1),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_4,2),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(2, i10_0_0_1, i10_0_0_4, 3),
+packet_out(2, x8f940cd7, 3)
+}
+// [Collection time(s)] 0.999074
+
+EDB {
+packet_in_l3(1, 1, x8f940cd7, i10_0_0_1, i10_0_0_4),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,1),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_4,2),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(1, i10_0_0_1, i10_0_0_4, 2),
+packet_out(1, x8f940cd7, 2)
+}
+// [Collection time(s)] 1.006266
+
+EDB {
+packet_in_l3(3, 3, x8f940c99, i10_0_0_1, i10_0_0_4),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,1),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_4,2),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(3, i10_0_0_1, i10_0_0_4, 2),
+packet_out(3, x8f940c99, 2)
+}
+// [Collection time(s)] 1.013072
+
+EDB {
+packet_in_l3(3, 3, xd5bcf6b9, i0_0_0_0, i255_255_255_255),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,1),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_4,2),
+table(2,i10_0_0_1,1)
+}
+IDB {
+new_table(3,i0_0_0_0,3)
+}
+// [Collection time(s)] 1.068552
+
+EDB {
+packet_in_l3(2, 3, xb77d1255, i0_0_0_0, i255_255_255_255),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,1),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+new_table(2,i0_0_0_0,3)
+}
+// [Collection time(s)] 1.087218
+
+EDB {
+packet_in_l3(1, 2, xb79ad134, i0_0_0_0, i255_255_255_255),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,1),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+new_table(1,i0_0_0_0,2)
+}
+// [Collection time(s)] 1.546804
+
+EDB {
+packet_in_l3(2, 2, x2a253b9f, i10_0_0_2, i10_0_0_4),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+packet_out(2, x2a253b9f, 3),
+new_table(2,i10_0_0_2,2)
+}
+// [Collection time(s)] 3.012828
+
+EDB {
+packet_in_l3(1, 1, x2a253bbe, i10_0_0_2, i10_0_0_4),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+packet_out(1, x2a253bbe, 2),
+new_table(1,i10_0_0_2,1)
+}
+// [Collection time(s)] 3.018180
+
+EDB {
+packet_in_l3(3, 3, x2a253b80, i10_0_0_2, i10_0_0_4),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+packet_out(3, x2a253b80, 2),
+new_table(3,i10_0_0_2,3)
+}
+// [Collection time(s)] 3.024243
+
+EDB {
+packet_in_l3(3, 2, xce12de20, i10_0_0_4, i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(3, i10_0_0_4, i10_0_0_2, 3),
+packet_out(3, xce12de20, 3),
+new_auth(i10_0_0_2)
+}
+// [Collection time(s)] 3.033314
+
+EDB {
+packet_in_l3(1, 2, xce12de20, i10_0_0_4, i10_0_0_2),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(1, i10_0_0_4, i10_0_0_2, 1),
+packet_out(1, xce12de20, 1)
+}
+// [Collection time(s)] 3.050301
+
+EDB {
+packet_in_l3(2, 3, xce12de01, i10_0_0_4, i10_0_0_2),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(2, i10_0_0_4, i10_0_0_2, 2),
+packet_out(2, xce12de01, 2)
+}
+// [Collection time(s)] 3.065501
+
+EDB {
+packet_in_l3(2, 2, xfebe179d, i10_0_0_2, i10_0_0_4),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(2, i10_0_0_2, i10_0_0_4, 3),
+packet_out(2, xfebe179d, 3)
+}
+// [Collection time(s)] 4.018833
+
+EDB {
+packet_in_l3(1, 1, xfebe17bc, i10_0_0_2, i10_0_0_4),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(1, i10_0_0_2, i10_0_0_4, 2),
+packet_out(1, xfebe17bc, 2)
+}
+// [Collection time(s)] 4.039807
+
+EDB {
+packet_in_l3(3, 3, xfebe177e, i10_0_0_2, i10_0_0_4),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(3, i10_0_0_2, i10_0_0_4, 2),
+packet_out(3, xfebe177e, 2)
+}
+// [Collection time(s)] 4.063631
+
+EDB {
+packet_in_l3(1, 1, xed9d0aab, i0_0_0_0, i255_255_255_255),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+new_table(1,i0_0_0_0,1)
+}
+// [Collection time(s)] 6.022856
+
+EDB {
+packet_in_l3(2, 3, xf1cd0495, i0_0_0_0, i255_255_255_255),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,1),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+}
+// [Collection time(s)] 6.730419
+
+EDB {
+packet_in_l3(2, 1, xe0576559, i10_0_0_1, i10_0_0_2),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,1),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(2, i10_0_0_1, i10_0_0_2, 2),
+packet_out(2, xe0576559, 2)
+}
+// [Collection time(s)] 7.040136
+
+EDB {
+packet_in_l3(2, 2, xa23931ba, i10_0_0_2, i10_0_0_1),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,1),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+flow_mod_l3(2, i10_0_0_2, i10_0_0_1, 1),
+packet_out(2, xa23931ba, 1)
+}
+// [Collection time(s)] 7.047572
+
+EDB {
+packet_in_l3(3, 3, xf42ce379, i0_0_0_0, i255_255_255_255),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,1),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+}
+// [Collection time(s)] 8.035038
+
+EDB {
+packet_in_l3(1, 2, x481abb34, i0_0_0_0, i255_255_255_255),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,1),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+new_table(1,i0_0_0_0,2)
+}
+// [Collection time(s)] 9.306212
+
+EDB {
+packet_in_l3(2, 1, x3088b5a8, i10_0_0_1, i10_0_0_3),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+}
+// [Collection time(s)] 11.053641
+
+EDB {
+packet_in_l3(2, 1, x4e55c968, i10_0_0_1, i10_0_0_3),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+}
+// [Collection time(s)] 12.054681
+
+EDB {
+packet_in_l3(2, 1, x835d4dc8, i10_0_0_1, i10_0_0_3),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+}
+// [Collection time(s)] 13.059893
+
+EDB {
+packet_in_l3(2, 1, x490a4b68, i10_0_0_1, i10_0_0_3),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+}
+// [Collection time(s)] 14.065981
+
+EDB {
+packet_in_l3(2, 1, xe613962a, i10_0_0_1, i10_0_0_3),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+}
+// [Collection time(s)] 15.075022
+
+EDB {
+packet_in_l3(1, 1, x623cef2b, i0_0_0_0, i255_255_255_255),
+auth(i10_0_0_2),
+auth(i10_0_0_1),
+auth(i10_0_0_4),
+table(1,i0_0_0_0,2),
+table(2,i0_0_0_0,3),
+table(2,i10_0_0_4,3),
+table(1,i10_0_0_1,1),
+table(1,i10_0_0_2,1),
+table(1,i10_0_0_4,2),
+table(3,i10_0_0_1,3),
+table(3,i10_0_0_2,3),
+table(2,i10_0_0_2,2),
+table(3,i10_0_0_4,2),
+table(3,i0_0_0_0,3),
+table(2,i10_0_0_1,1)
+}
+IDB {
+new_table(1,i0_0_0_0,1)
+}
+// [Collection time(s)] 15.999288
+
