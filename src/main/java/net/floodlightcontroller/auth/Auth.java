@@ -155,7 +155,7 @@ public class Auth implements IOFMessageListener, IFloodlightModule {
                 pob.setData(pi.getData());
                 sw.write(pob.build());
 
-                tc.addOutput(pob.build());
+                //tc.addOutput(pob.build());
             }
         }
         else {
@@ -205,7 +205,7 @@ public class Auth implements IOFMessageListener, IFloodlightModule {
                 pob.setData(pi.getData());
                 sw.write(pob.build());
 
-                tc.addOutput(pob.build());
+                //tc.addOutput(pob.build());
             }
         }
         tc.addFinalStates(table, auth);
