@@ -139,52 +139,16 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
                 sw.write(pob.build());
 
                 tc.addOutput(pob.build());
-            } else if (inPort == OFPort.of(1)) {
-                OFFlowMod.Builder fmb = sw.getOFFactory().buildFlowAdd();
-                //Install flow from port 1 to 2
-                Match.Builder mb = sw.getOFFactory().buildMatch();
-                mb.setExact(MatchField.ETH_SRC, eth.getSourceMACAddress())
-                        .setExact(MatchField.ETH_DST, eth.getDestinationMACAddress());
-
-                List<OFAction> actions = new ArrayList<OFAction>();
-                actions.add(sw.getOFFactory().actions().output(OFPort.of(2), Integer.MAX_VALUE));
-
-                U64 cookie = AppCookie.makeCookie(FORWARDING_APP_ID, 0);
-                fmb.setMatch(mb.build()) // was match w/o modifying input port
-                        .setActions(actions)
-                        .setIdleTimeout(FLOWMOD_DEFAULT_IDLE_TIMEOUT)
-                        .setHardTimeout(FLOWMOD_DEFAULT_HARD_TIMEOUT)
-                        .setBufferId(OFBufferId.NO_BUFFER)
-                        .setCookie(cookie)
-                        .setOutPort(OFPort.of(2))
-                        .setPriority(FLOWMOD_DEFAULT_PRIORITY);
-                if (logger.isTraceEnabled()) {
-                    logger.trace("Firewall:Installing flow from port 1 to 2");
-                }
-                sw.write(fmb.build());
-
-                tc.addOutput(fmb.build());
-                //Push this packet out
-                OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
-                pob.setActions(actions);
-                pob.setBufferId(OFBufferId.NO_BUFFER);
-                pob.setInPort(inPort);
-                pob.setData(pi.getData());
-                sw.write(pob.build());
-
-                tc.addOutput(pob.build());
-
-                trusted.add(eth.getDestinationMACAddress());
-            } else if (inPort == OFPort.of(2)) {
-                if (trusted.contains(eth.getSourceMACAddress())) {
+            } else if (eth.getEtherType() == Ethernet.TYPE_IPv4) {
+                if (inPort == OFPort.of(1)) {
                     OFFlowMod.Builder fmb = sw.getOFFactory().buildFlowAdd();
-                    //Install flow from port 2 to 1
+                    //Install flow from port 1 to 2
                     Match.Builder mb = sw.getOFFactory().buildMatch();
                     mb.setExact(MatchField.ETH_SRC, eth.getSourceMACAddress())
                             .setExact(MatchField.ETH_DST, eth.getDestinationMACAddress());
 
                     List<OFAction> actions = new ArrayList<OFAction>();
-                    actions.add(sw.getOFFactory().actions().output(OFPort.of(1), Integer.MAX_VALUE));
+                    actions.add(sw.getOFFactory().actions().output(OFPort.of(2), Integer.MAX_VALUE));
 
                     U64 cookie = AppCookie.makeCookie(FORWARDING_APP_ID, 0);
                     fmb.setMatch(mb.build()) // was match w/o modifying input port
@@ -193,10 +157,10 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
                             .setHardTimeout(FLOWMOD_DEFAULT_HARD_TIMEOUT)
                             .setBufferId(OFBufferId.NO_BUFFER)
                             .setCookie(cookie)
-                            .setOutPort(OFPort.of(1))
+                            .setOutPort(OFPort.of(2))
                             .setPriority(FLOWMOD_DEFAULT_PRIORITY);
                     if (logger.isTraceEnabled()) {
-                        logger.trace("Firewall:Installing flow from port 2 to 1");
+                        logger.trace("Firewall:Installing flow from port 1 to 2");
                     }
                     sw.write(fmb.build());
 
@@ -209,7 +173,45 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
                     pob.setData(pi.getData());
                     sw.write(pob.build());
 
-                    tc.addOutput(fmb.build());
+                    tc.addOutput(pob.build());
+
+                    trusted.add(eth.getDestinationMACAddress());
+                } else if (inPort == OFPort.of(2)) {
+                    if (trusted.contains(eth.getSourceMACAddress())) {
+                        OFFlowMod.Builder fmb = sw.getOFFactory().buildFlowAdd();
+                        //Install flow from port 2 to 1
+                        Match.Builder mb = sw.getOFFactory().buildMatch();
+                        mb.setExact(MatchField.ETH_SRC, eth.getSourceMACAddress())
+                                .setExact(MatchField.ETH_DST, eth.getDestinationMACAddress());
+
+                        List<OFAction> actions = new ArrayList<OFAction>();
+                        actions.add(sw.getOFFactory().actions().output(OFPort.of(1), Integer.MAX_VALUE));
+
+                        U64 cookie = AppCookie.makeCookie(FORWARDING_APP_ID, 0);
+                        fmb.setMatch(mb.build()) // was match w/o modifying input port
+                                .setActions(actions)
+                                .setIdleTimeout(FLOWMOD_DEFAULT_IDLE_TIMEOUT)
+                                .setHardTimeout(FLOWMOD_DEFAULT_HARD_TIMEOUT)
+                                .setBufferId(OFBufferId.NO_BUFFER)
+                                .setCookie(cookie)
+                                .setOutPort(OFPort.of(1))
+                                .setPriority(FLOWMOD_DEFAULT_PRIORITY);
+                        if (logger.isTraceEnabled()) {
+                            logger.trace("Firewall:Installing flow from port 2 to 1");
+                        }
+                        sw.write(fmb.build());
+
+                        tc.addOutput(fmb.build());
+                        //Push this packet out
+                        OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
+                        pob.setActions(actions);
+                        pob.setBufferId(OFBufferId.NO_BUFFER);
+                        pob.setInPort(inPort);
+                        pob.setData(pi.getData());
+                        sw.write(pob.build());
+
+                        tc.addOutput(fmb.build());
+                    }
                 }
             }
             tc.addFinalStates(trusted);
