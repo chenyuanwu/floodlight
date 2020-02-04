@@ -128,7 +128,7 @@ def test_module(module, fanout, depth):
         floodlight_proc = subprocess.Popen(' '.join(cmd), shell=True,
                                            preexec_fn=os.setsid)
         # wait for the POX controller to start
-        time.sleep(2)
+        time.sleep(5)
     except subprocess.CalledProcessError as e:
         print e
         exit(1)
