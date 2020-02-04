@@ -84,7 +84,7 @@ public class Auth implements IOFMessageListener, IFloodlightModule {
         table = new HashMap<Pair<IOFSwitch, IPv4Address>, OFPort>();
         auth = new HashSet<IPv4Address>();
         auth.addAll(AUTH_SERVERS);
-        tc = new TraceCollector("auth");
+        tc = new TraceCollector("auth", "l3");
         if (logger.isTraceEnabled()) {
             logger.debug("module auth initialized");
         }

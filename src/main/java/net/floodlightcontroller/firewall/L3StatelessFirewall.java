@@ -84,7 +84,7 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
     public void init(FloodlightModuleContext context) throws FloodlightModuleException {
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
         logger = LoggerFactory.getLogger(L3StatelessFirewall.class);
-        tc = new TraceCollector("l3-statelessfirewall");
+        tc = new TraceCollector("l3-statelessfirewall", "l3");
         if (logger.isTraceEnabled()) {
             logger.trace("module l3-statelessfirewall initialized");
         }

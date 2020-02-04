@@ -21,10 +21,14 @@ import argparse
 
 
 MODULES = {
+       'auth',
        'learningswitch',
        'statelessfirewall',
        'statefulfirewall',
        'firewallmigration',
+       'l3statelessfirewall',
+       'l3statefulfirewall',
+       'l3firewallmigration'
         }
 
 # clean up Floodlight process when done
@@ -32,7 +36,7 @@ floodlight_proc = None
 def kill_floodlight():
     if floodlight_proc != None:
         os.killpg(os.getpgid(floodlight_proc.pid), signal.SIGTERM)
-        print ('CLean up Floodlight program.')
+        print ('Clean up Floodlight program.')
 
 atexit.register(kill_floodlight)
 
@@ -141,6 +145,12 @@ def test_module(module, fanout, depth):
         learning_mn()
     elif module == 'auth':
         auth_mn()
+    elif module == 'l3firewallmigration':
+        firewall_stateful_mn()
+    elif module == 'l3statefulfirewall':
+        firewall_stateful_mn()
+    elif module == 'l3statelessfirewall':
+        firewall_mn()
     else:
         assert False, 'Unrecognized controller name: %s.' % module
 

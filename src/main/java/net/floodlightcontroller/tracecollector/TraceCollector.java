@@ -272,12 +272,14 @@ class IOInstance {
 
 public class TraceCollector {
     protected File file;
+    protected String layer;
     protected IOInstance currentInstance;
     protected long start_time;
     //protected Gson gson;
 
-    public TraceCollector(String outfile) {
+    public TraceCollector(String outfile, String layer) {
         try {
+            this.layer = layer;
             file = new File("/home/floodlight/Desktop/floodlight/traces/" + outfile + ".trace");
             if (file.exists()) {
                 file.delete();
@@ -325,7 +327,7 @@ public class TraceCollector {
             //Write edbs to file
             List<String> edb = new ArrayList<>();
             List<String> old_states = new ArrayList<>();
-            edb.add(instance.packet_in.toTupleString("l3"));
+            edb.add(instance.packet_in.toTupleString(layer));
 
             for (Map.Entry<String, List> entry : instance.prev_states.entrySet()) {
                 for (int i = 0; i < entry.getValue().size(); i++) {

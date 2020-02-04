@@ -81,7 +81,7 @@ public class FirewallMigration implements IOFMessageListener, IFloodlightModule 
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
         logger = LoggerFactory.getLogger(FirewallMigration.class);
         trusted = new ConcurrentSkipListSet<MacAddress>();
-        tc = new TraceCollector("firewallmigration");
+        tc = new TraceCollector("firewallmigration", "l2");
         if (logger.isTraceEnabled()) {
             logger.trace("module firewallmigration initialized");
         }

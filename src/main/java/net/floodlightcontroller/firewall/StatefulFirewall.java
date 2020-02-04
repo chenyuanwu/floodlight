@@ -82,7 +82,7 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
         logger = LoggerFactory.getLogger(StatefulFirewall.class);
         trusted = new ConcurrentSkipListSet<MacAddress>();
-        tc = new TraceCollector("statefulfirewall");
+        tc = new TraceCollector("statefulfirewall", "l2");
         if (logger.isTraceEnabled()) {
             logger.trace("module statefulfirewall initialized");
         }

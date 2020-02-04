@@ -81,7 +81,7 @@ public class StatelessFirewall implements IOFMessageListener, IFloodlightModule 
     public void init(FloodlightModuleContext context) throws FloodlightModuleException {
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
         logger = LoggerFactory.getLogger(StatelessFirewall.class);
-        tc = new TraceCollector("statelessfirewall");
+        tc = new TraceCollector("statelessfirewall", "l2");
         if (logger.isTraceEnabled()) {
             logger.trace("module statelessfirewall initialized");
         }

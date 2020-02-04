@@ -84,7 +84,7 @@ public class L3FirewallMigration implements IOFMessageListener, IFloodlightModul
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
         logger = LoggerFactory.getLogger(L3FirewallMigration.class);
         trusted = new ConcurrentSkipListSet<IPv4Address>();
-        tc = new TraceCollector("l3-firewallmigration");
+        tc = new TraceCollector("l3-firewallmigration", "l3");
         if (logger.isTraceEnabled()) {
             logger.trace("module l3-firewallmigration initialized");
         }
