@@ -210,7 +210,7 @@ public class StatefulFirewall implements IOFMessageListener, IFloodlightModule {
                         pob.setData(pi.getData());
                         sw.write(pob.build());
 
-                        tc.addOutput(fmb.build());
+                        tc.addOutput(pob.build());
                     }
                 }
             }
