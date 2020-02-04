@@ -63,6 +63,7 @@ def cleanup(net):
 def firewall_stateful_mn():
     net = setup()
 
+    time.sleep(1)
     h1, h2, h3, h4 = net.get('h1', 'h2', 'h3', 'h4')
 
     # h1, h2 are on the port 1 of switch1, so traffic initiating from h1 or h2
@@ -83,6 +84,7 @@ def firewall_stateful_mn():
 def firewall_mn():
     net = setup()
 
+    time.sleep(1)
     h1, h2, h3, h4 = net.get('h1', 'h2', 'h3', 'h4')
 
     print h1.IP(), h1.cmd('hping3 -c 4', h4.IP())
@@ -99,6 +101,7 @@ def learning_mn():
 def auth_mn():
     net = setup()
 
+    time.sleep(1)
     h1, h2, h3, h4 = net.get('h1', 'h2', 'h3', 'h4')
 
     # Let h4 be the auth server
