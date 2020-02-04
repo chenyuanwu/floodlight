@@ -1,0 +1,770 @@
+// Trace collected Mon Feb 03 23:40:35 EST 2020
+EDB {
+packet_in(3, 3, xf2d76d0f, x42d0dc413e5b, x0180c200000e, 35020)
+}
+IDB {
+}
+// [Collection time(s)] 0.009497
+
+EDB {
+packet_in(1, 1, x7dd502c5, xcab8e69073f6, x0180c200000e, 35020)
+}
+IDB {
+}
+// [Collection time(s)] 0.024716
+
+EDB {
+packet_in(1, 2, x6e938d20, x56dc423684c8, x0180c200000e, 35020)
+}
+IDB {
+}
+// [Collection time(s)] 0.025510
+
+EDB {
+packet_in(3, 3, x5efb4b9d, x42d0dc413e5b, xffffffffffff, 35138)
+}
+IDB {
+}
+// [Collection time(s)] 0.028485
+
+EDB {
+packet_in(1, 1, x319f5c53, xcab8e69073f6, xffffffffffff, 35138)
+}
+IDB {
+}
+// [Collection time(s)] 0.033366
+
+EDB {
+packet_in(2, 3, x20879d12, x3e0ddbaf2ae3, xffffffffffff, 35138)
+}
+IDB {
+}
+// [Collection time(s)] 0.034500
+
+EDB {
+packet_in_l3(1, 2, xaac53a5a, i0_0_0_0, i255_255_255_255)
+}
+IDB {
+}
+// [Collection time(s)] 0.083368
+
+EDB {
+packet_in_l3(2, 3, xaac53a3b, i0_0_0_0, i255_255_255_255)
+}
+IDB {
+}
+// [Collection time(s)] 0.135283
+
+EDB {
+packet_in(2, 1, x9903926f, x2a101472b268, xffffffffffff, 2054)
+}
+IDB {
+}
+// [Collection time(s)] 0.249267
+
+EDB {
+packet_in(1, 1, x9903926f, x2a101472b268, xffffffffffff, 2054)
+}
+IDB {
+packet_out(1, x9903926f, 2)
+}
+// [Collection time(s)] 0.265868
+
+EDB {
+packet_in(3, 3, x2868097c, x42d0dc413e5b, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 0.267600
+
+EDB {
+packet_in(3, 3, x990392ad, x2a101472b268, xffffffffffff, 2054)
+}
+IDB {
+}
+// [Collection time(s)] 0.272824
+
+EDB {
+packet_in(3, 2, x92661a7b, xba83a748aeab, x2a101472b268, 2054)
+}
+IDB {
+}
+// [Collection time(s)] 0.291470
+
+EDB {
+packet_in(1, 2, xcca61aad, x56dc423684c8, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 0.477391
+
+EDB {
+packet_in(1, 2, x92661a7b, xba83a748aeab, x2a101472b268, 2054)
+}
+IDB {
+packet_out(1, x92661a7b, 1)
+}
+// [Collection time(s)] 0.480643
+
+EDB {
+packet_in(2, 3, x50b43bf0, x3e0ddbaf2ae3, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 0.481621
+
+EDB {
+packet_in_l3(2, 3, xf88d90b9, i0_0_0_0, i255_255_255_255)
+}
+IDB {
+}
+// [Collection time(s)] 0.484328
+
+EDB {
+packet_in(2, 3, x92661a5c, xba83a748aeab, x2a101472b268, 2054)
+}
+IDB {
+}
+// [Collection time(s)] 0.485854
+
+EDB {
+packet_in_l3(2, 1, xdf830917, i10_0_0_1, i10_0_0_4)
+}
+IDB {
+}
+// [Collection time(s)] 0.494800
+
+EDB {
+packet_in_l3(1, 1, xdf830917, i10_0_0_1, i10_0_0_4)
+}
+IDB {
+flow_mod_l3(1, i10_0_0_1, i10_0_0_4, 2),
+packet_out(1, xdf830917, 2),
+flow_mod_l3(1, i10_0_0_4, i10_0_0_1, 1)
+}
+// [Collection time(s)] 0.536391
+
+EDB {
+packet_in_l3(3, 2, x2f529934, i10_0_0_4, i10_0_0_1)
+}
+IDB {
+}
+// [Collection time(s)] 0.537423
+
+EDB {
+packet_in(1, 1, xa2048eb4, xcab8e69073f6, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 0.544565
+
+EDB {
+packet_in_l3(2, 1, x20f12c95, i10_0_0_1, i10_0_0_4)
+}
+IDB {
+}
+// [Collection time(s)] 1.253616
+
+EDB {
+packet_in(3, 3, x9b34d44e, x42d0dc413e5b, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 1.272262
+
+EDB {
+packet_in_l3(3, 3, x20f12cd3, i10_0_0_1, i10_0_0_4)
+}
+IDB {
+}
+// [Collection time(s)] 1.274440
+
+EDB {
+packet_in_l3(3, 2, x4dd55973, i10_0_0_4, i10_0_0_1)
+}
+IDB {
+}
+// [Collection time(s)] 1.280420
+
+EDB {
+packet_in(1, 2, x7e91febe, x56dc423684c8, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 1.343455
+
+EDB {
+packet_in(2, 3, x5f1997a2, x3e0ddbaf2ae3, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 1.447804
+
+EDB {
+packet_in(1, 1, x204eebe5, xcab8e69073f6, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 1.535599
+
+EDB {
+packet_in(3, 3, x388b109d, x42d0dc413e5b, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 1.753386
+
+EDB {
+packet_in(1, 2, xb2979e0e, x56dc423684c8, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 1.845700
+
+EDB {
+packet_in(2, 3, xb68bd0f1, x3e0ddbaf2ae3, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 1.944020
+
+EDB {
+packet_in(1, 1, x64dcd1d4, xcab8e69073f6, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.025689
+
+EDB {
+packet_in(3, 3, x127a4268, x42d0dc413e5b, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.168064
+
+EDB {
+packet_in(2, 2, x1031b62e, xc6dbeefebe31, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.222032
+
+EDB {
+packet_in(1, 1, x1031b5d1, xc6dbeefebe31, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.236841
+
+EDB {
+packet_in(1, 2, x66b3ad7, x56dc423684c8, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.245384
+
+EDB {
+packet_in_l3(2, 1, xe25d76d7, i10_0_0_1, i10_0_0_4)
+}
+IDB {
+}
+// [Collection time(s)] 2.260663
+
+EDB {
+packet_in_l3(3, 3, xe25d7715, i10_0_0_1, i10_0_0_4)
+}
+IDB {
+}
+// [Collection time(s)] 2.269176
+
+EDB {
+packet_in_l3(3, 2, x22aa4d34, i10_0_0_4, i10_0_0_1)
+}
+IDB {
+}
+// [Collection time(s)] 2.277637
+
+EDB {
+packet_in(2, 3, xd54d36b5, x3e0ddbaf2ae3, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.353231
+
+EDB {
+packet_in(3, 3, x2868097c, x42d0dc413e5b, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.428066
+
+EDB {
+packet_in(1, 1, xd2eae156, xcab8e69073f6, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.430118
+
+EDB {
+packet_in(1, 2, xcca61aad, x56dc423684c8, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.519573
+
+EDB {
+packet_in(3, 1, xe7801968, x2a38dc0b52e3, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.581679
+
+EDB {
+packet_in(1, 2, xe78019c5, x2a38dc0b52e3, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.585838
+
+EDB {
+packet_in(2, 3, x50b43bf0, x3e0ddbaf2ae3, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.624392
+
+EDB {
+packet_in(1, 1, xa2048eb4, xcab8e69073f6, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.703699
+
+EDB {
+packet_in(2, 1, xea9bda74, x2a101472b268, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.749578
+
+EDB {
+packet_in(1, 1, xea9bda74, x2a101472b268, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 2.752697
+
+EDB {
+packet_in(3, 2, x9ea4ff7d, xba83a748aeab, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 3.142248
+
+EDB {
+packet_in(1, 2, x9ea4ff7d, xba83a748aeab, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 3.144223
+
+EDB {
+packet_in_l3(2, 1, x204246b7, i10_0_0_1, i10_0_0_4)
+}
+IDB {
+}
+// [Collection time(s)] 3.261923
+
+EDB {
+packet_in_l3(3, 3, x204246f5, i10_0_0_1, i10_0_0_4)
+}
+IDB {
+}
+// [Collection time(s)] 3.272142
+
+EDB {
+packet_in_l3(3, 2, xd2b0ae15, i10_0_0_4, i10_0_0_1)
+}
+IDB {
+}
+// [Collection time(s)] 3.279489
+
+EDB {
+packet_in(3, 2, x3138f5a7, xba83a748aeab, xffffffffffff, 2054)
+}
+IDB {
+}
+// [Collection time(s)] 3.297885
+
+EDB {
+packet_in(1, 2, x3138f5a7, xba83a748aeab, xffffffffffff, 2054)
+}
+IDB {
+packet_out(1, x3138f5a7, 1)
+}
+// [Collection time(s)] 3.301586
+
+EDB {
+packet_in(2, 3, x3138f588, xba83a748aeab, xffffffffffff, 2054)
+}
+IDB {
+}
+// [Collection time(s)] 3.302542
+
+EDB {
+packet_in(2, 2, xd393f638, xc6dbeefebe31, xba83a748aeab, 2054)
+}
+IDB {
+}
+// [Collection time(s)] 3.304287
+
+EDB {
+packet_in(1, 1, xd393f5db, xc6dbeefebe31, xba83a748aeab, 2054)
+}
+IDB {
+packet_out(1, xd393f5db, 2)
+}
+// [Collection time(s)] 3.317005
+
+EDB {
+packet_in(3, 3, xd393f619, xc6dbeefebe31, xba83a748aeab, 2054)
+}
+IDB {
+}
+// [Collection time(s)] 3.319111
+
+EDB {
+packet_in_l3(3, 2, x85a5a550, i10_0_0_4, i10_0_0_2)
+}
+IDB {
+}
+// [Collection time(s)] 3.329969
+
+EDB {
+packet_in_l3(1, 2, x85a5a550, i10_0_0_4, i10_0_0_2)
+}
+IDB {
+drop_l3(1, i10_0_0_4, i10_0_0_2)
+}
+// [Collection time(s)] 3.361399
+
+EDB {
+packet_in_l3(2, 3, x4ebd8879, i0_0_0_0, i255_255_255_255)
+}
+IDB {
+}
+// [Collection time(s)] 3.396268
+
+EDB {
+packet_in_l3(3, 2, x3f77db31, i10_0_0_4, i10_0_0_2)
+}
+IDB {
+}
+// [Collection time(s)] 4.304687
+
+EDB {
+packet_in(3, 3, x9b34d44e, x42d0dc413e5b, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 5.259026
+
+EDB {
+packet_in_l3(3, 2, xc0a5fc51, i10_0_0_4, i10_0_0_2)
+}
+IDB {
+}
+// [Collection time(s)] 5.321900
+
+EDB {
+packet_in_l3(1, 1, x42eb549a, i0_0_0_0, i255_255_255_255)
+}
+IDB {
+}
+// [Collection time(s)] 5.339686
+
+EDB {
+packet_in_l3(3, 3, x42eb54d8, i0_0_0_0, i255_255_255_255)
+}
+IDB {
+}
+// [Collection time(s)] 5.349132
+
+EDB {
+packet_in(1, 2, x7e91febe, x56dc423684c8, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 5.353992
+
+EDB {
+packet_in(2, 3, x5f1997a2, x3e0ddbaf2ae3, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 5.450678
+
+EDB {
+packet_in(1, 1, x204eebe5, xcab8e69073f6, x3333000000fb, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 5.535994
+
+EDB {
+packet_in(1, 2, xbc3580, xba83a748aeab, x2a101472b268, 2054)
+}
+IDB {
+packet_out(1, xbc3580, 1)
+}
+// [Collection time(s)] 5.543523
+
+EDB {
+packet_in(2, 1, xabe4e05e, x2a101472b268, xba83a748aeab, 2054)
+}
+IDB {
+}
+// [Collection time(s)] 5.544423
+
+EDB {
+packet_in(1, 1, xabe4e05e, x2a101472b268, xba83a748aeab, 2054)
+}
+IDB {
+packet_out(1, xabe4e05e, 2)
+}
+// [Collection time(s)] 5.555873
+
+EDB {
+packet_in(3, 3, x127a4268, x42d0dc413e5b, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.167502
+
+EDB {
+packet_in(2, 2, x1031b62e, xc6dbeefebe31, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.237119
+
+EDB {
+packet_in(1, 1, x1031b5d1, xc6dbeefebe31, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.239039
+
+EDB {
+packet_in(1, 2, x66b3ad7, x56dc423684c8, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.262643
+
+EDB {
+packet_in_l3(3, 2, x566ea3b1, i10_0_0_4, i10_0_0_2)
+}
+IDB {
+}
+// [Collection time(s)] 6.328219
+
+EDB {
+packet_in(2, 3, xd54d36b5, x3e0ddbaf2ae3, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.357973
+
+EDB {
+packet_in(1, 1, xd2eae156, xcab8e69073f6, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.437816
+
+EDB {
+packet_in_l3(2, 3, xa4ed8039, i0_0_0_0, i255_255_255_255)
+}
+IDB {
+}
+// [Collection time(s)] 6.502588
+
+EDB {
+packet_in(3, 1, xe7801968, x2a38dc0b52e3, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.591026
+
+EDB {
+packet_in(1, 2, xe78019c5, x2a38dc0b52e3, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.593090
+
+EDB {
+packet_in(2, 1, xea9bda74, x2a101472b268, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.757811
+
+EDB {
+packet_in(1, 1, xea9bda74, x2a101472b268, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 6.761040
+
+EDB {
+packet_in_l3(1, 2, xc935271a, i0_0_0_0, i255_255_255_255)
+}
+IDB {
+}
+// [Collection time(s)] 7.067737
+
+EDB {
+packet_in_l3(2, 3, xc93526fb, i0_0_0_0, i255_255_255_255)
+}
+IDB {
+}
+// [Collection time(s)] 7.080736
+
+EDB {
+packet_in(3, 2, x9ea4ff7d, xba83a748aeab, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 7.149932
+
+EDB {
+packet_in(1, 2, x9ea4ff7d, xba83a748aeab, x333300000002, 34525)
+}
+IDB {
+}
+// [Collection time(s)] 7.152939
+
+EDB {
+packet_in_l3(2, 2, x13274c90, i10_0_0_2, i10_0_0_4)
+}
+IDB {
+}
+// [Collection time(s)] 7.336688
+
+EDB {
+packet_in_l3(1, 1, x13274c33, i10_0_0_2, i10_0_0_4)
+}
+IDB {
+flow_mod_l3(1, i10_0_0_2, i10_0_0_4, 2),
+packet_out(1, x13274c33, 2),
+flow_mod_l3(1, i10_0_0_4, i10_0_0_2, 1)
+}
+// [Collection time(s)] 7.356945
+
+EDB {
+packet_in_l3(3, 2, x65d04eb0, i10_0_0_4, i10_0_0_2)
+}
+IDB {
+}
+// [Collection time(s)] 7.359393
+
+EDB {
+packet_in(1, 2, x6e93895f, x56dc423684c8, x0180c200000e, 35020)
+}
+IDB {
+}
+// [Collection time(s)] 8.213593
+
+EDB {
+packet_in(1, 1, x7dd502c5, xcab8e69073f6, x0180c200000e, 35020)
+}
+IDB {
+}
+// [Collection time(s)] 8.217424
+
+EDB {
+packet_in(3, 3, xf2d76d0f, x42d0dc413e5b, x0180c200000e, 35020)
+}
+IDB {
+}
+// [Collection time(s)] 8.221866
+
+EDB {
+packet_in(2, 3, x7cc9284, x3e0ddbaf2ae3, x0180c200000e, 35020)
+}
+IDB {
+}
+// [Collection time(s)] 8.223316
+
+EDB {
+packet_in_l3(2, 2, x3e1b5712, i10_0_0_2, i10_0_0_4)
+}
+IDB {
+}
+// [Collection time(s)] 8.351063
+
+EDB {
+packet_in_l3(3, 2, x4e8d9d1, i10_0_0_4, i10_0_0_2)
+}
+IDB {
+}
+// [Collection time(s)] 8.360929
+
+EDB {
+packet_in_l3(2, 3, x4e8d9b2, i10_0_0_4, i10_0_0_2)
+}
+IDB {
+}
+// [Collection time(s)] 8.365553
+
+EDB {
+packet_in_l3(3, 3, x47ce9d0e, i0_0_0_0, i255_255_255_255)
+}
+IDB {
+}
+// [Collection time(s)] 8.462945
+
+EDB {
+packet_in_l3(2, 2, x2cedc26f, i10_0_0_2, i10_0_0_4)
+}
+IDB {
+}
+// [Collection time(s)] 9.357445
+
+EDB {
+packet_in_l3(3, 3, x2cedc250, i10_0_0_2, i10_0_0_4)
+}
+IDB {
+}
+// [Collection time(s)] 9.373084
+
+EDB {
+packet_in_l3(3, 2, xaccec8f0, i10_0_0_4, i10_0_0_2)
+}
+IDB {
+}
+// [Collection time(s)] 9.377345
+
+EDB {
+packet_in_l3(2, 2, x8740d4f1, i10_0_0_2, i10_0_0_4)
+}
+IDB {
+}
+// [Collection time(s)] 10.367112
+
+EDB {
+packet_in_l3(3, 3, x8740d4d2, i10_0_0_2, i10_0_0_4)
+}
+IDB {
+}
+// [Collection time(s)] 10.391083
+
+EDB {
+packet_in_l3(3, 2, xc0df3371, i10_0_0_4, i10_0_0_2)
+}
+IDB {
+}
+// [Collection time(s)] 10.397241
+
