@@ -29,12 +29,8 @@ class Convert {
     }
 
     public static String convertIP(IPv4Address ip) {
-        if (ip.toString().equals("255.255.255.255")) {
-            return "255255255255";
-        } else {
-            String s = "i" + ip.toString();
-            return s.replace(".", "_");
-        }
+        String s = "i" + ip.toString();
+        return s.replace(".", "_");
     }
 }
 

@@ -60,10 +60,8 @@ def cleanup(net):
     net.stop()
     Cleanup.cleanup()
 
-def firewall_stateful_mn():
-    net = setup()
+def firewall_stateful_mn(net):
 
-    time.sleep(2)
     h1, h2, h3, h4 = net.get('h1', 'h2', 'h3', 'h4')
 
     # h1, h2 are on the port 1 of switch1, so traffic initiating from h1 or h2
@@ -81,10 +79,8 @@ def firewall_stateful_mn():
 
     cleanup(net)
 
-def firewall_mn():
-    net = setup()
+def firewall_mn(net):
 
-    time.sleep(2)
     h1, h2, h3, h4 = net.get('h1', 'h2', 'h3', 'h4')
 
     print h1.IP(), h1.cmd('hping3 -c 4', h4.IP())
@@ -93,15 +89,14 @@ def firewall_mn():
 
     cleanup(net)
 
-def learning_mn():
-    net = setup()
+def learning_mn(net):
+
     net.pingAll()
+
     cleanup(net)
     
-def auth_mn():
-    net = setup()
+def auth_mn(net):
 
-    time.sleep(1)
     h1, h2, h3, h4 = net.get('h1', 'h2', 'h3', 'h4')
 
     # Let h4 be the auth server
@@ -122,6 +117,8 @@ def auth_mn():
 
 def test_module(module, fanout, depth):
 
+    net = setup()
+
     # Start controller
     global floodlight_proc
     cmd = ['java', '-ea -Dlogback.configurationFile=logback.xml',
@@ -131,7 +128,7 @@ def test_module(module, fanout, depth):
         floodlight_proc = subprocess.Popen(' '.join(cmd), shell=True,
                                            preexec_fn=os.setsid)
         # wait for the POX controller to start
-        time.sleep(5)
+        time.sleep(3)
     except subprocess.CalledProcessError as e:
         print e
         exit(1)
@@ -139,21 +136,21 @@ def test_module(module, fanout, depth):
     # Run Mininet simulation
 
     if module == 'statefulfirewall':
-        firewall_stateful_mn()
+        firewall_stateful_mn(net)
     elif module == 'firewallmigration':
-        firewall_stateful_mn()
+        firewall_stateful_mn(net)
     elif module == 'statelessfirewall':
-        firewall_mn()
+        firewall_mn(net)
     elif module == 'learningswitch':
-        learning_mn()
+        learning_mn(net)
     elif module == 'auth':
-        auth_mn()
+        auth_mn(net)
     elif module == 'l3firewallmigration':
-        firewall_stateful_mn()
+        firewall_stateful_mn(net)
     elif module == 'l3statefulfirewall':
-        firewall_stateful_mn()
+        firewall_stateful_mn(net)
     elif module == 'l3statelessfirewall':
-        firewall_mn()
+        firewall_mn(net)
     else:
         assert False, 'Unrecognized controller name: %s.' % module
 
