@@ -66,16 +66,16 @@ def firewall_stateful_mn(net):
 
     # h1, h2 are on the port 1 of switch1, so traffic initiating from h1 or h2
     # should be allowed.
-    print h1.IP(), h1.cmd('hping3 -c 4', h4.IP())
+    print h1.IP(), h1.cmd('ping -c 4', h4.IP())
 
     # h4 is on the port 2 side of switch 1, but it is seen on previous flows, so
     # now traffic from h4 would also be allowed.
-    print h4.IP(), h4.cmd('hping3 -c 4', h2.IP())
+    print h4.IP(), h4.cmd('ping -c 4', h2.IP())
 
-    print h2.IP(), h2.cmd('hping3 -c 4', h4.IP())
+    print h2.IP(), h2.cmd('ping -c 4', h4.IP())
 
     # h3 is also from the outside, this traffic should be blocked.
-    print h3.IP(), h3.cmd('hping3 -c 4', h2.IP())
+    print h3.IP(), h3.cmd('ping -c 4', h2.IP())
 
     cleanup(net)
 
@@ -83,9 +83,9 @@ def firewall_mn(net):
 
     h1, h2, h3, h4 = net.get('h1', 'h2', 'h3', 'h4')
 
-    print h1.IP(), h1.cmd('hping3 -c 4', h4.IP())
-    print h4.IP(), h4.cmd('hping3 -c 4', h2.IP())
-    print h2.IP(), h2.cmd('hping3 -c 4', h4.IP())
+    print h1.IP(), h1.cmd('ping -c 4', h4.IP())
+    print h4.IP(), h4.cmd('ping -c 4', h2.IP())
+    print h2.IP(), h2.cmd('ping -c 4', h4.IP())
 
     cleanup(net)
 
@@ -102,16 +102,16 @@ def auth_mn(net):
     # Let h4 be the auth server
 
     # h1 send to h4, get authorized
-    print h1.IP(), h1.cmd('hping3 -c 5', h4.IP())
+    print h1.IP(), h1.cmd('ping -c 5', h4.IP())
 
     # h2 send to h4, get authorized
-    print h2.IP(), h2.cmd('hping3 -c 5', h4.IP())
+    print h2.IP(), h2.cmd('ping -c 5', h4.IP())
 
     # h1 and h2 should communicate
-    print h1.IP(), h1.cmd('hping3 -c 5', h2.IP())
+    print h1.IP(), h1.cmd('ping -c 5', h2.IP())
 
     # h1 and h3 should not communicate
-    print h1.IP(), h1.cmd('hping3 -c 5', h3.IP())
+    print h1.IP(), h1.cmd('ping -c 5', h3.IP())
 
     cleanup(net)
 
