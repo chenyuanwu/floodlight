@@ -1,7 +1,5 @@
 #!/usr/bin/python
 
-import sys
-
 from os import path
 import subprocess
 import os
@@ -11,12 +9,17 @@ from mininet.net import Mininet
 from mininet.topolib import TreeTopo
 from mininet.log import setLogLevel
 from mininet.clean import Cleanup
-from mininet.node import Controller, RemoteController
 
+from mininet.node import Controller, RemoteController
+from os import environ
 import time
 import atexit
 import signal
+import shutil
+
 import argparse
+import random
+from datetime import datetime
 
 FLOODDIR = "/home/floodlight/Desktop/floodlight"
 
