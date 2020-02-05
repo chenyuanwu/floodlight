@@ -33,6 +33,7 @@ public class L3FirewallMigration implements IOFMessageListener, IFloodlightModul
     protected static Logger logger;
     protected TraceCollector tc;
     protected Set<IPv4Address> trusted;
+    protected Set<IPv4Address> isBroadcast;
 
     protected IPv4Address subnet_mask = IPv4Address.of("255.255.255.0");
 
@@ -84,6 +85,9 @@ public class L3FirewallMigration implements IOFMessageListener, IFloodlightModul
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
         logger = LoggerFactory.getLogger(L3FirewallMigration.class);
         trusted = new HashSet<IPv4Address>();
+        isBroadcast = new HashSet<IPv4Address>();
+        isBroadcast.add(IPv4Address.of("255.255.255.255"));
+
         tc = new TraceCollector("l3-firewallmigration", "l3");
         if (logger.isTraceEnabled()) {
             logger.trace("module l3-firewallmigration initialized");
@@ -120,8 +124,8 @@ public class L3FirewallMigration implements IOFMessageListener, IFloodlightModul
     }
 
     public Command processPacketInMessage(IOFSwitch sw, OFPacketIn pi, IRoutingDecision decision, FloodlightContext cntx) {
-        tc.addTableNames("trusted");
-        tc.addInput(pi, sw, cntx, trusted);
+        tc.addTableNames("isBroadcast", "trusted");
+        tc.addInput(pi, sw, cntx, isBroadcast, trusted);
 
         Ethernet eth = IFloodlightProviderService.bcStore.get(cntx, IFloodlightProviderService.CONTEXT_PI_PAYLOAD);
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
@@ -152,7 +156,7 @@ public class L3FirewallMigration implements IOFMessageListener, IFloodlightModul
                 IPv4Address dstIp = ip.getDestinationAddress();
 
                 if (isIPBroadcast(dstIp)) {
-                    tc.addFinalStates();
+                    tc.addFinalStates(isBroadcast, trusted);
                     return Command.CONTINUE;
                 }
 
@@ -223,7 +227,7 @@ public class L3FirewallMigration implements IOFMessageListener, IFloodlightModul
                     tc.addOutput(fmb.build());
                 }
             }
-            tc.addFinalStates(trusted);
+            tc.addFinalStates(isBroadcast, trusted);
 
             return Command.STOP;
         } else {
@@ -233,7 +237,7 @@ public class L3FirewallMigration implements IOFMessageListener, IFloodlightModul
                         new Object[]{sw, inPort});
             }
              */
-            tc.addFinalStates(trusted);
+            tc.addFinalStates(isBroadcast, trusted);
 
             return Command.CONTINUE;
         }

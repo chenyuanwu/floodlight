@@ -32,6 +32,7 @@ public class L3StatefulFirewall implements IOFMessageListener, IFloodlightModule
     protected static Logger logger;
     protected TraceCollector tc;
     protected Set<IPv4Address> trusted;
+    protected Set<IPv4Address> isBroadcast;
 
     protected IPv4Address subnet_mask = IPv4Address.of("255.255.255.0");
 
@@ -83,6 +84,9 @@ public class L3StatefulFirewall implements IOFMessageListener, IFloodlightModule
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
         logger = LoggerFactory.getLogger(L3StatefulFirewall.class);
         trusted = new HashSet<IPv4Address>();
+        isBroadcast = new HashSet<IPv4Address>();
+        isBroadcast.add(IPv4Address.of("255.255.255.255"));
+
         tc = new TraceCollector("l3-statefulfirewall", "l3");
         if (logger.isTraceEnabled()) {
             logger.trace("module l3-statefulfirewall initialized");
@@ -119,8 +123,8 @@ public class L3StatefulFirewall implements IOFMessageListener, IFloodlightModule
     }
 
     public Command processPacketInMessage(IOFSwitch sw, OFPacketIn pi, IRoutingDecision decision, FloodlightContext cntx) {
-        tc.addTableNames("trusted");
-        tc.addInput(pi, sw, cntx, trusted);
+        tc.addTableNames("isBroadcast", "trusted");
+        tc.addInput(pi, sw, cntx, isBroadcast, trusted);
 
         Ethernet eth = IFloodlightProviderService.bcStore.get(cntx, IFloodlightProviderService.CONTEXT_PI_PAYLOAD);
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
@@ -151,7 +155,7 @@ public class L3StatefulFirewall implements IOFMessageListener, IFloodlightModule
                 IPv4Address dstIp = ip.getDestinationAddress();
 
                 if (isIPBroadcast(dstIp)) {
-                    tc.addFinalStates();
+                    tc.addFinalStates(isBroadcast, trusted);
                     return Command.CONTINUE;
                 }
 
@@ -221,7 +225,7 @@ public class L3StatefulFirewall implements IOFMessageListener, IFloodlightModule
                     tc.addOutput(fmb.build());
                 }
             }
-            tc.addFinalStates(trusted);
+            tc.addFinalStates(isBroadcast, trusted);
 
             return Command.STOP;
         } else {
@@ -231,7 +235,7 @@ public class L3StatefulFirewall implements IOFMessageListener, IFloodlightModule
                         new Object[]{sw, inPort});
             }
              */
-            tc.addFinalStates(trusted);
+            tc.addFinalStates(isBroadcast, trusted);
 
             return Command.CONTINUE;
         }

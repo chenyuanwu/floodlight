@@ -60,42 +60,49 @@ def cleanup(net):
     net.stop()
     Cleanup.cleanup()
 
-def firewall_stateful_mn(net):
+def firewall_stateful_mn():
+    net = setup()
+    time.sleep(3)
 
     h1, h2, h3, h4 = net.get('h1', 'h2', 'h3', 'h4')
 
     # h1, h2 are on the port 1 of switch1, so traffic initiating from h1 or h2
     # should be allowed.
-    print h1.IP(), h1.cmd('ping -c 4', h4.IP())
+    print h1.IP(), h1.cmd('hping3 -c 4', h4.IP())
 
     # h4 is on the port 2 side of switch 1, but it is seen on previous flows, so
     # now traffic from h4 would also be allowed.
-    print h4.IP(), h4.cmd('ping -c 4', h2.IP())
+    print h4.IP(), h4.cmd('hping3 -c 4', h2.IP())
 
-    print h2.IP(), h2.cmd('ping -c 4', h4.IP())
+    print h2.IP(), h2.cmd('hping3 -c 4', h4.IP())
 
     # h3 is also from the outside, this traffic should be blocked.
-    print h3.IP(), h3.cmd('ping -c 4', h2.IP())
+    print h3.IP(), h3.cmd('hping3 -c 4', h2.IP())
 
     cleanup(net)
 
-def firewall_mn(net):
+def firewall_mn():
+    net = setup()
+    time.sleep(3)
 
     h1, h2, h3, h4 = net.get('h1', 'h2', 'h3', 'h4')
 
-    print h1.IP(), h1.cmd('ping -c 4', h4.IP())
-    print h4.IP(), h4.cmd('ping -c 4', h2.IP())
-    print h2.IP(), h2.cmd('ping -c 4', h4.IP())
+    print h1.IP(), h1.cmd('hping3 -c 4', h4.IP())
+    print h4.IP(), h4.cmd('hping3 -c 4', h2.IP())
+    print h2.IP(), h2.cmd('hping3 -c 4', h4.IP())
 
     cleanup(net)
 
-def learning_mn(net):
+def learning_mn():
+    net = setup()
 
     net.pingAll()
 
     cleanup(net)
     
-def auth_mn(net):
+def auth_mn():
+    net = setup()
+    time.sleep(3)
 
     h1, h2, h3, h4 = net.get('h1', 'h2', 'h3', 'h4')
 
@@ -117,8 +124,6 @@ def auth_mn(net):
 
 def test_module(module, fanout, depth):
 
-    net = setup()
-    time.sleep(3)
     # Start controller
     global floodlight_proc
     cmd = ['java', '-ea -Dlogback.configurationFile=logback.xml',
@@ -136,21 +141,21 @@ def test_module(module, fanout, depth):
     # Run Mininet simulation
 
     if module == 'statefulfirewall':
-        firewall_stateful_mn(net)
+        firewall_stateful_mn()
     elif module == 'firewallmigration':
-        firewall_stateful_mn(net)
+        firewall_stateful_mn()
     elif module == 'statelessfirewall':
-        firewall_mn(net)
+        firewall_mn()
     elif module == 'learningswitch':
-        learning_mn(net)
+        learning_mn()
     elif module == 'auth':
-        auth_mn(net)
+        auth_mn()
     elif module == 'l3firewallmigration':
-        firewall_stateful_mn(net)
+        firewall_stateful_mn()
     elif module == 'l3statefulfirewall':
-        firewall_stateful_mn(net)
+        firewall_stateful_mn()
     elif module == 'l3statelessfirewall':
-        firewall_mn(net)
+        firewall_mn()
     else:
         assert False, 'Unrecognized controller name: %s.' % module
 

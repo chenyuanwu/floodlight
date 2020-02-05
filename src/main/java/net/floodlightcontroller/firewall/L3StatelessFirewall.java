@@ -1,9 +1,6 @@
 package net.floodlightcontroller.firewall;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
+import java.util.*;
 
 import net.floodlightcontroller.core.util.AppCookie;
 import net.floodlightcontroller.packet.IPv4;
@@ -34,6 +31,7 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
     protected IFloodlightProviderService floodlightProvider;
     protected static Logger logger;
     protected TraceCollector tc;
+    protected Set<IPv4Address> isBroadcast;
 
     protected IPv4Address subnet_mask = IPv4Address.of("255.255.255.0");
 
@@ -84,6 +82,9 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
     public void init(FloodlightModuleContext context) throws FloodlightModuleException {
         floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
         logger = LoggerFactory.getLogger(L3StatelessFirewall.class);
+        isBroadcast = new HashSet<>();
+        isBroadcast.add(IPv4Address.of("255.255.255.255"));
+
         tc = new TraceCollector("l3-statelessfirewall", "l3");
         if (logger.isTraceEnabled()) {
             logger.trace("module l3-statelessfirewall initialized");
@@ -120,8 +121,8 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
     }
 
     public Command processPacketInMessage(IOFSwitch sw, OFPacketIn pi, IRoutingDecision decision, FloodlightContext cntx) {
-        tc.addTableNames();
-        tc.addInput(pi, sw, cntx);
+        tc.addTableNames("isBroadcast");
+        tc.addInput(pi, sw, cntx, isBroadcast);
 
         Ethernet eth = IFloodlightProviderService.bcStore.get(cntx, IFloodlightProviderService.CONTEXT_PI_PAYLOAD);
         OFPort inPort = (pi.getVersion().compareTo(OFVersion.OF_12) < 0 ? pi.getInPort() : pi.getMatch().get(MatchField.IN_PORT));
@@ -152,7 +153,7 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
                 IPv4Address dstIp = ip.getDestinationAddress();
 
                 if (isIPBroadcast(dstIp)) {
-                    tc.addFinalStates();
+                    tc.addFinalStates(isBroadcast);
                     return Command.CONTINUE;
                 }
 
@@ -244,7 +245,7 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
                     tc.addOutput(fmb.build());
                 }
             }
-            tc.addFinalStates();
+            tc.addFinalStates(isBroadcast);
 
             return Command.STOP;
         } else {
@@ -254,7 +255,7 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
                         new Object[]{sw, inPort});
             }
              */
-            tc.addFinalStates();
+            tc.addFinalStates(isBroadcast);
 
             return Command.CONTINUE;
         }
