@@ -1,1006 +1,966 @@
-// Trace collected Wed Feb 05 02:24:08 EST 2020
+// Trace collected Wed Feb 05 03:55:13 EST 2020
 EDB {
-packet_in(1, 2, x1b29fd33, x2e6181c888c1, x0180c200000e, 35020),
+packet_in(1, 2, x24d90433, xaedb45ff410a, x0180c200000e, 35020),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.003422
+// [Collection time(s)] 0.012522
 
 EDB {
-packet_in(1, 1, x2d98de34, x427e25448a8f, x333300000016, 34525),
+packet_in(1, 1, xf6a32eb6, x669987ed3d94, x0180c200000e, 35020),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.007744
+// [Collection time(s)] 0.015235
 
 EDB {
-packet_in(1, 2, x65312ec1, x2e6181c888c1, xffffffffffff, 35138),
+packet_in(1, 2, xa92bc3a, xaedb45ff410a, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.030357
+// [Collection time(s)] 0.027960
 
 EDB {
-packet_in(1, 1, xa2c36f65, x427e25448a8f, x0180c200000e, 35020),
+packet_in(1, 1, x10b48e2f, x669987ed3d94, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.031692
+// [Collection time(s)] 0.041644
 
 EDB {
-packet_in(3, 3, x6d2d63ac, xeeeca47348c5, xffffffffffff, 35138),
+packet_in(1, 2, xff78c2c1, xaedb45ff410a, xffffffffffff, 35138),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.033137
+// [Collection time(s)] 0.042970
 
 EDB {
-packet_in(2, 3, xcaf9968a, x9a5ff7f0c534, xffffffffffff, 35138),
+packet_in(1, 1, x2442ed44, x669987ed3d94, xffffffffffff, 35138),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.045269
+// [Collection time(s)] 0.044178
 
 EDB {
-packet_in(2, 3, x3b02f5cd, x9a5ff7f0c534, x3333000000fb, 34525),
+packet_in(3, 3, x89a8d60, xbaf736b8e32f, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.056505
+// [Collection time(s)] 0.137623
 
 EDB {
-packet_in(1, 1, xcb2a6db7, x427e25448a8f, x3333000000fb, 34525),
+packet_in(1, 1, x63f481e8, x669987ed3d94, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.113549
+// [Collection time(s)] 0.192118
 
 EDB {
-packet_in(1, 2, xb5bd7ac4, x2e6181c888c1, x3333000000fb, 34525),
+packet_in(1, 2, xf5b87e8c, xaedb45ff410a, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.117522
+// [Collection time(s)] 0.237942
 
 EDB {
-packet_in(3, 3, x5961a4d6, xeeeca47348c5, x333300000016, 34525),
+packet_in_l3(1, 1, x9ee566d0, i0_0_0_0, i255_255_255_255),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.118677
+// [Collection time(s)] 0.259444
 
 EDB {
-packet_in(3, 3, xdae3a76d, xeeeca47348c5, x3333000000fb, 34525),
+packet_in_l3(1, 2, xe7f3ac6d, i0_0_0_0, i255_255_255_255),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.125965
+// [Collection time(s)] 0.268758
 
 EDB {
-packet_in_l3(3, 3, x59469694, i0_0_0_0, i255_255_255_255),
+packet_in_l3(3, 3, x9ee5670e, i0_0_0_0, i255_255_255_255),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.155754
+// [Collection time(s)] 0.271472
 
 EDB {
-packet_in(1, 1, x6892f629, x427e25448a8f, x3333000000fb, 34525),
+packet_in_l3(2, 3, xe7f3ac4e, i0_0_0_0, i255_255_255_255),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.250531
+// [Collection time(s)] 0.281077
 
 EDB {
-packet_in_l3(1, 1, xc290ffc9, i0_0_0_0, i255_255_255_255),
+packet_in(3, 3, x459a03a1, xbaf736b8e32f, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.274702
+// [Collection time(s)] 0.337561
 
 EDB {
-packet_in(1, 2, x2325bf89, x2e6181c888c1, x333300000016, 34525),
+packet_in(1, 2, x2d1b7f04, xaedb45ff410a, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.278839
+// [Collection time(s)] 0.352969
 
 EDB {
-packet_in(1, 2, x38a69905, x2e6181c888c1, x3333000000fb, 34525),
+packet_in(2, 3, x2a5937eb, x7e58b83e4d11, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.280535
+// [Collection time(s)] 0.412856
 
 EDB {
-packet_in_l3(3, 3, xc290ff8b, i0_0_0_0, i255_255_255_255),
+packet_in(3, 3, xf8dcab92, xbaf736b8e32f, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.281798
+// [Collection time(s)] 0.603830
 
 EDB {
-packet_in(3, 3, x6b5aa9ef, xeeeca47348c5, x3333000000fb, 34525),
+packet_in_l3(3, 3, x31066c49, i0_0_0_0, i255_255_255_255),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.317204
+// [Collection time(s)] 0.677496
 
 EDB {
-packet_in(1, 2, xff178316, x2e6181c888c1, x3333000000fb, 34525),
+packet_in(3, 3, xdc4ee3ab, xbaf736b8e32f, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.461279
+// [Collection time(s)] 0.719984
 
 EDB {
-packet_in(3, 3, xd305d181, xeeeca47348c5, x3333000000fb, 34525),
+packet_in_l3(2, 3, x822ab8e0, i0_0_0_0, i255_255_255_255),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.498208
+// [Collection time(s)] 0.823151
 
 EDB {
-packet_in(1, 1, x4b3d57c0, x427e25448a8f, x3333000000fb, 34525),
+packet_in(1, 1, x54f26b9d, x669987ed3d94, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.570116
+// [Collection time(s)] 0.844573
 
 EDB {
-packet_in(2, 3, xa969b44e, x9a5ff7f0c534, x3333000000fb, 34525),
+packet_in(1, 2, xa92bc3a, xaedb45ff410a, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.714387
+// [Collection time(s)] 1.060174
 
 EDB {
-packet_in(1, 2, x63f4880f, x2e6181c888c1, x3333000000fb, 34525),
+packet_in(2, 1, x5b826e49, xb27948fd7c27, xffffffffffff, 2054),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.775467
+// [Collection time(s)] 1.316970
 
 EDB {
-packet_in_l3(2, 3, xbf7050f6, i0_0_0_0, i255_255_255_255),
+packet_in(1, 1, x5b826e49, xb27948fd7c27, xffffffffffff, 2054),
+isBroadcast(i255_255_255_255)
+}
+IDB {
+packet_out(1, x5b826e49, 2)
+}
+// [Collection time(s)] 1.325443
+
+EDB {
+packet_in(3, 3, x5b826e87, xb27948fd7c27, xffffffffffff, 2054),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.789613
+// [Collection time(s)] 1.326671
 
 EDB {
-packet_in(3, 3, x20c9ec79, xeeeca47348c5, x3333000000fb, 34525),
+packet_in(3, 2, xdf054dc9, x4aa49a7425d2, xb27948fd7c27, 2054),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 0.813879
+// [Collection time(s)] 1.329956
 
 EDB {
-packet_in(1, 1, xcb2a6db7, x427e25448a8f, x3333000000fb, 34525),
+packet_in(1, 2, xdf054dc9, x4aa49a7425d2, xb27948fd7c27, 2054),
+isBroadcast(i255_255_255_255)
+}
+IDB {
+packet_out(1, xdf054dc9, 1)
+}
+// [Collection time(s)] 1.467498
+
+EDB {
+packet_in(3, 3, x459a03a1, xbaf736b8e32f, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 1.243293
+// [Collection time(s)] 1.468680
 
 EDB {
-packet_in_l3(1, 2, xa3dd683d, i0_0_0_0, i255_255_255_255),
+packet_in(2, 3, xdf054daa, x4aa49a7425d2, xb27948fd7c27, 2054),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 1.339407
+// [Collection time(s)] 1.470549
 
 EDB {
-packet_in_l3(2, 3, xa3dd681e, i0_0_0_0, i255_255_255_255),
+packet_in_l3(2, 1, xb72d8cdf, i10_0_0_1, i10_0_0_4),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 1.343634
+// [Collection time(s)] 1.477406
 
 EDB {
-packet_in(2, 1, xe422e8ee, xfa34f0c88a0d, xffffffffffff, 2054),
-isBroadcast(i255_255_255_255)
-}
-IDB {
-}
-// [Collection time(s)] 1.434223
-
-EDB {
-packet_in(1, 1, xe422e8ee, xfa34f0c88a0d, xffffffffffff, 2054),
-isBroadcast(i255_255_255_255)
-}
-IDB {
-packet_out(1, xe422e8ee, 2)
-}
-// [Collection time(s)] 1.447287
-
-EDB {
-packet_in(1, 2, x38a69905, x2e6181c888c1, x3333000000fb, 34525),
-isBroadcast(i255_255_255_255)
-}
-IDB {
-}
-// [Collection time(s)] 1.448523
-
-EDB {
-packet_in(3, 3, xe422e8b0, xfa34f0c88a0d, xffffffffffff, 2054),
-isBroadcast(i255_255_255_255)
-}
-IDB {
-}
-// [Collection time(s)] 1.452587
-
-EDB {
-packet_in(3, 2, x4ad5a712, x1e9954322901, xfa34f0c88a0d, 2054),
-isBroadcast(i255_255_255_255)
-}
-IDB {
-}
-// [Collection time(s)] 1.459702
-
-EDB {
-packet_in(1, 2, x4ad5a712, x1e9954322901, xfa34f0c88a0d, 2054),
-isBroadcast(i255_255_255_255)
-}
-IDB {
-packet_out(1, x4ad5a712, 1)
-}
-// [Collection time(s)] 1.586389
-
-EDB {
-packet_in(3, 3, x6b5aa9ef, xeeeca47348c5, x3333000000fb, 34525),
-isBroadcast(i255_255_255_255)
-}
-IDB {
-}
-// [Collection time(s)] 1.587554
-
-EDB {
-packet_in(2, 3, x4ad5a6f3, x1e9954322901, xfa34f0c88a0d, 2054),
-isBroadcast(i255_255_255_255)
-}
-IDB {
-}
-// [Collection time(s)] 1.589805
-
-EDB {
-packet_in_l3(2, 1, xa27c62e5, i10_0_0_1, i10_0_0_4),
-isBroadcast(i255_255_255_255)
-}
-IDB {
-}
-// [Collection time(s)] 1.598892
-
-EDB {
-packet_in_l3(1, 1, xa27c62e5, i10_0_0_1, i10_0_0_4),
+packet_in_l3(1, 1, xb72d8cdf, i10_0_0_1, i10_0_0_4),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 flow_mod_l3(1, i10_0_0_1, i10_0_0_4, 2),
-packet_out(1, xa27c62e5, 2),
+packet_out(1, xb72d8cdf, 2),
 flow_mod_l3(1, i10_0_0_4, i10_0_0_1, 1)
 }
-// [Collection time(s)] 1.622910
+// [Collection time(s)] 1.503491
 
 EDB {
-packet_in_l3(3, 2, x9023c6e6, i10_0_0_4, i10_0_0_1),
+packet_in_l3(3, 2, x1aeb6f3c, i10_0_0_4, i10_0_0_1),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 1.624560
+// [Collection time(s)] 1.506333
 
 EDB {
-packet_in(2, 3, x978faaff, x9a5ff7f0c534, x3333000000fb, 34525),
+packet_in(2, 3, xf477239b, x7e58b83e4d11, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 1.733679
+// [Collection time(s)] 1.589627
 
 EDB {
-packet_in(2, 3, x3b02f5cd, x9a5ff7f0c534, x3333000000fb, 34525),
+packet_in(2, 3, xa819f688, x7e58b83e4d11, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.221467
+// [Collection time(s)] 1.793524
 
 EDB {
-packet_in(1, 1, x6892f629, x427e25448a8f, x3333000000fb, 34525),
+packet_in(1, 1, x10b48e2f, x669987ed3d94, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.252194
+// [Collection time(s)] 2.029144
 
 EDB {
-packet_in_l3(2, 1, xc40d16c4, i10_0_0_1, i10_0_0_4),
+packet_in(1, 1, x98a311be, x669987ed3d94, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.439433
+// [Collection time(s)] 2.226652
 
 EDB {
-packet_in_l3(3, 3, xc40d1686, i10_0_0_1, i10_0_0_4),
+packet_in(1, 2, xf5b87e8c, xaedb45ff410a, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.452547
+// [Collection time(s)] 2.229954
 
 EDB {
-packet_in_l3(3, 2, x6781de86, i10_0_0_4, i10_0_0_1),
+packet_in_l3(2, 1, x773c623d, i10_0_0_1, i10_0_0_4),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.457578
+// [Collection time(s)] 2.321064
 
 EDB {
-packet_in(1, 2, xff178316, x2e6181c888c1, x3333000000fb, 34525),
+packet_in_l3(3, 3, x773c627b, i10_0_0_1, i10_0_0_4),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.463540
+// [Collection time(s)] 2.332956
 
 EDB {
-packet_in(3, 3, xd305d181, xeeeca47348c5, x3333000000fb, 34525),
+packet_in_l3(3, 2, xd7f4361a, i10_0_0_4, i10_0_0_1),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.499194
+// [Collection time(s)] 2.337733
 
 EDB {
-packet_in(2, 1, x109c2795, xfa34f0c88a0d, x333300000002, 34525),
+packet_in(1, 2, xf6df359b, xaedb45ff410a, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.518882
+// [Collection time(s)] 2.436716
 
 EDB {
-packet_in(1, 1, x109c2795, xfa34f0c88a0d, x333300000002, 34525),
+packet_in(2, 3, x2a5937eb, x7e58b83e4d11, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.521687
+// [Collection time(s)] 2.495433
 
 EDB {
-packet_in(2, 3, x640faf50, x9a5ff7f0c534, x333300000002, 34525),
+packet_in(2, 3, x8256183b, x7e58b83e4d11, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.630991
+// [Collection time(s)] 2.498476
 
 EDB {
-packet_in(3, 2, xc94e58b6, x1e9954322901, x333300000002, 34525),
+packet_in(3, 3, xf8dcab92, xbaf736b8e32f, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.726469
+// [Collection time(s)] 2.604005
 
 EDB {
-packet_in(1, 2, xc94e58b6, x1e9954322901, x333300000002, 34525),
+packet_in(3, 1, xcab284dc, x26f053ad615d, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.729626
+// [Collection time(s)] 2.681211
 
 EDB {
-packet_in(1, 1, x3508ea17, x427e25448a8f, x3333000000fb, 34525),
+packet_in(1, 2, xcab28539, x26f053ad615d, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.734512
+// [Collection time(s)] 2.685802
 
 EDB {
-packet_in(2, 2, xce94ee22, x162a5877351f, x333300000002, 34525),
+packet_in(3, 3, x3b5a2782, xbaf736b8e32f, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.870944
+// [Collection time(s)] 2.800774
 
 EDB {
-packet_in(1, 1, xce94ee41, x162a5877351f, x333300000002, 34525),
+packet_in(2, 1, x875f4162, xb27948fd7c27, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.874977
+// [Collection time(s)] 2.889166
 
 EDB {
-packet_in(2, 3, xa969b44e, x9a5ff7f0c534, x3333000000fb, 34525),
+packet_in(1, 1, x875f4162, xb27948fd7c27, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.878949
+// [Collection time(s)] 2.892371
 
 EDB {
-packet_in(1, 2, xb63cbe6, x2e6181c888c1, x3333000000fb, 34525),
+packet_in(2, 2, xbb593cf5, x8aa159907180, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.942258
+// [Collection time(s)] 2.896889
 
 EDB {
-packet_in(3, 3, xc5b6ed8f, xeeeca47348c5, x3333000000fb, 34525),
+packet_in(1, 1, xbb593c98, x8aa159907180, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 2.993880
+// [Collection time(s)] 2.899974
 
 EDB {
-packet_in(1, 1, xf79d85a4, x427e25448a8f, x333300000002, 34525),
+packet_in(1, 1, xf3d4084d, x669987ed3d94, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 3.159212
+// [Collection time(s)] 2.921236
 
 EDB {
-packet_in(3, 1, xd7aefe4d, x36e5a658a7af, x333300000002, 34525),
+packet_in(1, 1, x54f26b9d, x669987ed3d94, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 3.350807
+// [Collection time(s)] 2.926550
 
 EDB {
-packet_in(1, 2, xd7aefe2e, x36e5a658a7af, x333300000002, 34525),
+packet_in(1, 2, x1e96e149, xaedb45ff410a, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 3.360507
+// [Collection time(s)] 3.137301
 
 EDB {
-packet_in(1, 2, xbda61f9, x2e6181c888c1, x333300000002, 34525),
+packet_in(1, 2, xa92bc3a, xaedb45ff410a, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 3.366868
+// [Collection time(s)] 3.141823
 
 EDB {
-packet_in(3, 3, xdca92bf0, xeeeca47348c5, x333300000002, 34525),
+packet_in_l3(2, 1, x28e857d, i10_0_0_1, i10_0_0_4),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 3.398577
+// [Collection time(s)] 3.323885
 
 EDB {
-packet_in(1, 1, xcb2a6db7, x427e25448a8f, x3333000000fb, 34525),
+packet_in_l3(3, 3, x28e85bb, i10_0_0_1, i10_0_0_4),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 3.409292
+// [Collection time(s)] 3.331826
 
 EDB {
-packet_in_l3(2, 1, x3de203c4, i10_0_0_1, i10_0_0_4),
+packet_in_l3(3, 2, x201eb4da, i10_0_0_4, i10_0_0_1),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 3.442996
+// [Collection time(s)] 3.343885
 
 EDB {
-packet_in_l3(3, 3, x3de20386, i10_0_0_1, i10_0_0_4),
+packet_in(3, 2, x183d0a5a, x4aa49a7425d2, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 3.456308
+// [Collection time(s)] 3.433190
 
 EDB {
-packet_in_l3(3, 2, xc259da86, i10_0_0_4, i10_0_0_1),
+packet_in(1, 2, x183d0a5a, x4aa49a7425d2, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 3.461308
+// [Collection time(s)] 3.436195
 
 EDB {
-packet_in(1, 2, x38a69905, x2e6181c888c1, x3333000000fb, 34525),
+packet_in(3, 3, xc6e5c4e3, xbaf736b8e32f, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 3.611604
+// [Collection time(s)] 3.511191
 
 EDB {
-packet_in(3, 3, x6b5aa9ef, xeeeca47348c5, x3333000000fb, 34525),
+packet_in(3, 3, x459a03a1, xbaf736b8e32f, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 3.653701
+// [Collection time(s)] 3.513462
 
 EDB {
-packet_in_l3(2, 1, xcc9bd787, i10_0_0_1, i10_0_0_4),
+packet_in_l3(2, 1, x46a6629e, i10_0_0_1, i10_0_0_4),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 4.445079
+// [Collection time(s)] 4.328727
 
 EDB {
-packet_in_l3(3, 3, xcc9bd749, i10_0_0_1, i10_0_0_4),
+packet_in_l3(3, 3, x46a662dc, i10_0_0_1, i10_0_0_4),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 4.451433
+// [Collection time(s)] 4.336130
 
 EDB {
-packet_in_l3(3, 2, x49a83407, i10_0_0_4, i10_0_0_1),
+packet_in_l3(3, 2, x80cb375a, i10_0_0_4, i10_0_0_1),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 4.456956
+// [Collection time(s)] 4.340532
 
 EDB {
-packet_in(3, 2, x6c7e9a08, x1e9954322901, xffffffffffff, 2054),
+packet_in(3, 2, x16191e9b, x4aa49a7425d2, xffffffffffff, 2054),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 4.467122
+// [Collection time(s)] 4.355406
 
 EDB {
-packet_in(1, 2, x6c7e9a08, x1e9954322901, xffffffffffff, 2054),
+packet_in(1, 2, x16191e9b, x4aa49a7425d2, xffffffffffff, 2054),
 isBroadcast(i255_255_255_255)
 }
 IDB {
-packet_out(1, x6c7e9a08, 1)
+packet_out(1, x16191e9b, 1)
 }
-// [Collection time(s)] 4.471015
+// [Collection time(s)] 4.368091
 
 EDB {
-packet_in(2, 3, x6c7e99e9, x1e9954322901, xffffffffffff, 2054),
-isBroadcast(i255_255_255_255)
-}
-IDB {
-}
-// [Collection time(s)] 4.473001
-
-EDB {
-packet_in(2, 2, x6cb9a8e3, x162a5877351f, x1e9954322901, 2054),
+packet_in(2, 3, x16191e7c, x4aa49a7425d2, xffffffffffff, 2054),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 4.474979
+// [Collection time(s)] 4.369222
 
 EDB {
-packet_in(1, 1, x6cb9a902, x162a5877351f, x1e9954322901, 2054),
-isBroadcast(i255_255_255_255)
-}
-IDB {
-packet_out(1, x6cb9a902, 2)
-}
-// [Collection time(s)] 4.480947
-
-EDB {
-packet_in(3, 3, x6cb9a8c4, x162a5877351f, x1e9954322901, 2054),
+packet_in(2, 2, x856eef36, x8aa159907180, x4aa49a7425d2, 2054),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 4.482016
+// [Collection time(s)] 4.371214
 
 EDB {
-packet_in_l3(3, 2, x760702cc, i10_0_0_4, i10_0_0_2),
+packet_in(1, 1, x856eeed9, x8aa159907180, x4aa49a7425d2, 2054),
+isBroadcast(i255_255_255_255)
+}
+IDB {
+packet_out(1, x856eeed9, 2)
+}
+// [Collection time(s)] 4.382670
+
+EDB {
+packet_in(3, 3, x856eef17, x8aa159907180, x4aa49a7425d2, 2054),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 4.494295
+// [Collection time(s)] 4.383823
 
 EDB {
-packet_in_l3(1, 2, x760702cc, i10_0_0_4, i10_0_0_2),
+packet_in_l3(3, 2, xbb0dfa50, i10_0_0_4, i10_0_0_2),
+isBroadcast(i255_255_255_255)
+}
+IDB {
+}
+// [Collection time(s)] 4.400203
+
+EDB {
+packet_in_l3(1, 2, xbb0dfa50, i10_0_0_4, i10_0_0_2),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 drop_l3(1, i10_0_0_4, i10_0_0_2)
 }
-// [Collection time(s)] 4.506186
+// [Collection time(s)] 4.411088
 
 EDB {
-packet_in_l3(1, 2, x6c1d5d3d, i0_0_0_0, i255_255_255_255),
+packet_in_l3(2, 3, x4a6aade0, i0_0_0_0, i255_255_255_255),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 5.139759
+// [Collection time(s)] 4.421757
 
 EDB {
-packet_in_l3(2, 3, x6c1d5d1e, i0_0_0_0, i255_255_255_255),
+packet_in_l3(1, 1, xd9355910, i0_0_0_0, i255_255_255_255),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 5.143985
+// [Collection time(s)] 5.336369
 
 EDB {
-packet_in_l3(3, 2, x2003d0cd, i10_0_0_4, i10_0_0_2),
+packet_in_l3(3, 3, xd935594e, i0_0_0_0, i255_255_255_255),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 5.476432
+// [Collection time(s)] 5.340973
 
 EDB {
-packet_in(2, 3, x978faaff, x9a5ff7f0c534, x3333000000fb, 34525),
+packet_in_l3(3, 2, x7cd46790, i10_0_0_4, i10_0_0_2),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 5.734741
+// [Collection time(s)] 5.368766
 
 EDB {
-packet_in(1, 1, x6892f629, x427e25448a8f, x3333000000fb, 34525),
+packet_in_l3(3, 3, x6b565e89, i0_0_0_0, i255_255_255_255),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 6.252188
+// [Collection time(s)] 5.469928
 
 EDB {
-packet_in(1, 2, xff178316, x2e6181c888c1, x3333000000fb, 34525),
+packet_in(2, 3, xf477239b, x7e58b83e4d11, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 6.461765
+// [Collection time(s)] 5.596854
 
 EDB {
-packet_in_l3(3, 3, x5a68614, i0_0_0_0, i255_255_255_255),
+packet_in(1, 1, x10b48e2f, x669987ed3d94, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 6.484723
+// [Collection time(s)] 6.029793
 
 EDB {
-packet_in_l3(3, 2, x83728d6c, i10_0_0_4, i10_0_0_2),
+packet_in(1, 2, xf5b87e8c, xaedb45ff410a, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 6.490378
+// [Collection time(s)] 6.231650
 
 EDB {
-packet_in(3, 3, xd305d181, xeeeca47348c5, x3333000000fb, 34525),
+packet_in_l3(3, 2, x44a8330f, i10_0_0_4, i10_0_0_2),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 6.507522
+// [Collection time(s)] 6.370281
 
 EDB {
-packet_in(2, 1, x109c2795, xfa34f0c88a0d, x333300000002, 34525),
+packet_in(2, 3, x8256183b, x7e58b83e4d11, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 6.530513
+// [Collection time(s)] 6.505196
 
 EDB {
-packet_in(1, 1, x109c2795, xfa34f0c88a0d, x333300000002, 34525),
+packet_in(1, 2, xbe13e9a1, x4aa49a7425d2, xb27948fd7c27, 2054),
+isBroadcast(i255_255_255_255)
+}
+IDB {
+packet_out(1, xbe13e9a1, 1)
+}
+// [Collection time(s)] 6.519130
+
+EDB {
+packet_in(2, 1, x380f922c, xb27948fd7c27, x4aa49a7425d2, 2054),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 6.534265
+// [Collection time(s)] 6.520237
 
 EDB {
-packet_in(1, 2, xb32337fc, x1e9954322901, xfa34f0c88a0d, 2054),
+packet_in(1, 1, x380f922c, xb27948fd7c27, x4aa49a7425d2, 2054),
 isBroadcast(i255_255_255_255)
 }
 IDB {
-packet_out(1, xb32337fc, 1)
+packet_out(1, x380f922c, 2)
 }
-// [Collection time(s)] 6.638310
+// [Collection time(s)] 6.535390
 
 EDB {
-packet_in(2, 1, x8f1d6cf1, xfa34f0c88a0d, x1e9954322901, 2054),
-isBroadcast(i255_255_255_255)
-}
-IDB {
-}
-// [Collection time(s)] 6.639756
-
-EDB {
-packet_in(1, 1, x8f1d6cf1, xfa34f0c88a0d, x1e9954322901, 2054),
-isBroadcast(i255_255_255_255)
-}
-IDB {
-packet_out(1, x8f1d6cf1, 2)
-}
-// [Collection time(s)] 6.646503
-
-EDB {
-packet_in(2, 3, x640faf50, x9a5ff7f0c534, x333300000002, 34525),
+packet_in(3, 3, xf8dcab92, xbaf736b8e32f, x3333000000fb, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 6.647964
+// [Collection time(s)] 6.602449
 
 EDB {
-packet_in(3, 2, xc94e58b6, x1e9954322901, x333300000002, 34525),
+packet_in(3, 1, xcab284dc, x26f053ad615d, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 6.736874
+// [Collection time(s)] 6.689134
 
 EDB {
-packet_in(1, 2, xc94e58b6, x1e9954322901, x333300000002, 34525),
+packet_in(1, 2, xcab28539, x26f053ad615d, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 6.738724
+// [Collection time(s)] 6.692138
 
 EDB {
-packet_in_l3(1, 1, x6ef0ef49, i0_0_0_0, i255_255_255_255),
+packet_in(2, 1, x875f4162, xb27948fd7c27, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 6.759018
+// [Collection time(s)] 6.900031
 
 EDB {
-packet_in_l3(3, 3, x6ef0ef0b, i0_0_0_0, i255_255_255_255),
+packet_in(1, 1, x875f4162, xb27948fd7c27, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 6.761315
+// [Collection time(s)] 6.908667
 
 EDB {
-packet_in(2, 2, xce94ee22, x162a5877351f, x333300000002, 34525),
+packet_in(2, 2, xbb593cf5, x8aa159907180, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 6.879137
+// [Collection time(s)] 6.910456
 
 EDB {
-packet_in(1, 1, xce94ee41, x162a5877351f, x333300000002, 34525),
+packet_in(1, 1, xbb593c98, x8aa159907180, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 6.882145
+// [Collection time(s)] 6.926175
 
 EDB {
-packet_in(1, 1, xf79d85a4, x427e25448a8f, x333300000002, 34525),
+packet_in(1, 1, xf3d4084d, x669987ed3d94, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 7.166331
+// [Collection time(s)] 6.928365
 
 EDB {
-packet_in(3, 1, xd7aefe4d, x36e5a658a7af, x333300000002, 34525),
+packet_in(1, 2, x1e96e149, xaedb45ff410a, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 7.358593
+// [Collection time(s)] 7.145079
 
 EDB {
-packet_in(1, 2, xd7aefe2e, x36e5a658a7af, x333300000002, 34525),
+packet_in_l3(3, 2, xa1ec184e, i10_0_0_4, i10_0_0_2),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 7.365871
+// [Collection time(s)] 7.397446
 
 EDB {
-packet_in(1, 2, xbda61f9, x2e6181c888c1, x333300000002, 34525),
+packet_in(3, 2, x183d0a5a, x4aa49a7425d2, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 7.374057
+// [Collection time(s)] 7.440739
 
 EDB {
-packet_in(3, 3, xdca92bf0, xeeeca47348c5, x333300000002, 34525),
+packet_in(1, 2, x183d0a5a, x4aa49a7425d2, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 7.406231
+// [Collection time(s)] 7.446285
 
 EDB {
-packet_in_l3(3, 2, x7253ecd, i10_0_0_4, i10_0_0_2),
+packet_in(3, 3, xc6e5c4e3, xbaf736b8e32f, x333300000002, 34525),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 7.489237
+// [Collection time(s)] 7.512844
 
 EDB {
-packet_in_l3(2, 3, xdde03db6, i0_0_0_0, i255_255_255_255),
+packet_in_l3(1, 2, x7873966d, i0_0_0_0, i255_255_255_255),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 7.823209
+// [Collection time(s)] 7.941833
 
 EDB {
-packet_in_l3(2, 2, x82ae354c, i10_0_0_2, i10_0_0_4),
+packet_in_l3(2, 3, x7873964e, i0_0_0_0, i255_255_255_255),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 8.497211
+// [Collection time(s)] 7.948071
 
 EDB {
-packet_in_l3(1, 1, x82ae356b, i10_0_0_2, i10_0_0_4),
+packet_in_l3(2, 2, x66e5ffcf, i10_0_0_2, i10_0_0_4),
+isBroadcast(i255_255_255_255)
+}
+IDB {
+}
+// [Collection time(s)] 8.410039
+
+EDB {
+packet_in_l3(1, 1, x66e5ff72, i10_0_0_2, i10_0_0_4),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 flow_mod_l3(1, i10_0_0_2, i10_0_0_4, 2),
-packet_out(1, x82ae356b, 2),
+packet_out(1, x66e5ff72, 2),
 flow_mod_l3(1, i10_0_0_4, i10_0_0_2, 1)
 }
-// [Collection time(s)] 8.508802
+// [Collection time(s)] 8.421359
 
 EDB {
-packet_in_l3(3, 2, xe37e73ec, i10_0_0_4, i10_0_0_2),
+packet_in_l3(3, 2, xd8ed2ab0, i10_0_0_4, i10_0_0_2),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 8.509833
+// [Collection time(s)] 8.422481
 
 EDB {
-packet_in_l3(2, 2, xb9540e4d, i10_0_0_2, i10_0_0_4),
+packet_in_l3(2, 2, x3282c2f0, i10_0_0_2, i10_0_0_4),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 9.502881
+// [Collection time(s)] 9.415357
 
 EDB {
-packet_in_l3(3, 3, xb9540e2e, i10_0_0_2, i10_0_0_4),
+packet_in_l3(3, 3, x3282c2d1, i10_0_0_2, i10_0_0_4),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 9.511073
+// [Collection time(s)] 9.422370
 
 EDB {
-packet_in_l3(3, 2, xc3588acb, i10_0_0_4, i10_0_0_2),
+packet_in_l3(3, 2, xa41d45b0, i10_0_0_4, i10_0_0_2),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 9.515970
+// [Collection time(s)] 9.426674
 
 EDB {
-packet_in(1, 2, x1b29fd33, x2e6181c888c1, x0180c200000e, 35020),
+packet_in(1, 2, x24d90433, xaedb45ff410a, x0180c200000e, 35020),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 10.270048
+// [Collection time(s)] 10.404384
 
 EDB {
-packet_in(1, 1, xa2c36f65, x427e25448a8f, x0180c200000e, 35020),
+packet_in(1, 1, xf6a32eb6, x669987ed3d94, x0180c200000e, 35020),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 10.278769
+// [Collection time(s)] 10.409605
 
 EDB {
-packet_in(3, 3, xa2f0ab1e, xeeeca47348c5, x0180c200000e, 35020),
+packet_in(2, 3, xee891342, x7e58b83e4d11, x0180c200000e, 35020),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 10.281307
+// [Collection time(s)] 10.411351
 
 EDB {
-packet_in(2, 3, x1d0e2afc, x9a5ff7f0c534, x0180c200000e, 35020),
+packet_in(1, 1, xf6a33277, x669987ed3d94, x0180c200000e, 35020),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 10.284197
+// [Collection time(s)] 10.420587
 
 EDB {
-packet_in_l3(2, 2, x1c5e61aa, i10_0_0_2, i10_0_0_4),
+packet_in(3, 3, x80764cda, xbaf736b8e32f, x0180c200000e, 35020),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 10.508130
+// [Collection time(s)] 10.421627
 
 EDB {
-packet_in_l3(3, 3, x1c5e618b, i10_0_0_2, i10_0_0_4),
+packet_in(1, 2, x24d907f4, xaedb45ff410a, x0180c200000e, 35020),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 10.516535
+// [Collection time(s)] 10.429706
 
 EDB {
-packet_in_l3(3, 2, x4fb3822d, i10_0_0_4, i10_0_0_2),
+packet_in_l3(2, 2, x68859a91, i10_0_0_2, i10_0_0_4),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 10.522651
+// [Collection time(s)] 10.430752
 
 EDB {
-packet_in_l3(2, 2, x2061bc4c, i10_0_0_2, i10_0_0_4),
+packet_in_l3(3, 3, x68859a72, i10_0_0_2, i10_0_0_4),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 11.510857
+// [Collection time(s)] 10.463289
 
 EDB {
-packet_in_l3(3, 3, x2061bc2d, i10_0_0_2, i10_0_0_4),
+packet_in_l3(3, 2, x2dbe32b0, i10_0_0_4, i10_0_0_2),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 11.518496
+// [Collection time(s)] 10.466359
 
 EDB {
-packet_in_l3(3, 2, x661d2bec, i10_0_0_4, i10_0_0_2),
+packet_in_l3(2, 3, x2dbe3291, i10_0_0_4, i10_0_0_2),
 isBroadcast(i255_255_255_255)
 }
 IDB {
 }
-// [Collection time(s)] 11.524402
+// [Collection time(s)] 10.469800
+
+EDB {
+packet_in_l3(2, 2, xb6c59c51, i10_0_0_2, i10_0_0_4),
+isBroadcast(i255_255_255_255)
+}
+IDB {
+}
+// [Collection time(s)] 11.427681
+
+EDB {
+packet_in_l3(3, 3, xb6c59c32, i10_0_0_2, i10_0_0_4),
+isBroadcast(i255_255_255_255)
+}
+IDB {
+}
+// [Collection time(s)] 11.430363
 
