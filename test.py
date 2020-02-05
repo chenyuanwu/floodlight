@@ -118,7 +118,7 @@ def auth_mn(net):
 def test_module(module, fanout, depth):
 
     net = setup()
-
+    time.sleep(3)
     # Start controller
     global floodlight_proc
     cmd = ['java', '-ea -Dlogback.configurationFile=logback.xml',
