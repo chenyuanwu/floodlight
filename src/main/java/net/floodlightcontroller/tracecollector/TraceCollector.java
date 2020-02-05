@@ -280,7 +280,7 @@ public class TraceCollector {
     public TraceCollector(String outfile, String layer) {
         try {
             this.layer = layer;
-            file = new File("/home/floodlight/Desktop/floodlight/traces/" + outfile + ".trace");
+            file = new File("/home/floodlight/Desktop/floodlight/tmp/" + outfile + ".trace");
             if (file.exists()) {
                 file.delete();
                 file.createNewFile();

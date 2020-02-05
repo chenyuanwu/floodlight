@@ -18,17 +18,13 @@ import atexit
 import signal
 import argparse
 
+FLOODDIR = "/home/floodlight/Desktop/floodlight"
 
 
 MODULES = {
-       'auth',
        'learningswitch',
        'statelessfirewall',
-       'statefulfirewall',
-       'firewallmigration',
-       'l3statelessfirewall',
-       'l3statefulfirewall',
-       'l3firewallmigration'
+       'l3statelessfirewall'
         }
 
 # clean up Floodlight process when done
@@ -143,7 +139,19 @@ def auth_mn():
 
     cleanup(net)
 
-def test_module(module, fanout, depth):
+def random_mn(fanout, depth, nflows):
+    net = setup(fanout=fanout, depth=depth)
+
+    for i in range(nflows):
+        # Randomly draw two hosts
+        h1 = random.choice(net.hosts)
+        h2 = random.choice(net.hosts)
+
+        print h1.IP(), h1.cmd('hping3 -c 4', h2.IP())
+
+    cleanup(net)
+
+def test_module(module, fanout, depth, random, nflows):
 
     # Start controller
     global floodlight_proc
@@ -160,44 +168,67 @@ def test_module(module, fanout, depth):
         exit(1)
 
     # Run Mininet simulation
-
-    if module == 'statefulfirewall':
-        firewall_stateful_mn()
-    elif module == 'firewallmigration':
-        firewall_stateful_mn()
-    elif module == 'statelessfirewall':
-        firewall_mn()
-    elif module == 'learningswitch':
-        learning_mn()
-    elif module == 'auth':
-        auth_mn()
-    elif module == 'l3firewallmigration':
-        firewall_l3_stateful_mn()
-    elif module == 'l3statefulfirewall':
-        firewall_l3_stateful_mn()
-    elif module == 'l3statelessfirewall':
-        firewall_mn()
+    if random:
+        random_mn(fanout, depth, nflows)
     else:
-        assert False, 'Unrecognized controller name: %s.' % module
+        if module == 'statefulfirewall':
+            firewall_stateful_mn()
+        elif module == 'firewallmigration':
+            firewall_stateful_mn()
+        elif module == 'statelessfirewall':
+            firewall_mn()
+        elif module == 'learningswitch':
+            learning_mn()
+        elif module == 'auth':
+            auth_mn()
+        elif module == 'l3firewallmigration':
+            firewall_l3_stateful_mn()
+        elif module == 'l3statefulfirewall':
+            firewall_l3_stateful_mn()
+        elif module == 'l3statelessfirewall':
+            firewall_mn()
+        else:
+            assert False, 'Unrecognized controller name: %s.' % module
 
     # Kill the controller program
     os.killpg(os.getpgid(floodlight_proc.pid), signal.SIGTERM)
     print ('CLean up Floodlight program.')
 
+    tmp_file = os.path.join(FLOODDIR, 'tmp', '%s.trace' % module)
+    if random:
+        time_stamp = datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+        trace_file = os.path.join(FLOODDIR, 'random-traces',
+                '%s-%s.trace' % (module, time_stamp) )
+    else:
+        trace_file = os.path.join(FLOODDIR, 'traces', '%s.trace' % module)
+
+    try:
+        print 'rename %s to %s' % (tmp_file, trace_file)
+        shutil.move(tmp_file, trace_file)
+    except IOError:
+        print 'No trace generated. Skip parsing'
+        return
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('module', help='POX module name')
+    parser.add_argument('--random', type=bool, default=False)
     parser.add_argument('--fanout', type=int, default = 2)
     parser.add_argument('--depth', type=int, default = 2)
+    parser.add_argument('--nflows', type=int, default = 10)
+    parser.add_argument('--ntrails', type=int, default = 1)
 
 
     args = parser.parse_args()
 
-    if args.module == 'all':
-        for m in MODULES:
-            print 'Testing module: %s\n#########################\n' % m
-            test_module(m, args.fanout, args.depth)
-    else:
-        test_module(args.module, args.fanout, args.depth)
+    assert args.random == True or args.ntrails == 1
+
+    for t in range(args.ntrails):
+        if args.module == 'all':
+            for m in MODULES:
+                print '#' * 30
+                print 'Testing module: %s\n' % m
+                test_module(m, args.fanout, args.depth, args.random, args.nflows)
+        else:
+            test_module(args.module, args.fanout, args.depth, args.random, args.nflows)
 

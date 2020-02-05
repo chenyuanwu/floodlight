@@ -1,9 +1,6 @@
 package net.floodlightcontroller.firewall;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
+import java.util.*;
 
 import net.floodlightcontroller.core.util.AppCookie;
 import net.floodlightcontroller.tracecollector.TraceCollector;

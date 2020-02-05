@@ -1,10 +1,7 @@
 package net.floodlightcontroller.l2pairs;
 
 import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.floodlightcontroller.core.FloodlightContext;
@@ -206,7 +203,7 @@ public class L2Pairs extends ForwardingBase implements IFloodlightModule {
         super.init();
         this.floodlightProviderService = context.getServiceImpl(IFloodlightProviderService.class);
         macToPortMap = new ConcurrentHashMap<Pair<IOFSwitch, MacAddress>, OFPort>();
-        tc = new TraceCollector("l2pairs", "l2");
+        tc = new TraceCollector("learningswitch", "l2");
         if (log.isTraceEnabled()) {
             log.trace("module l2pairs initialized");
         }

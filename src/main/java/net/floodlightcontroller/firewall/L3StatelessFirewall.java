@@ -84,8 +84,7 @@ public class L3StatelessFirewall implements IOFMessageListener, IFloodlightModul
         logger = LoggerFactory.getLogger(L3StatelessFirewall.class);
         isBroadcast = new HashSet<>();
         isBroadcast.add(IPv4Address.of("255.255.255.255"));
-
-        tc = new TraceCollector("l3-statelessfirewall", "l3");
+        tc = new TraceCollector("l3statelessfirewall", "l3");
         if (logger.isTraceEnabled()) {
             logger.trace("module l3-statelessfirewall initialized");
         }
