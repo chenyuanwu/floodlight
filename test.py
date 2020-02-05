@@ -60,6 +60,27 @@ def cleanup(net):
     net.stop()
     Cleanup.cleanup()
 
+def firewall_l3_stateful_mn():
+    net = setup()
+    time.sleep(3)
+
+    h1, h2, h3, h4 = net.get('h1', 'h2', 'h3', 'h4')
+
+    # h3 is also from the outside, this traffic should be blocked.
+    print h3.IP(), h3.cmd('hping3 -c 4', h2.IP())
+
+    # h1, h2 are on the port 1 of switch1, so traffic initiating from h1 or h2
+    # should be allowed.
+    print h1.IP(), h1.cmd('hping3 -c 4', h4.IP())
+
+    # h4 is on the port 2 side of switch 1, but it is seen on previous flows, so
+    # now traffic from h4 would also be allowed.
+    print h4.IP(), h4.cmd('hping3 -c 4', h2.IP())
+
+    print h2.IP(), h2.cmd('hping3 -c 4', h4.IP())
+
+    cleanup(net)
+
 def firewall_stateful_mn():
     net = setup()
     time.sleep(3)
@@ -151,9 +172,9 @@ def test_module(module, fanout, depth):
     elif module == 'auth':
         auth_mn()
     elif module == 'l3firewallmigration':
-        firewall_stateful_mn()
+        firewall_l3_stateful_mn()
     elif module == 'l3statefulfirewall':
-        firewall_stateful_mn()
+        firewall_l3_stateful_mn()
     elif module == 'l3statelessfirewall':
         firewall_mn()
     else:
