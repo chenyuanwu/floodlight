@@ -224,14 +224,16 @@ public class L3StatefulFirewall implements IOFMessageListener, IFloodlightModule
 
                     tc.addOutput(fmb.build());
                     //Push this packet out
-                    OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
-                    pob.setActions(actions);
-                    pob.setBufferId(OFBufferId.NO_BUFFER);
-                    pob.setInPort(inPort);
-                    pob.setData(pi.getData());
-                    sw.write(pob.build());
+                    if (actions.size() != 0) {
+                        OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
+                        pob.setActions(actions);
+                        pob.setBufferId(OFBufferId.NO_BUFFER);
+                        pob.setInPort(inPort);
+                        pob.setData(pi.getData());
+                        sw.write(pob.build());
 
-                    tc.addOutput(pob.build());
+                        tc.addOutput(pob.build());
+                    }
                 }
             }
             tc.addFinalStates(isBroadcast, trusted);
