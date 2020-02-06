@@ -25,9 +25,10 @@ FLOODDIR = "/home/floodlight/Desktop/floodlight"
 
 
 MODULES = {
-       'learningswitch',
-       'statelessfirewall',
-       'l3statelessfirewall'
+    "statefulfirewall",
+    "firewallmigration",
+    "l3statefulfirewall",
+    "l3firewallmigration"
         }
 
 # clean up Floodlight process when done

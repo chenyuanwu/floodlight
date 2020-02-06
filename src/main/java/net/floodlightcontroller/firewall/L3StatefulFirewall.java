@@ -87,7 +87,7 @@ public class L3StatefulFirewall implements IOFMessageListener, IFloodlightModule
         isBroadcast = new HashSet<IPv4Address>();
         isBroadcast.add(IPv4Address.of("255.255.255.255"));
 
-        tc = new TraceCollector("l3-statefulfirewall", "l3");
+        tc = new TraceCollector("l3statefulfirewall", "l3");
         if (logger.isTraceEnabled()) {
             logger.trace("module l3-statefulfirewall initialized");
         }
@@ -223,6 +223,15 @@ public class L3StatefulFirewall implements IOFMessageListener, IFloodlightModule
                     sw.write(fmb.build());
 
                     tc.addOutput(fmb.build());
+                    //Push this packet out
+                    OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
+                    pob.setActions(actions);
+                    pob.setBufferId(OFBufferId.NO_BUFFER);
+                    pob.setInPort(inPort);
+                    pob.setData(pi.getData());
+                    sw.write(pob.build());
+
+                    tc.addOutput(pob.build());
                 }
             }
             tc.addFinalStates(isBroadcast, trusted);
