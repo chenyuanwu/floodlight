@@ -25,10 +25,13 @@ FLOODDIR = "/home/floodlight/Desktop/floodlight"
 
 
 MODULES = {
+    "learningswitch",
+    "statelessfirewall",
     "statefulfirewall",
     "firewallmigration",
     "l3statefulfirewall",
-    "l3firewallmigration"
+    "l3firewallmigration",
+    "l3statelessfirewall"
         }
 
 # clean up Floodlight process when done
@@ -183,8 +186,6 @@ def test_module(module, fanout, depth, random, nflows):
             firewall_mn()
         elif module == 'learningswitch':
             learning_mn()
-        elif module == 'auth':
-            auth_mn()
         elif module == 'l3firewallmigration':
             firewall_l3_stateful_mn()
         elif module == 'l3statefulfirewall':
